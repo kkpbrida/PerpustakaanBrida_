@@ -1,151 +1,97 @@
-<?php
-// // Query pencarian
-// $search_type = isset($_GET['search_type']) ? $_GET['search_type'] : 'judul';
-// $search_query = isset($_GET['search_query']) ? $_GET['search_query'] : '';
-// $entries_per_page = isset($_GET['entries']) ? $_GET['entries'] : 10;
-
-// $where_clause = "";
-// if (!empty($search_query)) {
-//     $search_query = mysqli_real_escape_string($conn, $search_query);
-//     $where_clause = "WHERE $search_type LIKE '%$search_query%'";
-// }
-
-// $query = "SELECT * FROM buku $where_clause ORDER BY judul ASC";
-// $result = mysqli_query($conn, $query);
-?>
-
 <!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pencarian Buku Perpustakaan</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f5f5f5;
-        }
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .search-container {
-            margin-bottom: 20px;
-            display: flex;
-            gap: 10px;
-        }
-        select, input {
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        input[type="text"] {
-            flex-grow: 1;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-        th {
-            background-color: #f8f9fa;
-        }
-        tr:hover {
-            background-color: #f5f5f5;
-        }
-        .pagination {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            gap: 5px;
-        }
-        .pagination a {
-            padding: 8px 12px;
-            text-decoration: none;
-            border: 1px solid #ddd;
-            color: black;
-            border-radius: 4px;
-        }
-        .pagination a.active {
-            background-color: #007bff;
-            color: white;
-            border-color: #007bff;
-        }
-        .entries-container {
-            margin-bottom: 10px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h2>Pencarian Buku Perpustakaan</h2>
-        
-        <form method="GET" action="" class="search-container">
-            <select name="search_type">
-                <option value="judul" <?php echo $search_type == 'judul' ? 'selected' : ''; ?>>Judul Buku</option>
-                <option value="instansi" <?php echo $search_type == 'instansi' ? 'selected' : ''; ?>>Instansi</option>
-                <option value="penulis" <?php echo $search_type == 'penulis' ? 'selected' : ''; ?>>Penulis</option>
-            </select>
-            <input type="text" name="search_query" placeholder="Masukkan kata kunci pencarian..." 
-                   value="<?php echo htmlspecialchars($search_query); ?>">
-            <button type="submit">Cari</button>
-        </form>
-
-        <div class="entries-container">
-            <select name="entries" onchange="this.form.submit()">
-                <option value="10" <?php echo $entries_per_page == 10 ? 'selected' : ''; ?>>10</option>
-                <option value="25" <?php echo $entries_per_page == 25 ? 'selected' : ''; ?>>25</option>
-                <option value="50" <?php echo $entries_per_page == 50 ? 'selected' : ''; ?>>50</option>
-                <option value="100" <?php echo $entries_per_page == 100 ? 'selected' : ''; ?>>100</option>
-            </select>
-            entries per page
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>e-Library BRIDA</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet" />
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="container-fluid px-4">
+            <h1 class="mt-4">SELAMAT DATANG DI SIAP BRIDA</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                    Daftar Buku
+                </div>
+                <div class="card-body">
+                    <div class="input-group mb-3">
+                        <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                        <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                    </div>
+                    <table id="datatablesSimple">
+                        <thead>
+                            <tr>
+                                <th>Judul</th>
+                                <th>Instansi</th>
+                                <th>Fakultas</th>
+                                <th>Tahun</th>
+                                <th>Penulis</th>
+                                <th>Kategori</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Judul</th>
+                                <th>Instansi</th>
+                                <th>Fakultas</th>
+                                <th>Tahun</th>
+                                <th>Penulis</th>
+                                <th>Kategori</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <tr>
+                                <td>Introduction to Algorithms</td>
+                                <td>Universitas Halu Oleo</td>
+                                <td>Kedokteran</td>
+                                <td>2024</td>
+                                <td>Selin Rahmadani</td>
+                                <td>S1</td>
+                            </tr>
+                            <tr>
+                                <td>Data Structures and Algorithms</td>
+                                <td>Universitas Indonesia</td>
+                                <td>Teknik</td>
+                                <td>2023</td>
+                                <td>Ahmad Fauzi</td>
+                                <td>S2</td>
+                            </tr>
+                            <tr>
+                                <td>Machine Learning</td>
+                                <td>Universitas Gadjah Mada</td>
+                                <td>Ilmu Komputer</td>
+                                <td>2022</td>
+                                <td>Rina Suryani</td>
+                                <td>BRIDA</td>
+                            </tr>
+                            <!-- Add more rows as needed -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Judul Buku</th>
-                    <th>Instansi</th>
-                    <th>Fakultas</th>
-                    <th>Tahun</th>
-                    <th>Penulis</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                if (mysqli_num_rows($result) > 0) {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        echo "<tr>";
-                        echo "<td>" . htmlspecialchars($row['judul']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['instansi']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['fakultas']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['tahun']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['penulis']) . "</td>";
-                        echo "</tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='5' style='text-align: center;'>Tidak ada data yang ditemukan</td></tr>";
-                }
-                ?>
-            </tbody>
-        </table>
-
-        <div class="pagination">
-            <?php
-            // Tambahkan pagination sesuai kebutuhan
-            for ($i = 1; $i <= 5; $i++) {
-                echo "<a href='#' " . ($i == 1 ? "class='active'" : "") . ">$i</a>";
-            }
-            ?>
-        </div>
-    </div>
-</body>
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid px-4">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Copyright &copy; kkp ilkom nihh bozzz</div>
+                </div>
+            </div>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/chart-area-demo.js"></script>
+        <script src="assets/demo/chart-bar-demo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+        <script src="js/datatables-simple-demo.js"></script>
+    </body>
 </html>
