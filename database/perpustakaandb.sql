@@ -63,7 +63,7 @@ CREATE TABLE `kategori` (
 
 CREATE TABLE `penelitian` (
   `id_penelitian` int(11) NOT NULL,
-  `judul` varchar(50) NOT NULL,
+  `judul` varchar(100) NOT NULL,
   `nama_penulis` varchar(200) NOT NULL,
   `tahun` int(4) NOT NULL,
   `id_fakultas` int(11) DEFAULT NULL,
