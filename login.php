@@ -7,7 +7,7 @@ if(isset($_POST['login'])){
     $password = $_POST['password'];
 
     //cekking database
-    $result = mysqli_query($conn, "SELECT * FROM login WHERE username = '$username' AND password='$password'");
+    $result = mysqli_query($conn, "SELECT * FROM login WHERE username = '$username' AND password = '$password'");
     //hitung jumlah data
     $cek = mysqli_num_rows($result);
 
@@ -16,6 +16,7 @@ if(isset($_POST['login'])){
         header("location: index.php");
     }else{
         header("location: login.php");
+        echo "pass salah mas!!";
     }
     } 
 
