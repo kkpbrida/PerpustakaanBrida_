@@ -16,8 +16,9 @@ if(isset($_POST['login'])){
         header("location: index.php");
     }else{
         header("location: login.php");
-        echo "pass salah mas!!";
     }
+    
+    
     } 
 
     if(!isset($_SESSION['login'])){
@@ -77,3 +78,21 @@ if(isset($_POST['login'])){
         <script src="js/scripts.js"></script>
     </body>
 </html>
+<?php
+if(isset($_POST['login'])){
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    //cekking database
+    $result = mysqli_query($conn, "SELECT * FROM login WHERE username = '$username' AND password = '$password'");
+    //hitung jumlah data
+    $cek = mysqli_num_rows($result);
+
+    if($cek > 0){
+        $_SESSION['login'] = true;
+        header("location: index.php");
+    }else{
+        echo "<script>alert('Username atau Password salah!');</script>";
+    }
+}
+?>
