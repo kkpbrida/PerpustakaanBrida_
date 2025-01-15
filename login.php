@@ -1,5 +1,31 @@
 <?php
 require 'function.php';
+
+//cek login
+if(isset($_POST['login'])){
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    //cekking database
+    $result = mysqli_query($conn, "SELECT * FROM login WHERE username = '$username' AND password='$password'");
+    //hitung jumlah data
+    $cek = mysqli_num_rows($result);
+
+    if($cek > 0){
+        $_SESSION['login'] = true;
+        header("location: index.php");
+    }else{
+        header("location: login.php");
+    }
+    } 
+
+    if(!isset($_SESSION['login'])){
+
+    }
+    else{
+    header("location: index.php");
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -24,22 +50,18 @@ require 'function.php';
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
                                     <div class="card-body">
-                                        <form method = "post">
+                                        <form method = "POST" action = "login.php">  
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
-                                                <label for="inputEmail">Username</label>
+                                                <input class="form-control" id="inputUsername" type="text" placeholder="Username" name="username" required />
+                                                <label for="inputUsername">Username</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputPassword" type="password" placeholder="Password" />
+                                                <input class="form-control" id="inputPassword" type="password" placeholder="Password" name="password" required />
                                                 <label for="inputPassword">Password</label>
-                                            </div>
-                                            <div class="form-check mb-3">
-                                                <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
-                                                <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
-                                            </div>
-                                            <div class="d-flex align-items-center justify-content-between mt-4 mb-0">   
-                                                <a class="btn btn-primary" href="index.html">Login</a>
-                                            </div>
+                                            </div>  
+                                            <div class="d-flex align-items-center justify-content-center text-center mt-4 mb-0">   
+                                            <button class="btn btn-primary" name="login" >Login</button>
+                                        </div>
                                         </form>
                                     </div>
                                     <div class="card-footer text-center py-3">
