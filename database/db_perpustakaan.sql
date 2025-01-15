@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 15, 2025 at 06:50 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Waktu pembuatan: 15 Jan 2025 pada 08.11
+-- Versi server: 10.4.32-MariaDB
+-- Versi PHP: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `perpustakaandb`
+-- Database: `db_perpustakaan`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fakultas`
+-- Struktur dari tabel `fakultas`
 --
 
 CREATE TABLE `fakultas` (
@@ -36,7 +36,7 @@ CREATE TABLE `fakultas` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `instansi`
+-- Struktur dari tabel `instansi`
 --
 
 CREATE TABLE `instansi` (
@@ -47,7 +47,7 @@ CREATE TABLE `instansi` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kategori`
+-- Struktur dari tabel `kategori`
 --
 
 CREATE TABLE `kategori` (
@@ -58,7 +58,7 @@ CREATE TABLE `kategori` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `login`
+-- Struktur dari tabel `login`
 --
 
 CREATE TABLE `login` (
@@ -68,16 +68,17 @@ CREATE TABLE `login` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `login`
+-- Dumping data untuk tabel `login`
 --
 
 INSERT INTO `login` (`id_login`, `username`, `password`) VALUES
-(1, 'admin', 'admin123');
+(1, 'admin', 'admin123'),
+(2, 'admin', 'admin');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `penelitian`
+-- Struktur dari tabel `penelitian`
 --
 
 CREATE TABLE `penelitian` (
@@ -94,7 +95,7 @@ CREATE TABLE `penelitian` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `petugas`
+-- Struktur dari tabel `petugas`
 --
 
 CREATE TABLE `petugas` (
@@ -105,7 +106,7 @@ CREATE TABLE `petugas` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rak`
+-- Struktur dari tabel `rak`
 --
 
 CREATE TABLE `rak` (
@@ -116,7 +117,7 @@ CREATE TABLE `rak` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `registrasi`
+-- Struktur dari tabel `registrasi`
 --
 
 CREATE TABLE `registrasi` (
@@ -130,32 +131,32 @@ CREATE TABLE `registrasi` (
 --
 
 --
--- Indexes for table `fakultas`
+-- Indeks untuk tabel `fakultas`
 --
 ALTER TABLE `fakultas`
   ADD PRIMARY KEY (`id_fakultas`),
   ADD KEY `id_instansi` (`id_instansi`);
 
 --
--- Indexes for table `instansi`
+-- Indeks untuk tabel `instansi`
 --
 ALTER TABLE `instansi`
   ADD PRIMARY KEY (`id_instantsi`);
 
 --
--- Indexes for table `kategori`
+-- Indeks untuk tabel `kategori`
 --
 ALTER TABLE `kategori`
   ADD PRIMARY KEY (`id_kategori`);
 
 --
--- Indexes for table `login`
+-- Indeks untuk tabel `login`
 --
 ALTER TABLE `login`
   ADD PRIMARY KEY (`id_login`);
 
 --
--- Indexes for table `penelitian`
+-- Indeks untuk tabel `penelitian`
 --
 ALTER TABLE `penelitian`
   ADD PRIMARY KEY (`id_penelitian`),
@@ -165,82 +166,82 @@ ALTER TABLE `penelitian`
   ADD KEY `id_registrasi` (`id_registrasi`);
 
 --
--- Indexes for table `petugas`
+-- Indeks untuk tabel `petugas`
 --
 ALTER TABLE `petugas`
   ADD PRIMARY KEY (`nip`);
 
 --
--- Indexes for table `rak`
+-- Indeks untuk tabel `rak`
 --
 ALTER TABLE `rak`
   ADD PRIMARY KEY (`id_rak`);
 
 --
--- Indexes for table `registrasi`
+-- Indeks untuk tabel `registrasi`
 --
 ALTER TABLE `registrasi`
   ADD PRIMARY KEY (`id_registrasi`),
   ADD KEY `id_petugas` (`id_petugas`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `fakultas`
+-- AUTO_INCREMENT untuk tabel `fakultas`
 --
 ALTER TABLE `fakultas`
   MODIFY `id_fakultas` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `instansi`
+-- AUTO_INCREMENT untuk tabel `instansi`
 --
 ALTER TABLE `instansi`
   MODIFY `id_instantsi` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `kategori`
+-- AUTO_INCREMENT untuk tabel `kategori`
 --
 ALTER TABLE `kategori`
   MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `login`
+-- AUTO_INCREMENT untuk tabel `login`
 --
 ALTER TABLE `login`
-  MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `penelitian`
+-- AUTO_INCREMENT untuk tabel `penelitian`
 --
 ALTER TABLE `penelitian`
   MODIFY `id_penelitian` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `petugas`
+-- AUTO_INCREMENT untuk tabel `petugas`
 --
 ALTER TABLE `petugas`
   MODIFY `nip` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `registrasi`
+-- AUTO_INCREMENT untuk tabel `registrasi`
 --
 ALTER TABLE `registrasi`
   MODIFY `id_registrasi` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `fakultas`
+-- Ketidakleluasaan untuk tabel `fakultas`
 --
 ALTER TABLE `fakultas`
   ADD CONSTRAINT `fakultas_ibfk_1` FOREIGN KEY (`id_instansi`) REFERENCES `instansi` (`id_instantsi`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `penelitian`
+-- Ketidakleluasaan untuk tabel `penelitian`
 --
 ALTER TABLE `penelitian`
   ADD CONSTRAINT `penelitian_ibfk_1` FOREIGN KEY (`id_kategori`) REFERENCES `kategori` (`id_kategori`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -249,7 +250,7 @@ ALTER TABLE `penelitian`
   ADD CONSTRAINT `penelitian_ibfk_4` FOREIGN KEY (`id_registrasi`) REFERENCES `registrasi` (`id_registrasi`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `registrasi`
+-- Ketidakleluasaan untuk tabel `registrasi`
 --
 ALTER TABLE `registrasi`
   ADD CONSTRAINT `registrasi_ibfk_1` FOREIGN KEY (`id_petugas`) REFERENCES `petugas` (`nip`) ON DELETE CASCADE ON UPDATE CASCADE;
