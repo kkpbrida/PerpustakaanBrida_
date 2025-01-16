@@ -22,18 +22,18 @@ SET time_zone = "+00:00";
 --
 
 --
+-- Dumping data for table `instansi`
+--
+
+INSERT INTO `instansi` (`id_instantsi`, `nama_instansi`) VALUES
+(1, 'Universitas Halu OLeo');
+--
 -- Dumping data for table `fakultas`
 --
 
 INSERT INTO `fakultas` (`id_fakultas`, `nama_fakultas`, `id_instansi`) VALUES
 (2, 'Fakultas Matematika dan Ilmu Pengetahuan Alam', 1);
 
---
--- Dumping data for table `instansi`
---
-
-INSERT INTO `instansi` (`id_instantsi`, `nama_instansi`) VALUES
-(1, 'Universitas Halu OLeo');
 
 --
 -- Dumping data for table `kategori`
@@ -51,11 +51,6 @@ INSERT INTO `login` (`id_login`, `username`, `password`) VALUES
 (2, 'admin', 'admin');
 
 --
--- Dumping data for table `penelitian`
---
-
-INSERT INTO `penelitian` (`id_penelitian`, `judul`, `nama_penulis`, `tahun`, `id_fakultas`, `id_kategori`, `id_rak`, `id_registrasi`) VALUES
-(1, 'Analisis Hasil Pembahasan Bersayart Mengenai Perpustakaan Metode BIOS', 'Gilang Aziz Libratul Ahmad', 2024, 2, 2, 'A1', 3);
 
 --
 -- Dumping data for table `petugas`
@@ -79,6 +74,11 @@ INSERT INTO `registrasi` (`id_registrasi`, `tgl_masuk`, `id_petugas`) VALUES
 (3, '2025-01-16', 2);
 COMMIT;
 
+-- Dumping data for table `penelitian`
+--
+
+INSERT INTO `penelitian` (`id_penelitian`, `judul`, `nama_penulis`, `tahun`, `id_fakultas`, `id_kategori`, `id_rak`, `id_registrasi`) VALUES
+(1, 'Analisis Hasil Pembahasan Bersayart Mengenai Perpustakaan Metode BIOS', 'Gilang Aziz Libratul Ahmad', 2024, 2, 2, 'A1', 3);
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
