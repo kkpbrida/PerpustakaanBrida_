@@ -44,7 +44,7 @@ $result = $conn->query($sql);
 <body>
 <div class="container-fluid px-4">
     <div class="d-flex justify-content-between align-items-center mt-4">
-    <h1>SELAMAT DATANG DI SIAP BRIDA</h1>
+    <h1>Selamat Datang di e-Library Perpustakaan BRIDA</h1>
     <div>
         <a href="home.php" class="btn btn-secondary">Home</a>
         <a href="login.php" class="btn btn-primary">Login</a>
