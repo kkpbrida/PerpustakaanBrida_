@@ -21,6 +21,15 @@ SET time_zone = "+00:00";
 -- Database: `db_perpustakaan`
 --
 
+-- Dumping data for table `instansi`
+--
+
+INSERT INTO `instansi` (`id_instantsi`, `nama_instansi`) VALUES
+(1, 'Universitas Halu Oleo'),
+(2, 'Universitas Halu Oleo'),
+(3, 'Institut Agama Islam Negeri Kendari'),
+(4, 'Universitas Mandala Waluya'),
+(5, 'Universitas Sulawesi Tenggara');
 --
 -- Dumping data for table `fakultas`
 --
@@ -33,16 +42,17 @@ INSERT INTO `fakultas` (`id_fakultas`, `nama_fakultas`, `id_instansi`) VALUES
 (5, 'Ilmu Sosial dan Ilmu Politik', 1);
 
 --
--- Dumping data for table `instansi`
+
+-- Dumping data for table `rak`
 --
 
-INSERT INTO `instansi` (`id_instantsi`, `nama_instansi`) VALUES
-(1, 'Universitas Halu Oleo'),
-(2, 'Universitas Halu Oleo'),
-(3, 'Institut Agama Islam Negeri Kendari'),
-(4, 'Universitas Mandala Waluya'),
-(5, 'Universitas Sulawesi Tenggara');
-
+INSERT INTO `rak` (`id_rak`, `keterangan`) VALUES
+('A1', NULL),
+('A2', NULL),
+('A3', NULL),
+('A4', NULL),
+('A5', NULL);
+COMMIT;
 --
 -- Dumping data for table `kategori`
 --
@@ -74,16 +84,6 @@ INSERT INTO `penelitian` (`id_penelitian`, `judul`, `nama_penulis`, `tahun`, `id
 (5, 'Pengaruh Literasi Keuangan terhadap Keputusan Investasi Mahasiswa pada Platform Peer-to-Peer Lending', 'Kalingga Sakti', '2024', 2, 2, 'A1', '2025-01-16', 'Admin');
 
 --
--- Dumping data for table `rak`
---
-
-INSERT INTO `rak` (`id_rak`, `keterangan`) VALUES
-('A1', NULL),
-('A2', NULL),
-('A3', NULL),
-('A4', NULL),
-('A5', NULL);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

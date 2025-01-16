@@ -148,7 +148,7 @@
 --   ADD KEY `id_fakultas` (`id_fakultas`),
 --   ADD KEY `id_kategori` (`id_kategori`),
 --   ADD KEY `id_rak` (`id_rak`);
--- ALTER TABLE `penelitian` ADD FULLTEXT KEY `judul` (`judul`,`nama_penulis`);
+ALTER TABLE `penelitian` ADD FULLTEXT KEY `judul` (`judul`,`nama_penulis`);
 -- ALTER TABLE `penelitian` ADD FULLTEXT KEY `judul_2` (`judul`,`nama_penulis`);
 
 ALTER TABLE `penelitian`
