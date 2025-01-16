@@ -3,6 +3,6 @@
 if(isset($_SESSION['login'])){
 }
 else{
-    header("location: login.php");
+    header("location: home.php");
 }
 ?>
