@@ -1,6 +1,6 @@
 <?php
 require 'function.php';
-require 'cek.php';
+
 
 // Fetch distinct years from the database for the dropdown
 $years_query = "SELECT DISTINCT tahun FROM penelitian ORDER BY tahun DESC";
