@@ -2,40 +2,31 @@
 require 'function.php';
 
 
+
 // Fetch distinct years from the database for the dropdown
 $years_query = "SELECT DISTINCT tahun FROM penelitian ORDER BY tahun DESC";
-$years_result = mysqli_query($conn, $years_query);
+$years_result = $conn->query($years_query);
 
-$search = '';
-$selected_year = '';
-if (isset($_POST['search'])) {
-    $search = $_POST['search'];
-    $selected_year = $_POST['year'];
-    $query = "SELECT p.judul, i.nama_instansi, f.nama_fakultas, p.tahun, p.nama_penulis, k.nama_kategori 
-              FROM penelitian p
-              JOIN fakultas f ON p.id_fakultas = f.id_fakultas
-              JOIN instansi i ON f.id_instansi = i.id_instantsi
-              JOIN kategori k ON p.id_kategori = k.id_kategori
-              WHERE (MATCH(p.judul, p.nama_penulis) AGAINST('$search' IN NATURAL LANGUAGE MODE)
-              OR i.nama_instansi LIKE '%$search%'
-              OR f.nama_fakultas LIKE '%$search%'
-              OR k.nama_kategori LIKE '%$search%'
-              OR p.id_fakultas LIKE '%$search%'
-              OR p.id_kategori LIKE '%$search%'
-              OR p.id_rak LIKE '%$search%'
-              OR p.id_registrasi LIKE '%$search%')";
-    if ($selected_year != '') {
-        $query .= " AND p.tahun = $selected_year";
-    }
-} else {
-    $query = "SELECT p.judul, i.nama_instansi, f.nama_fakultas, p.tahun, p.nama_penulis, k.nama_kategori 
-              FROM penelitian p
-              JOIN fakultas f ON p.id_fakultas = f.id_fakultas
-              JOIN instansi i ON f.id_instansi = i.id_instantsi
-              JOIN kategori k ON p.id_kategori = k.id_kategori";
+$search = isset($_POST['search']) ? $conn->real_escape_string($_POST['search']) : '';
+$year = isset($_POST['year']) ? $conn->real_escape_string($_POST['year']) : '';
+
+$sql = "SELECT p.judul, p.nama_penulis, f.nama_fakultas, i.nama_instansi, p.tahun, k.nama_kategori 
+        FROM penelitian p
+        JOIN fakultas f ON p.id_fakultas = f.id_fakultas
+        JOIN instansi i ON f.id_instansi = i.id_instantsi
+        JOIN kategori k ON p.id_kategori = k.id_kategori
+        WHERE 1=1";
+if ($search != '') {
+    $sql .= " AND (MATCH(p.judul, p.nama_penulis) AGAINST('$search' IN NATURAL LANGUAGE MODE)
+                  OR f.nama_fakultas LIKE '%$search%'
+                  OR i.nama_instansi LIKE '%$search%'
+                  OR k.nama_kategori LIKE '%$search%')";
+}
+if ($year != '') {
+    $sql .= " AND p.tahun = '$year'";
 }
 
-$result = mysqli_query($conn, $query);
+$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -50,6 +41,7 @@ $result = mysqli_query($conn, $query);
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <div class="container-fluid px-4">
@@ -63,55 +55,43 @@ $result = mysqli_query($conn, $query);
     <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
-            Daftar Buku
+            Daftar Penelitian
         </div>
         <div class="card-body">
             <form method="POST" action="">
                 <div class="input-group mb-3">
-                    <input class="form-control" type="text" name="search" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" value="<?php echo $search; ?>" />
-                    <select class="form-control" name="year" style="max-width: 150px;">
+                    <input class="form-control" type="text" id="search" name="search" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" value="<?php echo $search; ?>" />
+                    <select class="form-control" id="year" name="year" style="max-width: 150px;">
                         <option value="">Select Year</option>
                         <?php while ($year_row = mysqli_fetch_assoc($years_result)) { ?>
-                            <option value="<?php echo $year_row['tahun']; ?>" <?php if ($selected_year == $year_row['tahun']) echo 'selected'; ?>>
+                            <option value="<?php echo $year_row['tahun']; ?>" <?php if ($year == $year_row['tahun']) echo 'selected'; ?>>
                                 <?php echo $year_row['tahun']; ?>
                             </option>
                         <?php } ?>
                     </select>
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="submit"><i class="fas fa-search"></i></button>
                 </div>
             </form>
-            <table id="datatablesSimple">
+            <table id="datatablesSimple" class="table table-striped">
                 <thead>
                     <tr>
                         <th>Judul</th>
-                        <th>Instansi</th>
+                        <th>Nama Penulis</th>
                         <th>Fakultas</th>
+                        <th>Instansi</th>
                         <th>Tahun</th>
-                        <th>Penulis</th>
                         <th>Kategori</th>
                     </tr>
                 </thead>
-                <tfoot>
-                    <tr>
-                        <th>Judul</th>
-                        <th>Instansi</th>
-                        <th>Fakultas</th>
-                        <th>Tahun</th>
-                        <th>Penulis</th>
-                        <th>Kategori</th>
-                    </tr>
-                </tfoot>
-                <tbody>
-                    <?php while ($row = mysqli_fetch_assoc($result)) { ?>
-                        <tr>
-                            <td><?php echo $row['judul']; ?></td>
-                            <td><?php echo $row['nama_instansi']; ?></td>
-                            <td><?php echo $row['nama_fakultas']; ?></td>
-                            <td><?php echo $row['tahun']; ?></td>
-                            <td><?php echo $row['nama_penulis']; ?></td>
-                            <td><?php echo $row['nama_kategori']; ?></td>
-                        </tr>
-                    <?php } ?>
+                <tbody id="results">
+                    <?php
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            echo "<tr><td>" . $row['judul'] . "</td><td>" . $row['nama_penulis'] . "</td><td>" . $row['nama_fakultas'] . "</td><td>" . $row['nama_instansi'] . "</td><td>" . $row['tahun'] . "</td><td>" . $row['nama_kategori'] . "</td></tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='6'>Tidak ada hasil ditemukan</td></tr>";
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
@@ -131,5 +111,24 @@ $result = mysqli_query($conn, $query);
 <script src="assets/demo/chart-bar-demo.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
 <script src="js/datatables-simple-demo.js"></script>
+<script>
+$(document).ready(function() {
+    $('#search, #year').on('input', function() {
+        var search = $('#search').val();
+        var year = $('#year').val();
+        $.ajax({
+            url: 'search.php',
+            method: 'POST',
+            data: { search: search, year: year },
+            success: function(response) {
+                $('#results').html(response);
+            }
+        });
+    });
+});
+</script>
 </body>
 </html>
+<?php
+$conn->close();
+?>
