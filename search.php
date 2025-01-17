@@ -1,27 +1,47 @@
 <?php
+// Aktifkan pelaporan error
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Tangkap output buffer untuk memastikan tidak ada output lain
+ob_start();
+
 require 'function.php';
+
+// Pastikan tidak ada output lain sebelum ini
+header('Content-Type: application/json');
 
 $search = isset($_POST['search']) ? $conn->real_escape_string($_POST['search']) : '';
 $year = isset($_POST['year']) ? $conn->real_escape_string($_POST['year']) : '';
 $category = isset($_POST['category']) ? $conn->real_escape_string($_POST['category']) : '';
+$instansi = isset($_POST['instansi']) ? $conn->real_escape_string($_POST['instansi']) : '';
 $page = isset($_POST['page']) ? (int)$_POST['page'] : 1;
-$limit = 10; // Number of records per page
+$limit = 10; // Jumlah record per halaman
 $offset = ($page - 1) * $limit;
 
-$sql = "SELECT p.id_penelitian, p.judul, p.nama_penulis, f.nama_fakultas, i.nama_instansi, p.tahun, k.nama_kategori, p.id_rak, p.tgl_masuk 
+// Tentukan kolom yang akan ditampilkan berdasarkan halaman yang memanggil
+$columns = "p.id_penelitian, p.judul, p.nama_penulis, i.nama_instansi, f.nama_fakultas, p.tahun, k.nama_kategori, p.id_rak";
+if (isset($_POST['page_type']) && $_POST['page_type'] == 'index') {
+    $columns .= ", p.tgl_masuk";
+}
+
+$sql = "SELECT $columns
         FROM penelitian p
-        JOIN fakultas f ON p.id_fakultas = f.id_fakultas
-        JOIN instansi i ON f.id_instansi = i.id_instantsi
+        JOIN instansi i ON p.id_instansi = i.id_instansi
         JOIN kategori k ON p.id_kategori = k.id_kategori
-        WHERE 1=1";
+        JOIN fakultas f ON p.id_fakultas = f.id_fakultas";
+$sql .= " WHERE 1=1";
 if ($search != '') {
-    $sql .= " AND (p.judul LIKE '%$search%' OR p.nama_penulis LIKE '%$search%' OR f.nama_fakultas LIKE '%$search%' OR i.nama_instansi LIKE '%$search%')";
+    $sql .= " AND (p.judul LIKE '%$search%' OR p.nama_penulis LIKE '%$search%' OR i.nama_instansi LIKE '%$search%')";
 }
 if ($year != '') {
     $sql .= " AND p.tahun = '$year'";
 }
 if ($category != '') {
     $sql .= " AND k.nama_kategori = '$category'";
+}
+if ($instansi != '') {
+    $sql .= " AND i.nama_instansi = '$instansi'";
 }
 
 $total_sql = "SELECT COUNT(*) as total FROM ($sql) as subquery";
@@ -36,8 +56,8 @@ $result = $conn->query($sql);
 $data = '';
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-        $data .= "<tr><td>" . $row['judul'] . "</td><td>" . $row['nama_penulis'] . "</td><td>" . $row['nama_fakultas'] . "</td><td>" . $row['nama_instansi'] . "</td><td>" . $row['tahun'] . "</td><td>" . $row['nama_kategori'] . "</td><td>" . $row['id_rak'] . "</td>";
-        if (isset($_POST['show_date']) && $_POST['show_date'] == 'true') {
+        $data .= "<tr><td>" . $row['judul'] . "</td><td>" . $row['nama_penulis'] . "</td><td>" . $row['nama_instansi'] . "</td><td>" . $row['nama_fakultas'] . "</td><td>" . $row['tahun'] . "</td><td>" . $row['nama_kategori'] . "</td><td>" . $row['id_rak'] . "</td>";
+        if (isset($_POST['page_type']) && $_POST['page_type'] == 'index') {
             $data .= "<td>" . $row['tgl_masuk'] . "</td>";
             $data .= "<td><a href='form.php?id=" . $row['id_penelitian'] . "' class='btn btn-primary'>Edit</a></td>";
         }
@@ -98,6 +118,15 @@ $response = [
     'info' => $info
 ];
 
+// Tangkap output buffer dan bersihkan
+$output = ob_get_clean();
+
+// Jika ada output yang tidak diinginkan, log ke file
+if (!empty($output)) {
+    file_put_contents('error_log.txt', $output, FILE_APPEND);
+}
+
+// Kembalikan JSON response
 echo json_encode($response);
 
 $conn->close();

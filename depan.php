@@ -21,7 +21,9 @@ $categories_result = $conn->query($categories_query);
     <title>e-Library BRIDA</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <style>
         .table {
             width: 100%;
@@ -92,20 +94,18 @@ $categories_result = $conn->query($categories_query);
             -webkit-appearance: none;
             -moz-appearance: none;
             padding-right: 30px; /* Adjust this value to make space for the icon */
+            max-height: 200px; /* Set the maximum height */
+            overflow-y: auto; /* Add vertical scrollbar if needed */
         }
 
+        /* Hapus ikon panah kustom */
         .select-wrapper::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            right: 10px;
-            width: 0;
-            height: 0;
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            border-top: 5px solid #000;
-            transform: translateY(-50%);
-            pointer-events: none;
+            display: none;
+        }
+
+        /* Samakan tinggi elemen input dan dropdown */
+        .form-control, .select2-container .select2-selection--single {
+            height: calc(2.25rem + 2px); /* Sesuaikan dengan tinggi elemen input */
         }
     </style>
 </head>
@@ -159,19 +159,19 @@ $categories_result = $conn->query($categories_query);
                     </div>
                 </div>
             </form>
-            <table class="table table-striped">
+            <table class="table table-striped" id="data-table">
                 <thead>
                     <tr>
                         <th>Judul</th>
                         <th>Nama Penulis</th>
-                        <th>Fakultas</th>
                         <th>Instansi</th>
+                        <th>Fakultas</th>
                         <th>Tahun</th>
                         <th>Kategori</th>
-                        <th>Lokasi</th>
+                        <th>ID Rak</th>
                     </tr>
                 </thead>
-                <tbody id="results">
+                <tbody>
                     <!-- Data akan dimuat di sini melalui AJAX -->
                 </tbody>
             </table>
@@ -195,19 +195,31 @@ $categories_result = $conn->query($categories_query);
 <script src="js/scripts.js"></script>
 <script>
 $(document).ready(function() {
+    // Inisialisasi Select2 pada elemen dropdown
+    $('#year, #category').select2();
+
     function fetchData(page = 1) {
-        var search = $('#search').val();
-        var year = $('#year').val();
-        var category = $('#category').val();
         $.ajax({
             url: 'search.php',
-            method: 'POST',
-            data: { search: search, year: year, category: category, page: page },
-            success: function(response) {
-                var data = JSON.parse(response);
-                $('#results').html(data.data);
-                $('#pagination').html(data.pagination);
-                $('#data-info').html(data.info);
+            type: 'POST',
+            data: {
+                search: $('#search').val(),
+                year: $('#year').val(),
+                category: $('#category').val(),
+                page: page,
+                page_type: 'depan'
+            },
+            success: function(data) {
+                try {
+                    $('#data-table tbody').html(data.data);
+                    $('#pagination').html(data.pagination);
+                    $('#data-info').html(data.info);
+                } catch (e) {
+                    console.error("Parsing error:", e);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX error:", status, error);
             }
         });
     }
@@ -216,16 +228,13 @@ $(document).ready(function() {
         fetchData();
     });
 
-    // Prevent form submission on Enter key press
     $('#searchForm').on('submit', function(e) {
         e.preventDefault();
         fetchData();
     });
 
-    // Fetch initial data
     fetchData();
 
-    // Handle pagination click
     $(document).on('click', '.page-link', function(e) {
         e.preventDefault();
         var page = $(this).data('page');
