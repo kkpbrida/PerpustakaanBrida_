@@ -148,15 +148,15 @@
 --   ADD KEY `id_fakultas` (`id_fakultas`),
 --   ADD KEY `id_kategori` (`id_kategori`),
 --   ADD KEY `id_rak` (`id_rak`);
-ALTER TABLE `penelitian` ADD FULLTEXT KEY `judul` (`judul`,`nama_penulis`);
+-- ALTER TABLE `penelitian` ADD FULLTEXT KEY `judul` (`judul`,`nama_penulis`);
 -- ALTER TABLE `penelitian` ADD FULLTEXT KEY `judul_2` (`judul`,`nama_penulis`);
 
-ALTER TABLE `penelitian`
-  ADD COLUMN `tgl_masuk` date NOT NULL DEFAULT current_timestamp();
-ALTER TABLE `penelitian`
-  ADD COLUMN `petugas` varchar(50) NOT NULL DEFAULT 'Admin';
-  ALTER TABLE `penelitian`
-    MODIFY COLUMN `tahun` varchar(50) NOT NULL;
+-- ALTER TABLE `penelitian`
+--   ADD COLUMN `tgl_masuk` date NOT NULL DEFAULT current_timestamp();
+-- ALTER TABLE `penelitian`
+--   ADD COLUMN `petugas` varchar(50) NOT NULL DEFAULT 'Admin';
+--   ALTER TABLE `penelitian`
+--     MODIFY COLUMN `tahun` varchar(50) NOT NULL;
 
 -- --
 -- -- Indexes for table `rak`
@@ -232,3 +232,6 @@ ALTER TABLE `penelitian`
 -- drop table registrasi;
 
 -- ALTER TABLE penelitian DROP COLUMN id_registrasi;
+
+-- Mengubah Batas Penulis
+ALTER TABLE penelitian MODIFY COLUMN nama_penulis varchar(500) NOT NULL;
