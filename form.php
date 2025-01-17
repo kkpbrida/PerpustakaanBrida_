@@ -53,10 +53,14 @@ require 'cek.php';
                                         <input type="date" id="tgl_masuk" name="tgl_masuk" class="form-control" required>
                                     </div>
                                     <div class="mb-3">
+                                        <label for="judul" class="form-label">Judul:</label>
+                                        <input type="text" id="judul" name="judul" class="form-control" required>
+                                    </div>
+                                    <div class="mb-3">
                                         <label for="nama_penulis" class="form-label">Nama Penulis:</label>
                                         <input type="text" id="nama_penulis" name="nama_penulis[]" class="form-control" required>
-                                        <button type="button" class="btn btn-secondary mt-2" onclick="addPenulis()">Tambah Penulis</button>
                                         <div id="penulis_container"></div>
+                                        <button type="button" class="btn btn-secondary mt-2" onclick="addPenulis()">Tambah Penulis</button>
                                     </div>
                                     <div class="mb-3">
                                         <label for="instansi" class="form-label">Instansi:</label>
@@ -138,10 +142,6 @@ require 'cek.php';
                                                 }
                                             ?>
                                         </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="judul" class="form-label">Judul:</label>
-                                        <input type="text" id="judul" name="judul" class="form-control" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="tahun" class="form-label">Tahun:</label>
