@@ -21,7 +21,6 @@ $categories_result = $conn->query($categories_query);
     <title>e-Library BRIDA</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         .table {
@@ -83,6 +82,31 @@ $categories_result = $conn->query($categories_query);
             flex: 0 0 auto;
             width: 25%;
         }
+
+        .select-wrapper {
+            position: relative;
+        }
+
+        .select-wrapper select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            padding-right: 30px; /* Adjust this value to make space for the icon */
+        }
+
+        .select-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #000;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
@@ -110,24 +134,28 @@ $categories_result = $conn->query($categories_query);
                             placeholder="Cari Judul/Nama Penulis" aria-label="Cari Judul/Nama Penulis" />
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12">
-                        <select class="form-control w-100" id="year" name="year">
-                            <option value="">Pilih Tahun</option>
-                            <?php while ($year_row = mysqli_fetch_assoc($years_result)) { ?>
-                                <option value="<?php echo $year_row['tahun']; ?>">
-                                    <?php echo $year_row['tahun']; ?>
-                                </option>
-                            <?php } ?>
-                        </select>
+                        <div class="select-wrapper">
+                            <select class="form-control w-100" id="year" name="year">
+                                <option value="">Pilih Tahun</option>
+                                <?php while ($year_row = mysqli_fetch_assoc($years_result)) { ?>
+                                    <option value="<?php echo $year_row['tahun']; ?>">
+                                        <?php echo $year_row['tahun']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12">
-                        <select class="form-control w-100" id="category" name="category">
-                            <option value="">Pilih Kategori</option>
-                            <?php while ($category_row = mysqli_fetch_assoc($categories_result)) { ?>
-                                <option value="<?php echo $category_row['nama_kategori']; ?>">
-                                    <?php echo $category_row['nama_kategori']; ?>
-                                </option>
-                            <?php } ?>
-                        </select>
+                        <div class="select-wrapper">
+                            <select class="form-control w-100" id="category" name="category">
+                                <option value="">Pilih Kategori</option>
+                                <?php while ($category_row = mysqli_fetch_assoc($categories_result)) { ?>
+                                    <option value="<?php echo $category_row['nama_kategori']; ?>">
+                                        <?php echo $category_row['nama_kategori']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </form>

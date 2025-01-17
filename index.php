@@ -90,6 +90,31 @@ $categories_result = $conn->query($categories_query);
             gap: 10px; /* Jarak antar ikon di kanan */
             margin-left: auto; /* Geser ke kanan */
         }
+
+        .select-wrapper {
+            position: relative;
+        }
+
+        .select-wrapper select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            padding-right: 30px; /* Adjust this value to make space for the icon */
+        }
+
+        .select-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #000;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
     </style>
 </head>
 <body class="sb-nav-fixed">
@@ -203,24 +228,28 @@ $categories_result = $conn->query($categories_query);
                                             placeholder="Cari Judul/Nama Penulis" aria-label="Cari Judul/Nama Penulis" />
                                     </div>
                                     <div class="col-lg-3 col-md-6 col-sm-12">
-                                        <select class="form-control w-100" id="year" name="year">
-                                            <option value="">Pilih Tahun</option>
-                                            <?php while ($year_row = mysqli_fetch_assoc($years_result)) { ?>
-                                                <option value="<?php echo $year_row['tahun']; ?>">
-                                                    <?php echo $year_row['tahun']; ?>
-                                                </option>
-                                            <?php } ?>
-                                        </select>
+                                        <div class="select-wrapper">
+                                            <select class="form-control w-100" id="year" name="year">
+                                                <option value="">Pilih Tahun</option>
+                                                <?php while ($year_row = mysqli_fetch_assoc($years_result)) { ?>
+                                                    <option value="<?php echo $year_row['tahun']; ?>">
+                                                        <?php echo $year_row['tahun']; ?>
+                                                    </option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="col-lg-3 col-md-6 col-sm-12">
-                                        <select class="form-control w-100" id="category" name="category">
-                                            <option value="">Pilih Kategori</option>
-                                            <?php while ($category_row = mysqli_fetch_assoc($categories_result)) { ?>
-                                                <option value="<?php echo $category_row['nama_kategori']; ?>">
-                                                    <?php echo $category_row['nama_kategori']; ?>
-                                                </option>
-                                            <?php } ?>
-                                        </select>
+                                        <div class="select-wrapper">
+                                            <select class="form-control w-100" id="category" name="category">
+                                                <option value="">Pilih Kategori</option>
+                                                <?php while ($category_row = mysqli_fetch_assoc($categories_result)) { ?>
+                                                    <option value="<?php echo $category_row['nama_kategori']; ?>">
+                                                        <?php echo $category_row['nama_kategori']; ?>
+                                                    </option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </form>
