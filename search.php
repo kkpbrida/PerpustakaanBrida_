@@ -8,7 +8,7 @@ $page = isset($_POST['page']) ? (int)$_POST['page'] : 1;
 $limit = 10; // Number of records per page
 $offset = ($page - 1) * $limit;
 
-$sql = "SELECT p.judul, p.nama_penulis, f.nama_fakultas, i.nama_instansi, p.tahun, k.nama_kategori, p.id_rak 
+$sql = "SELECT p.judul, p.nama_penulis, f.nama_fakultas, i.nama_instansi, p.tahun, k.nama_kategori, p.id_rak, p.tgl_masuk 
         FROM penelitian p
         JOIN fakultas f ON p.id_fakultas = f.id_fakultas
         JOIN instansi i ON f.id_instansi = i.id_instantsi
@@ -36,10 +36,14 @@ $result = $conn->query($sql);
 $data = '';
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-        $data .= "<tr><td>" . $row['judul'] . "</td><td>" . $row['nama_penulis'] . "</td><td>" . $row['nama_fakultas'] . "</td><td>" . $row['nama_instansi'] . "</td><td>" . $row['tahun'] . "</td><td>" . $row['nama_kategori'] . "</td><td>" . $row['id_rak'] . "</td></tr>";
+        $data .= "<tr><td>" . $row['judul'] . "</td><td>" . $row['nama_penulis'] . "</td><td>" . $row['nama_fakultas'] . "</td><td>" . $row['nama_instansi'] . "</td><td>" . $row['tahun'] . "</td><td>" . $row['nama_kategori'] . "</td><td>" . $row['id_rak'] . "</td>";
+        if (isset($_POST['show_date']) && $_POST['show_date'] == 'true') {
+            $data .= "<td>" . $row['tgl_masuk'] . "</td>";
+        }
+        $data .= "</tr>";
     }
 } else {
-    $data .= "<tr><td colspan='7'>Tidak ada hasil ditemukan</td></tr>";
+    $data .= "<tr><td colspan='8'>Tidak ada hasil ditemukan</td></tr>";
 }
 
 $pagination = '';

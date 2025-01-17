@@ -56,6 +56,16 @@ $categories_result = $conn->query($categories_query);
                 width: 100%;
             }
         }
+
+        .form-inline .form-control,
+        .form-inline .btn,
+        .form-inline .select {
+            width: 100%;
+        }
+
+        .form-inline .row {
+            width: 100%;
+        }
     </style>
 </head>
 <body>
@@ -132,7 +142,7 @@ $categories_result = $conn->query($categories_query);
 <footer class="py-4 bg-light mt-auto">
     <div class="container-fluid px-4">
         <div class="d-flex align-items-center justify-content-between small">
-            <div class="text-muted">Copyright &copy; kkp ilkom nihh bozzz</div>
+            <div class="text-muted">Copyright &copy; KKP ILMU KOMPUTER</div>
         </div>
     </div>
 </footer>
