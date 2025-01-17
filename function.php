@@ -10,31 +10,28 @@ if (!$conn) {
 // tambah penelitian
 if(isset($_POST['addpenelitian'])) {
     $tgl_masuk = $_POST['tgl_masuk'];
+    $instansi = $_POST['instansi'];
     $fakultas = $_POST['fakultas'];
     $kategori = $_POST['kategori'];
     $judul = $_POST['judul'];
     $tahun = $_POST['tahun'];
     $rak = $_POST['rak'];
 
-    $success = true;
+    // Concatenate all author names into a single string separated by commas
+    $nama_penulis = implode(", ", $_POST['nama_penulis']);
 
-    foreach ($_POST['nama_penulis'] as $nama_penulis) {
-        $addtotable = mysqli_query($conn, "INSERT INTO penelitian (tgl_masuk, nama_penulis, id_fakultas, id_kategori, judul, tahun, id_rak) 
-        VALUES ('$tgl_masuk', '$nama_penulis', '$fakultas', '$kategori', '$judul', '$tahun', '$rak')");
+    $addtotable = mysqli_query($conn, "INSERT INTO penelitian (tgl_masuk, nama_penulis, id_kategori, judul, tahun, id_rak, id_instansi, id_fakultas) 
+    VALUES ('$tgl_masuk', '$nama_penulis', '$kategori', '$judul', '$tahun', '$rak', '$instansi', '$fakultas')");
 
-        if (!$addtotable) {
-            $success = false;
-            die("Error: " . mysqli_error($conn));
-        }
-    }
-
-    if ($success) {
+    if ($addtotable) {
         echo "<script>
             document.addEventListener('DOMContentLoaded', function() {
                 var successModal = new bootstrap.Modal(document.getElementById('successModal'));
                 successModal.show();
             });
         </script>";
+    } else {
+        die("Error: " . mysqli_error($conn));
     }
 }
 ?>
