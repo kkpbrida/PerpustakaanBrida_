@@ -234,4 +234,6 @@
 -- ALTER TABLE penelitian DROP COLUMN id_registrasi;
 
 -- Mengubah Batas Penulis
-ALTER TABLE penelitian MODIFY COLUMN nama_penulis varchar(500) NOT NULL;
+-- ALTER TABLE penelitian MODIFY COLUMN nama_penulis varchar(500) NOT NULL;
+-- Mengubah Batas Judul
+ALTER TABLE penelitian MODIFY COLUMN judul varchar(500) NOT NULL;
