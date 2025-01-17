@@ -239,6 +239,7 @@ require 'cek.php';
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary" name="addpenelitian">Submit</button>
+                                    <button type="reset" class="btn btn-secondary">Reset</button>
                                 </form>
                             </div>
                         </div>
