@@ -60,8 +60,67 @@ require 'cek.php';
                                         <label for="nama_penulis" class="form-label">Nama Penulis:</label>
                                         <input type="text" id="nama_penulis" name="nama_penulis[]" class="form-control" required>
                                         <div id="penulis_container"></div>
-                                        <button type="button" class="btn btn-secondary mt-2" onclick="addPenulis()">Tambah Penulis</button>
+                                        <button type="button" class="btn btn-secondary mt-2" id="addPenulisBtn" onclick="addPenulis()">Tambah Penulis</button>
+                                        <button type="button" class="btn btn-danger mt-2" id="removePenulisBtn" onclick="removePenulis()" style="display: none;">Hapus</button>
                                     </div>
+                                    <script>
+                                        function addPenulis() {
+                                            var container = document.getElementById('penulis_container');
+                                            var totalInputs = container.querySelectorAll('input[name="nama_penulis[]"]').length;
+
+                                            if (totalInputs >= 9) { // Kolom awal + 9 = 10
+                                                var button = document.getElementById('addPenulisBtn');
+                                                button.disabled = true;
+                                                button.textContent = 'Batas Maksimal Tercapai';
+                                                button.classList.remove('btn-secondary');
+                                                button.classList.add('btn-danger');
+                                                return;
+                                            }
+
+                                            var input = document.createElement('input');
+                                            input.type = 'text';
+                                            input.name = 'nama_penulis[]';
+                                            input.className = 'form-control mt-2';
+                                            input.required = true;
+                                            container.appendChild(input);
+
+                                            // Show the remove button if there are more than one input fields
+                                            if (totalInputs + 1 > 0) {
+                                                document.getElementById('removePenulisBtn').style.display = 'inline-block';
+                                            }
+                                        }
+
+                                        function removePenulis() {
+                                            var container = document.getElementById('penulis_container');
+                                            var totalInputs = container.querySelectorAll('input[name="nama_penulis[]"]').length;
+
+                                            if (totalInputs > 0) {
+                                                container.removeChild(container.lastChild);
+                                            }
+
+                                            // Hide the remove button if there is only one input field left
+                                            if (totalInputs - 1 <= 0) {
+                                                document.getElementById('removePenulisBtn').style.display = 'none';
+                                            }
+
+                                            // Re-enable the add button if it was disabled
+                                            var addButton = document.getElementById('addPenulisBtn');
+                                            if (totalInputs <= 10) {
+                                                addButton.disabled = false;
+                                                addButton.textContent = 'Tambah Penulis';
+                                                addButton.classList.remove('btn-danger');
+                                                addButton.classList.add('btn-secondary');
+                                            }
+                                        }
+
+                                        // Initial check to hide the remove button if there is only one input field
+                                        document.addEventListener('DOMContentLoaded', function() {
+                                            var totalInputs = document.querySelectorAll('input[name="nama_penulis[]"]').length;
+                                            if (totalInputs <= 1) {
+                                                document.getElementById('removePenulisBtn').style.display = 'none';
+                                            }
+                                        });
+                                    </script>
                                     <div class="mb-3">
                                         <label for="instansi" class="form-label">Instansi:</label>
                                         <select id="instansi" name="instansi" class="form-control" required>
@@ -189,12 +248,60 @@ require 'cek.php';
         <script>
         function addPenulis() {
             var container = document.getElementById('penulis_container');
+            var totalInputs = container.querySelectorAll('input[name="nama_penulis[]"]').length;
+
+            if (totalInputs >= 9) { // Kolom awal + 9 = 10
+                var button = document.getElementById('addPenulisBtn');
+                button.disabled = true;
+                button.textContent = 'Batas Maksimal Tercapai';
+                button.classList.remove('btn-secondary');
+                button.classList.add('btn-danger');
+                return;
+            }
+
             var input = document.createElement('input');
             input.type = 'text';
             input.name = 'nama_penulis[]';
             input.className = 'form-control mt-2';
+            input.required = true;
             container.appendChild(input);
+
+            // Show the remove button if there are more than one input fields
+            if (totalInputs + 1 > 0) {
+                document.getElementById('removePenulisBtn').style.display = 'inline-block';
+            }
         }
+
+        function removePenulis() {
+            var container = document.getElementById('penulis_container');
+            var totalInputs = container.querySelectorAll('input[name="nama_penulis[]"]').length;
+
+            if (totalInputs > 0) {
+                container.removeChild(container.lastChild);
+            }
+
+            // Hide the remove button if there is only one input field left
+            if (totalInputs - 1 <= 0) {
+                document.getElementById('removePenulisBtn').style.display = 'none';
+            }
+
+            // Re-enable the add button if it was disabled
+            var addButton = document.getElementById('addPenulisBtn');
+            if (totalInputs <= 10) {
+                addButton.disabled = false;
+                addButton.textContent = 'Tambah Penulis';
+                addButton.classList.remove('btn-danger');
+                addButton.classList.add('btn-secondary');
+            }
+        }
+
+        // Initial check to hide the remove button if there is only one input field
+        document.addEventListener('DOMContentLoaded', function() {
+            var totalInputs = document.querySelectorAll('input[name="nama_penulis[]"]').length;
+            if (totalInputs <= 1) {
+                document.getElementById('removePenulisBtn').style.display = 'none';
+            }
+        });
         </script>
     </body>
 </html>
