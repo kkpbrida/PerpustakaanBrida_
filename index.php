@@ -177,10 +177,6 @@ $categories_result = $conn->query($categories_query);
                         </a>
                     </div>
                 </div>
-                <div class="sb-sidenav-footer">
-                    <div class="small">Logged in as:</div>
-                    Start Bootstrap
-                </div>
             </nav>
         </div>
         <div id="layoutSidenav_content">
