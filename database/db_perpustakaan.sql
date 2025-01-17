@@ -236,4 +236,25 @@
 -- Mengubah Batas Penulis
 -- ALTER TABLE penelitian MODIFY COLUMN nama_penulis varchar(500) NOT NULL;
 -- Mengubah Batas Judul
-ALTER TABLE penelitian MODIFY COLUMN judul varchar(500) NOT NULL;
+-- ALTER TABLE penelitian MODIFY COLUMN judul varchar(500) NOT NULL;
+
+-- Menghapus semua data penelitian dari id 1 sampai 5
+DELETE FROM penelitian WHERE id_penelitian BETWEEN 1 AND 5;
+
+-- Menghapus semua data fakultas dari id 1 sampai 5
+DELETE FROM fakultas WHERE id_fakultas BETWEEN 1 AND 5;
+
+-- Menghapus relasi antara fakultas dan instansi
+ALTER TABLE fakultas DROP CONSTRAINT fakultas_ibfk_1;
+
+-- Menghapus atribut id_instansi dari tabel fakultas
+ALTER TABLE fakultas DROP COLUMN id_instansi;
+
+-- Menghapus data instansi dari id 1 sampai 5
+DELETE FROM instansi WHERE id_instantsi BETWEEN 1 AND 5;
+
+-- Menambah kolom antara instansi dan penelitian
+ALTER TABLE penelitian ADD COLUMN id_instansi int(11) NOT NULL;
+
+-- Menambah relasi antara instansi dan penelitian
+ALTER TABLE penelitian ADD CONSTRAINT penelitian_ibfk_4 FOREIGN KEY (id_instansi) REFERENCES instansi (id_instantsi) ON DELETE CASCADE ON UPDATE CASCADE;
