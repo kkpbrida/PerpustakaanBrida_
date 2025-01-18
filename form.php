@@ -238,6 +238,28 @@ require 'cek.php';
                                             <i class="fa fa-caret-down"></i>
                                         </div>
                                     </div>
+                                    <script>
+                                        document.querySelectorAll('.select-container select').forEach(function(select) {
+                                            select.addEventListener('focus', function() {
+                                                this.nextElementSibling.classList.add('rotate');
+                                            });
+                                            select.addEventListener('blur', function() {
+                                                this.nextElementSibling.classList.remove('rotate');
+                                            });
+                                            select.addEventListener('change', function() {
+                                                this.nextElementSibling.classList.remove('rotate');
+                                            });
+                                        });
+                                    </script>
+                                    <style>
+                                        .fa-caret-down.rotate {
+                                            transform: translateY(-50%) rotate(180deg);
+                                        }
+                                        .select-container select {
+                                            max-height: 200px; 
+                                            overflow-y: auto;
+                                        }
+                                    </style>
                                     <button type="submit" class="btn btn-primary" name="addpenelitian">Submit</button>
                                     <button type="reset" class="btn btn-secondary">Reset</button>
                                 </form>
