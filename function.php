@@ -28,6 +28,9 @@ if(isset($_POST['addpenelitian'])) {
             document.addEventListener('DOMContentLoaded', function() {
                 var successModal = new bootstrap.Modal(document.getElementById('successModal'));
                 successModal.show();
+                document.getElementById('closeModalButton').addEventListener('click', function() {
+                    window.location.href = 'index.php';
+                });
             });
         </script>";
     } else {
@@ -48,7 +51,7 @@ if(isset($_POST['addpenelitian'])) {
                 Data penelitian berhasil ditambahkan!
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeModalButton">Close</button>
             </div>
         </div>
     </div>
