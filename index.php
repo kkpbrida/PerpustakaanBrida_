@@ -340,7 +340,62 @@ $categories_result = $conn->query($categories_query);
             var page = $(this).data('page');
             fetchData(page);
         });
+
+        // Handle edit button click
+        $(document).on('click', '.btn-edit', function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            $('#editId').val(id); // Set the ID in the hidden input field
+            $('#editModal').modal('show'); // Show the modal
+        });
+
+        // Handle form submission
+        $('#editForm').on('submit', function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: 'update_penelitian.php',
+                method: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    if (response.includes("Data updated successfully")) {
+                        $('#editModal').modal('hide');
+                        location.reload(); // Reload the page to reflect changes
+                    } else {
+                        alert(response); // Tampilkan pesan kesalahan
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert('An error occurred: ' + error); // Tampilkan pesan kesalahan
+                }
+            });
+        });
     });
     </script>
+    <!-- Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">Edit Penelitian</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="editForm">
+              <input type="hidden" id="editId" name="id_penelitian">
+              <div class="mb-3">
+                <label for="editJudul" class="form-label">Judul</label>
+                <input type="text" class="form-control" id="editJudul" name="judul">
+              </div>
+              <div class="mb-3">
+                <label for="editNamaPenulis" class="form-label">Nama Penulis</label>
+                <input type="text" class="form-control" id="editNamaPenulis" name="nama_penulis">
+              </div>
+              <!-- Tambahkan field lain sesuai kebutuhan -->
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 </body>
 </html>

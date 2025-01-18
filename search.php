@@ -59,7 +59,7 @@ if ($result->num_rows > 0) {
         $data .= "<tr><td>" . $row['judul'] . "</td><td>" . $row['nama_penulis'] . "</td><td>" . $row['nama_instansi'] . "</td><td>" . $row['nama_fakultas'] . "</td><td>" . $row['tahun'] . "</td><td>" . $row['nama_kategori'] . "</td><td>" . $row['id_rak'] . "</td>";
         if (isset($_POST['page_type']) && $_POST['page_type'] == 'index') {
             $data .= "<td>" . $row['tgl_masuk'] . "</td>";
-            $data .= "<td><a href='form.php?id=" . $row['id_penelitian'] . "' class='btn btn-primary'>Edit</a></td>";
+            $data .= "<td><a href='#' class='btn btn-primary btn-edit' data-id='" . $row['id_penelitian'] . "'>Edit</a></td>";
         }
         $data .= "</tr>";
     }
