@@ -56,10 +56,19 @@ $result = $conn->query($sql);
 $data = '';
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-        $data .= "<tr><td>" . $row['judul'] . "</td><td>" . $row['nama_penulis'] . "</td><td>" . $row['nama_instansi'] . "</td><td>" . $row['nama_fakultas'] . "</td><td>" . $row['tahun'] . "</td><td>" . $row['nama_kategori'] . "</td><td>" . $row['id_rak'] . "</td>";
+        $data .= "<tr><td>" . $row['judul'] . "</td><td>" . $row['nama_penulis'] . "</td><td>" . $row['nama_fakultas'] . "</td><td>" . $row['nama_instansi'] . "</td><td>" . $row['tahun'] . "</td><td>" . $row['nama_kategori'] . "</td><td>" . $row['id_rak'] . "</td>";
         if (isset($_POST['page_type']) && $_POST['page_type'] == 'index') {
             $data .= "<td>" . $row['tgl_masuk'] . "</td>";
-            $data .= "<td><a href='#' class='btn btn-primary btn-edit' data-id='" . $row['id_penelitian'] . "'>Edit</a></td>";
+            $data .= "<td><button type='button' class='btn btn-primary btn-edit' 
+                        data-id='" . $row['id_penelitian'] . "' 
+                        data-tgl_masuk='" . $row['tgl_masuk'] . "'
+                        data-judul='" . $row['judul'] . "'
+                        data-nama_penulis='" . $row['nama_penulis'] . "'
+                        data-instansi='" . $row['nama_instansi'] . "'
+                        data-fakultas='" . $row['nama_fakultas'] . "'
+                        data-kategori='" . $row['nama_kategori'] . "'
+                        data-tahun='" . $row['tahun'] . "'
+                        data-rak='" . $row['id_rak'] . "'>Edit</button></td>";
         }
         $data .= "</tr>";
     }

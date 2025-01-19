@@ -356,11 +356,62 @@ $categories_result = $conn->query($categories_query);
         });
 
         // Handle edit button click
-        $(document).on('click', '.btn-edit', function(e) {
+        $(document).on('click', '.btn-edit', function (e) {
             e.preventDefault();
+
+            // Ambil data dari tombol
             var id = $(this).data('id');
-            $('#editId').val(id); // Set the ID in the hidden input field
-            $('#editModal').modal('show'); // Show the modal
+            var tgl_masuk = $(this).data('tgl_masuk');
+            var judul = $(this).data('judul');
+            var nama_penulis = $(this).data('nama_penulis');
+            var instansi = $(this).data('instansi');
+            var fakultas = $(this).data('fakultas');
+            var kategori = $(this).data('kategori');
+            var tahun = $(this).data('tahun');
+            var rak = $(this).data('rak');
+            
+            // Debugging: Log the values to the console
+            console.log({
+                id,
+                tgl_masuk,
+                judul,
+                nama_penulis,
+                instansi,
+                fakultas,
+                kategori,
+                tahun,
+                rak
+            });
+            
+            // Set data ke form
+            $('#editId').val(id);
+            $('#editTgl_masuk').val(tgl_masuk);
+            $('#editJudul').val(judul);
+
+            // Set data nama_penulis (jika array, buat kolom input dinamis)
+            $('#editPenulisContainer').empty(); // Kosongkan container sebelumnya
+            if (nama_penulis) {
+                var penulisArray = nama_penulis.split(', '); // Pastikan dipisah dengan delimiter yang sesuai
+                penulisArray.forEach(function (penulis, index) {
+                    if (index === 0) {
+                        $('#editNamaPenulis').val(penulis); // Kolom pertama
+                    } else {
+                        $('#editPenulisContainer').append(`
+                            <input type="text" name="nama_penulis[]" class="form-control mt-2" value="${penulis}" required>
+                        `);
+                    }
+                });
+            }
+
+            // Set fakultas, kategori, tahun, rak ke dropdown
+            $('#editInstansi').val(instansi);
+            $('#editFakultas').val(fakultas);
+            $('#editKategori').val(kategori);
+            $('#editTahun').val(tahun);
+            $('#editRak').val(rak);
+
+            // Tampilkan modal
+            $('#editModal').modal('show');
         });
 
         // Handle form submission
@@ -401,7 +452,7 @@ $categories_result = $conn->query($categories_query);
                 <input type="date" class="form-control" id="editTgl_masuk" name="tgl_masuk" required>
               </div>
               <div class="mb-3">
-                <label for="editJudul" class="form-label">Judul</label>
+                <label for="editJudul" class="form-label">Judul:</label>
                 <input type="text" class="form-control" id="editJudul" name="judul" required>
               </div>
               <div class="mb-3">
@@ -470,9 +521,31 @@ $categories_result = $conn->query($categories_query);
                 });
               </script>
               <div class="mb-3">
-                <label for="fakultas" class="form-label">Fakultas:</label>
+                <label for="editInstansi" class="form-label">Instansi:</label>
                 <div class="select-container">
-                    <select id="fakultas" name="fakultas" class="form-control" required>
+                    <select id="editInstansi" name="instansi" class="form-control" required>
+                        <option value="" disabled selected>Pilih instansi</option>
+                        <?php
+                            $getdata = mysqli_query($conn, "SELECT * FROM instansi");
+                            if (!$getdata) {
+                                die("Error fetching data: " . mysqli_error($conn));
+                            }
+                            while ($fetcharray = mysqli_fetch_array($getdata)) {
+                                $nama_instansi = $fetcharray['nama_instansi'];
+                                $id_instansi = $fetcharray['id_instansi'];
+                        ?>
+                        <option value="<?php echo $id_instansi; ?>"><?php echo $nama_instansi; ?></option>
+                        <?php
+                            }
+                        ?>
+                    </select>
+                    <i class="fa fa-caret-down"></i>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="editFakultas" class="form-label">Fakultas:</label>
+                <div class="select-container">
+                    <select id="editFakultas" name="fakultas" class="form-control" required>
                         <option value="" disabled selected>Pilih Fakultas</option>
                         <?php
                             $getdata = mysqli_query($conn, "SELECT * FROM fakultas");
@@ -492,9 +565,9 @@ $categories_result = $conn->query($categories_query);
                 </div>
               </div>
               <div class="mb-3">
-                <label for="kategori" class="form-label">Kategori:</label>
+                <label for="editKategori" class="form-label">Kategori:</label>
                 <div class="select-container">
-                    <select id="kategori" name="kategori" class="form-control" required>
+                    <select id="editKategori" name="kategori" class="form-control" required>
                         <option value="" disabled selected>Pilih Kategori</option>
                         <?php
                             $getdata = mysqli_query($conn, "SELECT * FROM kategori");
@@ -514,9 +587,9 @@ $categories_result = $conn->query($categories_query);
                 </div>
               </div>
               <div class="mb-3">
-                <label for="tahun" class="form-label">Tahun:</label>
+                <label for="editTahun" class="form-label">Tahun:</label>
                 <div class="select-container">
-                    <select id="tahun" name="tahun" class="form-control" required>
+                    <select id="editTahun" name="tahun" class="form-control" required>
                         <option value="" disabled selected>Pilih Tahun</option>
                         <?php
                             for ($year = 2019; $year <= 2029; $year++) {
@@ -528,9 +601,9 @@ $categories_result = $conn->query($categories_query);
                 </div>
               </div>
               <div class="mb-3">
-                <label for="rak" class="form-label">Rak:</label>
+                <label for="editRak" class="form-label">Rak:</label>
                 <div class="select-container">
-                    <select id="rak" name="rak" class="form-control" required>
+                    <select id="editRak" name="rak" class="form-control" required>
                         <option value="" disabled selected>Pilih Rak</option>
                         <?php
                             $getdata = mysqli_query($conn, "SELECT id_rak FROM rak");
