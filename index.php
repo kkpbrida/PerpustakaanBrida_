@@ -356,7 +356,7 @@ $categories_result = $conn->query($categories_query);
         });
 
         // Handle edit button click
-        $(document).on('click', '.btn-edit', function (e) {
+        $(document).on('click', '.btn-edit', function(e) {
             e.preventDefault();
 
             // Ambil data dari tombol
@@ -404,9 +404,15 @@ $categories_result = $conn->query($categories_query);
             }
 
             // Set fakultas, kategori, tahun, rak ke dropdown
-            $('#editInstansi').val(instansi);
-            $('#editFakultas').val(fakultas);
-            $('#editKategori').val(kategori);
+            $('#editInstansi option').filter(function() {
+                return $(this).text() === instansi;
+            }).prop('selected', true);
+            $('#editFakultas option').filter(function() {
+                return $(this).text() === fakultas;
+            }).prop('selected', true);
+            $('#editKategori option').filter(function() {
+                return $(this).text() === kategori;
+            }).prop('selected', true);
             $('#editTahun').val(tahun);
             $('#editRak').val(rak);
 
