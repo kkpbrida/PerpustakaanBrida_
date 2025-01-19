@@ -113,6 +113,20 @@ $categories_result = $conn->query($categories_query);
         .form-control, .select2-container .select2-selection--single {
             height: calc(2.25rem + 2px); /* Sesuaikan dengan tinggi elemen input */
         }
+        .select-container {
+            position: relative;
+        }
+        .select-container select {
+            width: 100%;
+            padding-right: 30px; /* Adjust this value based on the icon size */
+        }
+        .select-container .fa-caret-down {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
     </style>
 </head>
 <body class="sb-nav-fixed">
@@ -383,14 +397,179 @@ $categories_result = $conn->query($categories_query);
             <form id="editForm">
               <input type="hidden" id="editId" name="id_penelitian">
               <div class="mb-3">
-                <label for="editJudul" class="form-label">Judul</label>
-                <input type="text" class="form-control" id="editJudul" name="judul">
+                <label for="editTgl_masuk" class="form-label">Tanggal Registrasi:</label>
+                <input type="date" class="form-control" id="editTgl_masuk" name="tgl_masuk" required>
               </div>
               <div class="mb-3">
-                <label for="editNamaPenulis" class="form-label">Nama Penulis</label>
-                <input type="text" class="form-control" id="editNamaPenulis" name="nama_penulis">
+                <label for="editJudul" class="form-label">Judul</label>
+                <input type="text" class="form-control" id="editJudul" name="judul" required>
               </div>
-              <!-- Tambahkan field lain sesuai kebutuhan -->
+              <div class="mb-3">
+                <label for="editNamaPenulis" class="form-label">Nama Penulis:</label>
+                <input type="text" id="editNamaPenulis" name="nama_penulis[]" class="form-control" required>
+                <div id="editPenulisContainer"></div>
+                <button type="button" class="btn btn-secondary mt-2" id="addEditPenulisBtn" onclick="addEditPenulis()">Tambah Penulis</button>
+                <button type="button" class="btn btn-danger mt-2" id="removeEditPenulisBtn" onclick="removeEditPenulis()" style="display: none;">Hapus</button>
+              </div>
+              <script>
+                function addEditPenulis() {
+                    var container = document.getElementById('editPenulisContainer');
+                    var totalInputs = container.querySelectorAll('input[name="nama_penulis[]"]').length;
+
+                    if (totalInputs >= 9) { // Kolom awal + 9 = 10
+                        var button = document.getElementById('addEditPenulisBtn');
+                        button.disabled = true;
+                        button.textContent = 'Batas Maksimal Tercapai';
+                        button.classList.remove('btn-secondary');
+                        button.classList.add('btn-danger');
+                        return;
+                    }
+
+                    var input = document.createElement('input');
+                    input.type = 'text';
+                    input.name = 'nama_penulis[]';
+                    input.className = 'form-control mt-2';
+                    input.required = true;
+                    container.appendChild(input);
+
+                    // Show the remove button if there are more than one input fields
+                    if (totalInputs + 1 > 0) {
+                        document.getElementById('removeEditPenulisBtn').style.display = 'inline-block';
+                    }
+                }
+
+                function removeEditPenulis() {
+                    var container = document.getElementById('editPenulisContainer');
+                    var totalInputs = container.querySelectorAll('input[name="nama_penulis[]"]').length;
+
+                    if (totalInputs > 0) {
+                        container.removeChild(container.lastChild);
+                    }
+
+                    // Hide the remove button if there is only one input field left
+                    if (totalInputs - 1 <= 0) {
+                        document.getElementById('removeEditPenulisBtn').style.display = 'none';
+                    }
+
+                    // Re-enable the add button if it was disabled
+                    var addButton = document.getElementById('addEditPenulisBtn');
+                    if (totalInputs <= 10) {
+                        addButton.disabled = false;
+                        addButton.textContent = 'Tambah Penulis';
+                        addButton.classList.remove('btn-danger');
+                        addButton.classList.add('btn-secondary');
+                    }
+                }
+
+                // Initial check to hide the remove button if there is only one input field
+                document.addEventListener('DOMContentLoaded', function() {
+                    var totalInputs = document.querySelectorAll('input[name="nama_penulis[]"]').length;
+                    if (totalInputs <= 1) {
+                        document.getElementById('removeEditPenulisBtn').style.display = 'none';
+                    }
+                });
+              </script>
+              <div class="mb-3">
+                <label for="fakultas" class="form-label">Fakultas:</label>
+                <div class="select-container">
+                    <select id="fakultas" name="fakultas" class="form-control" required>
+                        <option value="" disabled selected>Pilih Fakultas</option>
+                        <?php
+                            $getdata = mysqli_query($conn, "SELECT * FROM fakultas");
+                            if (!$getdata) {
+                                die("Error fetching data: " . mysqli_error($conn));
+                            }
+                            while ($fetcharray = mysqli_fetch_array($getdata)) {
+                                $nama_fakultas = $fetcharray['nama_fakultas'];
+                                $id_fakultas = $fetcharray['id_fakultas'];
+                        ?>
+                        <option value="<?php echo $id_fakultas; ?>"><?php echo $nama_fakultas; ?></option>
+                        <?php
+                            }
+                        ?>
+                    </select>
+                    <i class="fa fa-caret-down"></i>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="kategori" class="form-label">Kategori:</label>
+                <div class="select-container">
+                    <select id="kategori" name="kategori" class="form-control" required>
+                        <option value="" disabled selected>Pilih Kategori</option>
+                        <?php
+                            $getdata = mysqli_query($conn, "SELECT * FROM kategori");
+                            if (!$getdata) {
+                                die("Error fetching data: " . mysqli_error($conn));
+                            }
+                            while ($fetcharray = mysqli_fetch_array($getdata)) {
+                                $nama_kategori = $fetcharray['nama_kategori'];
+                                $id_kategori = $fetcharray['id_kategori'];
+                        ?>
+                        <option value="<?php echo $id_kategori; ?>"><?php echo $nama_kategori; ?></option>
+                        <?php
+                            }
+                        ?>
+                    </select>
+                    <i class="fa fa-caret-down"></i>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="tahun" class="form-label">Tahun:</label>
+                <div class="select-container">
+                    <select id="tahun" name="tahun" class="form-control" required>
+                        <option value="" disabled selected>Pilih Tahun</option>
+                        <?php
+                            for ($year = 2019; $year <= 2029; $year++) {
+                                echo "<option value='$year'>$year</option>";
+                            }
+                        ?>
+                    </select>
+                    <i class="fa fa-caret-down"></i>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="rak" class="form-label">Rak:</label>
+                <div class="select-container">
+                    <select id="rak" name="rak" class="form-control" required>
+                        <option value="" disabled selected>Pilih Rak</option>
+                        <?php
+                            $getdata = mysqli_query($conn, "SELECT id_rak FROM rak");
+                            if (!$getdata) {
+                                die("Error fetching data: " . mysqli_error($conn));
+                            }
+                            while ($fetcharray = mysqli_fetch_array($getdata)) {
+                                $id_rak = $fetcharray['id_rak'];
+                        ?>
+                        <option value="<?php echo $id_rak; ?>"><?php echo $id_rak; ?></option>
+                        <?php
+                            }
+                        ?>
+                    </select>
+                    <i class="fa fa-caret-down"></i>
+                </div>
+              </div>
+              <script>
+                document.querySelectorAll('.select-container select').forEach(function(select) {
+                    select.addEventListener('focus', function() {
+                        this.nextElementSibling.classList.add('rotate');
+                    });
+                    select.addEventListener('blur', function() {
+                        this.nextElementSibling.classList.remove('rotate');
+                    });
+                    select.addEventListener('change', function() {
+                        this.nextElementSibling.classList.remove('rotate');
+                    });
+                });
+              </script>
+              <style>
+                .fa-caret-down.rotate {
+                    transform: translateY(-50%) rotate(180deg);
+                }
+                .select-container select {
+                    max-height: 200px; 
+                    overflow-y: auto;
+                }
+              </style>
               <button type="submit" class="btn btn-primary">Save changes</button>
             </form>
           </div>
