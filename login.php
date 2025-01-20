@@ -39,8 +39,46 @@ if (isset($_SESSION['login'])) {
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+        <style>
+            body {
+                background: linear-gradient(rgba(0, 51, 102, 0.7), rgba(0, 51, 102, 0.7)), url('assets/img/9.jpg');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+            }
+            
+            .card {
+                background-color: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+            }
+            
+            .btn-custom-primary {
+                background-color: #FFC107;
+                border-color: #FFC107;
+                color: #000;
+                transition: all 0.3s ease;
+            }
+            
+            .btn-custom-primary:hover {
+                background-color: #FFB300;
+                border-color: #FFB300;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+            
+            .card-header {
+                background-color: transparent;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            }
+            
+            .card-footer {
+                background-color: transparent;
+                border-top: 1px solid rgba(0, 0, 0, 0.1);
+            }
+        </style>
     </head>
-    <body class="bg-primary">
+    <body>
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
@@ -51,21 +89,24 @@ if (isset($_SESSION['login'])) {
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
                                     <div class="card-body">
                                         <form method="POST" action="login.php">  
-                                            <div class="form-floating mb-3">
+                                            <div class="form-floating mb-3 position-relative">
                                                 <input class="form-control" id="inputUsername" type="text" placeholder="Username" name="username" required />
                                                 <label for="inputUsername">Username</label>
                                             </div>
-                                            <div class="form-floating mb-3">
+                                            <div class="form-floating mb-3 position-relative">
                                                 <input class="form-control" id="inputPassword" type="password" placeholder="Password" name="password" required />
                                                 <label for="inputPassword">Password</label>
-                                            </div>  
-                                            <div class="d-flex align-items-center justify-content-center text-center mt-4 mb-0">   
-                                                <button class="btn btn-primary" name="login">Login</button>
+                                                <span class="position-absolute top-50 end-0 translate-middle-y me-3" onclick="togglePassword()">
+                                                    <i id="togglePasswordIcon" class="fas fa-eye"></i>
+                                                </span>
                                             </div>
-                                            <div class="d-flex align-items-center justify-content-center text-center mt-4 mb-0">
-                                            <a class="btn btn-secondary" href="home.php">Go to Home</a>
+                                            <div class="d-flex align-items-center justify-content-center text-center mt-4 mb-3">   
+                                                <button class="btn btn-custom-primary px-4" name="login">Login</button>
                                             </div>
-                                    </form>
+                                            <div class="d-flex align-items-center justify-content-center text-center">
+                                                <a class="btn btn-custom-primary px-4" href="home.php">Back to Home</a>
+                                            </div>
+                                        </form>
                                     </div>
                                     <div class="card-footer text-center py-3"></div>
                                 </div>
@@ -101,6 +142,21 @@ if (isset($_SESSION['login'])) {
                 var errorModal = new bootstrap.Modal(document.getElementById('errorModal'), {});
                 errorModal.show();
             <?php endif; ?>
+
+            // Toggle password visibility
+            function togglePassword() {
+                var passwordField = document.getElementById('inputPassword');
+                var togglePasswordIcon = document.getElementById('togglePasswordIcon');
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    togglePasswordIcon.classList.remove('fa-eye');
+                    togglePasswordIcon.classList.add('fa-eye-slash');
+                } else {
+                    passwordField.type = 'password';
+                    togglePasswordIcon.classList.remove('fa-eye-slash');
+                    togglePasswordIcon.classList.add('fa-eye');
+                }
+            }
         </script>
     </body>
 </html>
