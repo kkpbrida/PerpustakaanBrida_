@@ -62,7 +62,10 @@ if (isset($_SESSION['login'])) {
                                             <div class="d-flex align-items-center justify-content-center text-center mt-4 mb-0">   
                                                 <button class="btn btn-primary" name="login">Login</button>
                                             </div>
-                                        </form>
+                                            <div class="d-flex align-items-center justify-content-center text-center mt-4 mb-0">
+                                            <a class="btn btn-secondary" href="home.php">Go to Home</a>
+                                            </div>
+                                    </form>
                                     </div>
                                     <div class="card-footer text-center py-3"></div>
                                 </div>
@@ -90,7 +93,7 @@ if (isset($_SESSION['login'])) {
                 </div>
             </div>
         </div>
-
+        
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script>
             // Show the modal if there's an error
