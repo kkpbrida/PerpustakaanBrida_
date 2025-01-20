@@ -284,7 +284,7 @@ $categories_result = $conn->query($categories_query);
                                         <th>Kategori</th>
                                         <th>Lokasi</th>
                                         <th>Tanggal Masuk</th>
-                                        <th>Aksi</th>
+                                        <th colspan="2" style="text-align: center;">Aksi</th> <!-- Pusatkan teks di header -->
                                     </tr>
                                 </thead>
                                 <tbody id="results">
