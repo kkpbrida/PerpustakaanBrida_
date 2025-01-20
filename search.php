@@ -59,6 +59,8 @@ while ($row = $result->fetch_assoc()) {
                     data-kategori='" . $row['nama_kategori'] . "'
                     data-tahun='" . $row['tahun'] . "'
                     data-rak='" . $row['id_rak'] . "'>Edit</button></td>";
+        $data .= "<td><button type='button' class='btn btn-danger btn-delete' 
+                    data-id='" . $row['id_penelitian'] . "'>Hapus</button></td>";
     }
     $data .= "</tr>";
 }

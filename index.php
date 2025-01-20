@@ -373,6 +373,7 @@ $categories_result = $conn->query($categories_query);
             var kategori = $(this).data('kategori');
             var tahun = $(this).data('tahun');
             var rak = $(this).data('rak');
+        
             
             // Debugging: Log the values to the console
             console.log({
@@ -443,6 +444,29 @@ $categories_result = $conn->query($categories_query);
                     alert('An error occurred: ' + error); // Tampilkan pesan kesalahan
                 }
             });
+        });
+        $(document).on('click', '.btn-delete', function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+        
+            // Show confirmation dialog
+            if (confirm("Are you sure you want to delete this record?")) {
+                // Kirimkan request ke server untuk menghapus data penelitian
+                $.ajax({
+                    url: 'delete.php',
+                    type: 'POST',
+                    data: {id: id},
+                    success: function(response) {
+                        // Tampilkan pesan sukses
+                        alert('Data berhasil dihapus!');
+                        // Refresh data
+                        fetchData();
+                    },
+                    error: function(xhr, status, error) {
+                        alert('An error occurred: ' + error); // Tampilkan pesan kesalahan
+                    }
+                });
+            }
         });
     });
     </script>

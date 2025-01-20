@@ -4,7 +4,6 @@ require 'function.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = isset($_POST['id_penelitian']) ? $conn->real_escape_string($_POST['id_penelitian']) : '';
     $judul = isset($_POST['judul']) ? $conn->real_escape_string($_POST['judul']) : '';
-    // $nama_penulis = isset($_POST['nama_penulis']) ? $conn->real_escape_string($_POST['nama_penulis']) : '';
     $tgl_masuk = isset($_POST['tgl_masuk']) ? $conn->real_escape_string($_POST['tgl_masuk']) : '';
     $instansi = isset($_POST['instansi']) ? $conn->real_escape_string($_POST['instansi']) : '';
     $fakultas = isset($_POST['fakultas']) ? $conn->real_escape_string($_POST['fakultas']) : '';
