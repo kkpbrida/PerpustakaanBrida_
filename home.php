@@ -78,7 +78,10 @@
         <div class="container">
             <div class="d-flex align-items-center">
                 <img src="assets/img/instansi-logo.png" alt="Logo BRIDA" height="40" class="me-2">
-                <a class="navbar-brand" href="#">SIAP BRIDA</a>
+                <div>
+                    <a class="navbar-brand" href="#">SIAP BRIDA</a>
+                    <small class="d-block text-white">Sistem Informasi Akademik Perpustakaan BRIDA Provinsi  Sulawesi Tenggara</small>
+                </div>
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -212,11 +215,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 d-flex align-items-center">
-                    <img src="assets/img/logo_sultra.png" alt="Logo Sultra" height="50" class="me-3">
+                    <img src="assets/img/logo_sultra.png" alt="Logo Sultra" height="80" class="me-2">
                     <div>
                         <h5>SIAP BRIDA</h5>
                         <p>Sistem Informasi Akademik Perpustakaan BRIDA</p>
+                        <p>Provinsi Sulawesi Tenggara</p>
+                        <p>Kendari</p>
+                        <p>Jl. Mayjend S. Parman No. 3, Kemaraya</p>
                     </div>
+                    <style>
+                        .custom-footer p {
+                            margin-bottom: 0.1rem;
+                        }
+                    </style>
                 </div>
                 <div class="col-md-6 text-md-end">
                     <p>© 2025 SIAP BRIDA. All rights reserved.</p>
