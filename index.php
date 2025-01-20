@@ -274,8 +274,8 @@ $categories_result = $conn->query($categories_query);
                                     <tr>
                                         <th>Judul</th>
                                         <th>Nama Penulis</th>
-                                        <th>Fakultas</th>
                                         <th>Instansi</th>
+                                        <th>Fakultas</th>
                                         <th>Tahun</th>
                                         <th>Kategori</th>
                                         <th>Lokasi</th>
