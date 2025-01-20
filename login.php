@@ -13,7 +13,7 @@ if (isset($_POST['login'])) {
 
     if ($cek > 0) {
         $_SESSION['login'] = true;
-        header("location: index.php");
+        header("location: dashboard.php");
         // exit();
     } else {
         $error = "Invalid username or password!";
@@ -21,7 +21,7 @@ if (isset($_POST['login'])) {
 }
 
 if (isset($_SESSION['login'])) {
-    header("location: index.php");
+    header("location: dashboard.php");
     // exit();
 }
 ?>
@@ -83,7 +83,7 @@ if (isset($_SESSION['login'])) {
             <div id="layoutAuthentication_content">
                 <main>
                     <div class="container">
-                        <div class="row justify-content-center">
+                      <div class="row justify-content-center">
                             <div class="col-lg-5">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
