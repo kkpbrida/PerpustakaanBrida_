@@ -168,7 +168,7 @@ $categories_result = $conn->query($categories_query);
                         <th>Fakultas</th>
                         <th>Tahun</th>
                         <th>Kategori</th>
-                        <th>ID Rak</th>
+                        <th>Lokasi</th>
                     </tr>
                 </thead>
                 <tbody>
