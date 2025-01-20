@@ -76,14 +76,17 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
         <div class="container">
-            <a class="navbar-brand mx-auto" href="#">SIAP BRIDA</a>
+            <div class="d-flex align-items-center">
+                <img src="assets/img/instansi-logo.png" alt="Logo BRIDA" height="40" class="me-2">
+                <a class="navbar-brand" href="#">SIAP BRIDA</a>
+            </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link btn btn-lg mt-3 btn-interactive" href="login.php">
+                        <a class="nav-link btn btn-lg btn-interactive" href="login.php" style="margin-top: -2px;">
                             <i class="fas fa-sign-in-alt me-2"></i>Login Admin
                         </a>
                     </li>
@@ -208,9 +211,12 @@
     <footer class="custom-footer text-white py-4">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    <h5>SIAP BRIDA</h5>
-                    <p>Sistem Informasi Akademik Perpustakaan BRIDA</p>
+                <div class="col-md-6 d-flex align-items-center">
+                    <img src="assets/img/logo_sultra.png" alt="Logo Sultra" height="50" class="me-3">
+                    <div>
+                        <h5>SIAP BRIDA</h5>
+                        <p>Sistem Informasi Akademik Perpustakaan BRIDA</p>
+                    </div>
                 </div>
                 <div class="col-md-6 text-md-end">
                     <p>© 2025 SIAP BRIDA. All rights reserved.</p>
