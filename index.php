@@ -232,10 +232,14 @@ $categories_result = $conn->query($categories_query);
                         <li class="breadcrumb-item active">Dashboard</li>
                     </ol> 
                     <div class="card mb-4">
-                        <div class="card-header">
-                            <i class="fas fa-table me-1"></i>
-                            Daftar Penelitian
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                            <div>
+                                <i class="fas fa-table me-1"></i>
+                                Daftar Penelitian
+                            </div>
+                            <a href="form.php" class="btn btn-warning">Tambah Penelitian</a>
                         </div>
+                        <div class="card-header d-flex justify-content-between align-items-center">
                         <div class="card-body">
                             <form method="POST" action="" class="form-inline" id="searchForm">
                                 <div class="row g-3">
