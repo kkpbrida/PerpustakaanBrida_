@@ -1,133 +1,128 @@
 <?php
-require_once 'function.php';
-// Query jumlah publikasi per tahun
-$query = "SELECT Tahun, COUNT(*) AS JumlahPublikasi FROM Penelitian GROUP BY Tahun";
-$result = $conn->query($query);
-
-$data = [];
-while ($row = $result->fetch_assoc()) {
-    $data[] = $row;
+require 'function.php';
+// Fetch data for Bar Chart (Penelitian per Tahun)
+$barChartQuery = "SELECT tahun, COUNT(*) as jumlah FROM penelitian GROUP BY tahun";
+$barChartResult = mysqli_query($conn, $barChartQuery);
+$barChartData = [];
+while ($row = mysqli_fetch_assoc($barChartResult)) {
+    $barChartData[] = $row;
 }
 
+// Fetch data for Pie Chart (Penelitian per Kategori)
+$pieChartQuery = "SELECT kategori.nama_kategori, COUNT(*) as jumlah FROM penelitian 
+                  JOIN kategori ON penelitian.id_kategori = kategori.id_kategori 
+                  GROUP BY penelitian.id_kategori";
+$pieChartResult = mysqli_query($conn, $pieChartQuery);
+$pieChartData = [];
+while ($row = mysqli_fetch_assoc($pieChartResult)) {
+    $pieChartData[] = $row;
+}
 
-// Kirim data ke JavaScript dalam format JSON
-$jsonData = json_encode($data)
-
+// Fetch data for Line Chart (Penelitian per Fakultas)
+$lineChartQuery = "SELECT fakultas.nama_fakultas, COUNT(*) as jumlah FROM penelitian 
+                   JOIN fakultas ON penelitian.id_fakultas = fakultas.id_fakultas 
+                   GROUP BY penelitian.id_fakultas";
+$lineChartResult = mysqli_query($conn, $lineChartQuery);
+$lineChartData = [];
+while ($row = mysqli_fetch_assoc($lineChartResult)) {
+    $lineChartData[] = $row;
+}
 ?>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Bar Chart
+    var ctxBar = document.getElementById('myBarChart').getContext('2d');
+    var barChart = new Chart(ctxBar, {
+        type: 'bar',
+        data: {
+            labels: <?php echo json_encode(array_column($barChartData, 'tahun')); ?>,
+            datasets: [{
+                label: 'Jumlah Penelitian',
+                data: <?php echo json_encode(array_column($barChartData, 'jumlah')); ?>,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Pie Chart
+    var ctxPie = document.getElementById('myPieChart').getContext('2d');
+    var pieChart = new Chart(ctxPie, {
+        type: 'pie',
+        data: {
+            labels: <?php echo json_encode(array_column($pieChartData, 'nama_kategori')); ?>,
+            datasets: [{
+                data: <?php echo json_encode(array_column($pieChartData, 'jumlah')); ?>,
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+            }]
+        }
+    });
+
+    // Line Chart
+    var ctxLine = document.getElementById('myAreaChart').getContext('2d');
+    var lineChart = new Chart(ctxLine, {
+        type: 'line',
+        data: {
+            labels: <?php echo json_encode(array_column($lineChartData, 'nama_fakultas')); ?>,
+            datasets: [{
+                label: 'Jumlah Penelitian',
+                data: <?php echo json_encode(array_column($lineChartData, 'jumlah')); ?>,
+                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                borderColor: 'rgba(153, 102, 255, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+});
+
+</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grafik Publikasi</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Grafik Penelitian</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .chart-container {
+            margin: 20px 0;
+        }
+    </style>
 </head>
 <body>
-    <h1>Grafik Jumlah Publikasi per Tahun</h1>
-    <canvas id="myChart" width="400" height="200"></canvas>
-
-    <script>
-        // Ambil data dari PHP
-        const dataFromPHP = <?php echo $jsonData; ?>;
-
-        // Format data untuk Chart.js
-        const labels = dataFromPHP.map(item => item.Tahun);
-        const data = dataFromPHP.map(item => item.JumlahPublikasi);
-
-        // Konfigurasi Chart.js
-        const ctx = document.getElementById('myChart').getContext('2d');
-        const myChart = new Chart(ctx, {
-            type: 'bar', // Jenis grafik: bar, line, pie, dll
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Jumlah Publikasi',
-                    data: data,
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    </script>
+    <div class="container">
+        <div class="chart-container">
+            <h2 class="text-center">Bar Chart - Penelitian per Tahun</h2>
+            <canvas id="myBarChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <h2 class="text-center">Pie Chart - Penelitian per Kategori</h2>
+            <canvas id="myPieChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <h2 class="text-center">Line Chart - Penelitian per Fakultas</h2>
+            <canvas id="myAreaChart"></canvas>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>
-<?php
-// Query jumlah publikasi per kategori
-$queryKategori = "SELECT kategori.nama_kategori, COUNT(penelitian.id_penelitian) AS jumlah_penelitian FROM penelitian JOIN kategori  ON penelitian.id_kategori = kategori.id_kategori GROUP BY kategori.nama_kategori;";
-$resultKategori = $conn->query($queryKategori);
-
-$dataKategori = [];
-while ($rowKategori = $resultKategori->fetch_assoc()) {
-    $dataKategori[] = $rowKategori;
-}
-
-$conn->close();
-
-// Kirim data ke JavaScript dalam format JSON
-$jsonDataKategori = json_encode($dataKategori);
-?>
-
-<script>
-    // Ambil data dari PHP
-    const dataKategoriFromPHP = <?php echo $jsonDataKategori; ?>;
-
-    // Format data untuk Chart.js
-    const labelsKategori = dataKategoriFromPHP.map(item => item.Kategori);
-    const dataKategori = dataKategoriFromPHP.map(item => item.JumlahPublikasi);
-
-    // Konfigurasi Chart.js untuk pie chart
-    const ctxKategori = document.getElementById('myPieChart').getContext('2d');
-    const myPieChart = new Chart(ctxKategori, {
-        type: 'pie', // Jenis grafik: pie
-        data: {
-            labels: labelsKategori,
-            datasets: [{
-                label: 'Jumlah Publikasi per Kategori',
-                data: dataKategori,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(tooltipItem) {
-                            return tooltipItem.label + ': ' + tooltipItem.raw;
-                        }
-                    }
-                }
-            }
-        }
-    });
-</script>
-
-<canvas id="myPieChart" width="400" height="200"></canvas>
