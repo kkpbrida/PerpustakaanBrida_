@@ -40,6 +40,7 @@ if ($year != '') {
 if ($category != '') {
     $sql .= " AND k.nama_kategori = '$category'";
 }
+$sql .= " ORDER BY p.tgl_masuk DESC";
 $sql .= " LIMIT $limit OFFSET $offset";
 
 $result = $conn->query($sql);
