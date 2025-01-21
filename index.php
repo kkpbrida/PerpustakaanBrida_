@@ -1,6 +1,6 @@
 <?php
-require 'function.php';
-require 'cek.php';
+require_once 'function.php';
+require_once 'cek.php';
 
 // Fetch distinct years from the database for the dropdown
 $years_query = "SELECT DISTINCT tahun FROM penelitian ORDER BY tahun DESC";
@@ -26,6 +26,8 @@ $categories_result = $conn->query($categories_query);
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bootstrap-4/bootstrap-4.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         .table {
             width: 100%;
@@ -130,7 +132,7 @@ $categories_result = $conn->query($categories_query);
     </style>
 </head>
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" aria-label="Main Navigation">
         <!-- Navbar Brand-->
         <a class="navbar-brand ps-3" >SIAP BRIDA</a>
         <!-- Sidebar Toggle-->
@@ -139,7 +141,7 @@ $categories_result = $conn->query($categories_query);
         <div class="navbar-right ms-auto">
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <button class="nav-link dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                     </ul>
@@ -149,7 +151,7 @@ $categories_result = $conn->query($categories_query);
     </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion" aria-label="Side Navigation">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Core</div>
@@ -168,7 +170,7 @@ $categories_result = $conn->query($categories_query);
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
+                            <nav class="sb-sidenav-menu-nested nav" aria-label="Nested Navigation">
                                 <a class="nav-link" href="layout-static.html">Static Navigation</a>
                                 <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
                             </nav>
@@ -179,7 +181,7 @@ $categories_result = $conn->query($categories_query);
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages" aria-label="Pages Navigation">
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
                                     Authentication
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -321,12 +323,12 @@ $categories_result = $conn->query($categories_query);
             $.ajax({
                 url: 'search.php',
                 method: 'POST',
-                data: { 
-                    search: search, 
-                    year: year, 
-                    category: category, 
-                    page: page, 
-                    page_type: 'index' 
+                data: {
+                    search: search,
+                    year: year,
+                    category: category,
+                    page: page,
+                    page_type: 'index'
                 },
                 success: function(response) {
                     $('#results').html(response.data);
@@ -423,25 +425,58 @@ $categories_result = $conn->query($categories_query);
         });
 
         // Handle form submission
-        $('#editForm').on('submit', function(e) {
+            $('#editForm').on('submit', function(e) {
             e.preventDefault();
+            
             $.ajax({
                 url: 'update_penelitian.php',
                 method: 'POST',
                 data: $(this).serialize(),
+                dataType: 'json',
+                beforeSend: function() {
+                    // Disable submit button
+                    $('#editForm button[type="submit"]').prop('disabled', true);
+                },
                 success: function(response) {
-                    if (response.includes("Data updated successfully")) {
+                    console.log('Response:', response); // Debug log
+                    if (response.success) {
                         $('#editModal').modal('hide');
-                        location.reload(); // Reload the page to reflect changes
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil!',
+                            text: response.message,
+                            timer: 2000,
+                            showConfirmButton: false
+                        }).then(function() {
+                            window.location.reload();
+                        });
                     } else {
-                        alert(response); // Tampilkan pesan kesalahan
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal!',
+                            text: response.message || 'Terjadi kesalahan saat memperbarui data',
+                            showConfirmButton: true
+                        });
                     }
                 },
                 error: function(xhr, status, error) {
-                    alert('An error occurred: ' + error); // Tampilkan pesan kesalahan
+                    console.error('Error:', xhr.responseText); // Debug log
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'Terjadi kesalahan pada server',
+                        showConfirmButton: true
+                    });
+                },
+                complete: function() {
+                    // Re-enable submit button
+                    $('#editForm button[type="submit"]').prop('disabled', false);
                 }
             });
         });
+
+
+
         $(document).on('click', '.btn-delete', function(e) {
             e.preventDefault();
             var id = $(this).data('id');
@@ -467,7 +502,7 @@ $categories_result = $conn->query($categories_query);
         });
     });
     </script>
-    <!-- Modal -->
+    
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -559,7 +594,7 @@ $categories_result = $conn->query($categories_query);
                         <?php
                             $getdata = mysqli_query($conn, "SELECT * FROM instansi");
                             if (!$getdata) {
-                                die("Error fetching data: " . mysqli_error($conn));
+                                die(ERROR_FETCHING_DATA . mysqli_error($conn));
                             }
                             while ($fetcharray = mysqli_fetch_array($getdata)) {
                                 $nama_instansi = $fetcharray['nama_instansi'];
@@ -653,6 +688,68 @@ $categories_result = $conn->query($categories_query);
                 </div>
               </div>
               <script>
+                    
+                    // Create FormData object
+                    const formData = new FormData(this);
+                    
+                    // Send AJAX request
+                    fetch('update_penelitian.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                    // Close the modal
+                    console.log(data); // Lihat respons sebenarnya
+                    try {
+                        const jsonData = JSON.parse(data); // Parsing JSON
+                        if (jsonData.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Berhasil!',
+                                text: jsonData.message || 'Data penelitian berhasil diperbarui',
+                                timer: 2000,
+                                showConfirmButton: false
+                            }).then(() => location.reload());
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Gagal!',
+                                text: jsonData.message || 'Terjadi kesalahan saat memperbarui data',
+                                timer: 2000,
+                                showConfirmButton: false
+                            });
+                        }
+                    } catch (error) {
+                        console.error('Invalid JSON response', error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: 'Terjadi kesalahan saat memproses respons server',
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'Terjadi kesalahan pada server',
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+                });
+
+                });
+             </script>
+              <script>
                 document.querySelectorAll('.select-container select').forEach(function(select) {
                     select.addEventListener('focus', function() {
                         this.nextElementSibling.classList.add('rotate');
@@ -670,7 +767,7 @@ $categories_result = $conn->query($categories_query);
                     transform: translateY(-50%) rotate(180deg);
                 }
                 .select-container select {
-                    max-height: 200px; 
+                    max-height: 200px;
                     overflow-y: auto;
                 }
               </style>
