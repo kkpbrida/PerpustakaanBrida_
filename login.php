@@ -70,11 +70,20 @@ if (isset($_SESSION['login'])) {
             .card-header {
                 background-color: transparent;
                 border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                position: relative;
             }
             
             .card-footer {
                 background-color: transparent;
                 border-top: 1px solid rgba(0, 0, 0, 0.1);
+            }
+
+            .home-icon {
+                color: #FFC107;
+                position: absolute;
+                top: 25%;
+                right: 15px;
+                transform: translateY(-50%);
             }
         </style>
     </head>
@@ -86,7 +95,10 @@ if (isset($_SESSION['login'])) {
                       <div class="row justify-content-center">
                             <div class="col-lg-5">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+                                    <div class="card-header">
+                                        <h3 class="text-center font-weight-light my-4">Login</h3>
+                                        <a href="home.php" class="home-icon"><i class="fas fa-home"></i></a>
+                                    </div>
                                     <div class="card-body">
                                         <form method="POST" action="login.php">  
                                             <div class="form-floating mb-3 position-relative">
@@ -103,9 +115,9 @@ if (isset($_SESSION['login'])) {
                                             <div class="d-flex align-items-center justify-content-center text-center mt-4 mb-3">   
                                                 <button class="btn btn-custom-primary px-4" name="login">Login</button>
                                             </div>
-                                            <div class="d-flex align-items-center justify-content-center text-center">
+                                            <!-- <div class="d-flex align-items-center justify-content-center text-center">
                                                 <a class="btn btn-custom-primary px-4" href="home.php">Back to Home</a>
-                                            </div>
+                                            </div> -->
                                         </form>
                                     </div>
                                     <div class="card-footer text-center py-3"></div>
