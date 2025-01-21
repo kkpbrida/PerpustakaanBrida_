@@ -418,14 +418,14 @@ $categories_result = $conn->query($categories_query);
 
             // Tampilkan dialog konfirmasi dengan SweetAlert2
             Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
+                title: 'Apakah Anda yakin?',
+                text: "Data ini akan dihapus secara permanen!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'Cancel'
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Kirimkan request ke server untuk menghapus data
@@ -436,8 +436,8 @@ $categories_result = $conn->query($categories_query);
                         success: function(response) {
                             // Tampilkan pesan sukses
                             Swal.fire(
-                                'Deleted!',
-                                'Your record has been deleted.',
+                                'Berhasil!',
+                                'Data berhasil dihapus.',
                                 'success'
                             );
                             // Refresh data
@@ -445,8 +445,8 @@ $categories_result = $conn->query($categories_query);
                         },
                         error: function(xhr, status, error) {
                             Swal.fire(
-                                'Error!',
-                                'An error occurred: ' + error,
+                                'Gagal!',
+                                'Terjadi kesalahan: ' + error,
                                 'error'
                             );
                         }
