@@ -90,7 +90,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link btn btn-lg btn-interactive" href="login.php" style="margin-top: -2px;">
-                            <i class="fas fa-sign-in-alt me-2"></i>Login Admin
+                            <i class="fas fa-sign-in-alt me-2"></i>Admin
                         </a>
                     </li>
                 </ul>
@@ -217,8 +217,8 @@
                 <div class="col-md-6 d-flex align-items-center">
                     <img src="assets/img/logo_sultra.png" alt="Logo Sultra" height="80" class="me-2">
                     <div>
-                        <h5>SIAP BRIDA</h5>
-                        <p>Sistem Informasi Akademik Perpustakaan BRIDA</p>
+                        <h5>E-BRAY BRIDA</h5>
+                        <p>Sistem Informasi Perpustakaan Digital Badan Riset Inovasi Daerah</p>
                         <p>Provinsi Sulawesi Tenggara</p>
                         <p>Kendari</p>
                         <p>Jl. Mayjend S. Parman No. 3, Kemaraya</p>
@@ -230,7 +230,7 @@
                     </style>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <p>© 2025 SIAP BRIDA. All rights reserved.</p>
+                    <p>© 2025 E-BRAY BRIDA. Kuliah Kerja Praktik Ilmu Komputer.</p>
                 </div>
             </div>
         </div>
