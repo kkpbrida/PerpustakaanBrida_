@@ -33,6 +33,8 @@ while ($row = mysqli_fetch_assoc($pieChartResult)) {
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- memuat jquery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -266,53 +268,32 @@ while ($row = mysqli_fetch_assoc($pieChartResult)) {
     </body>
 </html>
 <script>
-$(document).ready(function() {
-    // // Inisialisasi Select2 pada elemen dropdown
-    // $('#year, #category').select2();
+    document.addEventListener('DOMContentLoaded', function() {
+        fetchTableData();
 
-    function fetchData(page = 1) {
-        $.ajax({
-            url: 'search.php',
-            type: 'POST',
-            data: {
-                search: $('#search').val(),
-                year: $('#year').val(),
-                category: $('#category').val(),
-                page: page,
-                page_type: 'depan'
-            },
-            success: function(data) {
-                try {
-                    $('#data-table tbody').html(data.data);
-                    $('#pagination').html(data.pagination);
-                    $('#data-info').html(data.info);
-                } catch (e) {
-                    console.error("Parsing error:", e);
+        function fetchTableData() {
+            $.ajax({
+                url: 'search.php',
+                type: 'POST',
+                dataType: 'json', // Pastikan tipe data yang diterima adalah JSON
+                data: {
+                    page_type: 'depan'
+                },
+                success: function(data) {
+                    try {
+                        $('#data-table tbody').html(data.data);
+                        $('#pagination').html(data.pagination);
+                        $('#data-info').html(data.info);
+                    } catch (e) {
+                        console.error("Parsing error:", e);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX error:", status, error);
                 }
-            },
-            error: function(xhr, status, error) {
-                console.error("AJAX error:", status, error);
-            }
-        });
-    }
-
-    $('#search, #year, #category').on('input', function() {
-        fetchData();
+            });
+        }
     });
-
-    $('#searchForm').on('submit', function(e) {
-        e.preventDefault();
-        fetchData();
-    });
-
-    fetchData();
-
-    $(document).on('click', '.page-link', function(e) {
-        e.preventDefault();
-        var page = $(this).data('page');
-        fetchData(page);
-    });
-});
 
  // Data untuk Bar Chart
  const barChartLabels = <?= json_encode(array_column($barChartData, 'tahun')); ?>;
