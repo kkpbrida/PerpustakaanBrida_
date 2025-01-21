@@ -670,7 +670,6 @@ $categories_result = $conn->query($categories_query);
                     });
                 });
 
-                });
              </script>
               <script>
                 document.querySelectorAll('.select-container select').forEach(function(select) {
