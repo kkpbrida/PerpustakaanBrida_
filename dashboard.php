@@ -3,8 +3,11 @@
 require 'function.php';
 
 
-// Fetch data for Bar Chart (Penelitian per Tahun)
-$barChartQuery = "SELECT tahun, COUNT(*) as jumlah FROM penelitian GROUP BY tahun";
+// Fetch data for Bar Chart (Penelitian per Tahun) for the current year and the last 3 years
+$currentYear = 2025;
+$startYear = $currentYear - 3;
+
+$barChartQuery = "SELECT tahun, COUNT(*) as jumlah FROM penelitian WHERE tahun BETWEEN $startYear AND $currentYear GROUP BY tahun";
 $barChartResult = mysqli_query($conn, $barChartQuery);
 $barChartData = [];
 while ($row = mysqli_fetch_assoc($barChartResult)) {
@@ -296,29 +299,30 @@ while ($row = mysqli_fetch_assoc($pieChartResult)) {
     });
 
  // Data untuk Bar Chart
- const barChartLabels = <?= json_encode(array_column($barChartData, 'tahun')); ?>;
-        const barChartData = <?= json_encode(array_column($barChartData, 'jumlah')); ?>;
+const barChartLabels = <?= json_encode(array_column($barChartData, 'tahun')); ?>;
+const barChartData = <?= json_encode(array_column($barChartData, 'jumlah')); ?>;
 
-        const barCtx = document.getElementById('barChart').getContext('2d');
-        new Chart(barCtx, {
-            type: 'bar',
-            data: {
-                labels: barChartLabels,
-                datasets: [{
-                    label: 'Jumlah Penelitian',
-                    data: barChartData,
-                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: { display: false }
-                }
-            }
-        });
+const barCtx = document.getElementById('barChart').getContext('2d');
+new Chart(barCtx, {
+    type: 'line',
+    data: {
+        labels: barChartLabels,
+        datasets: [{
+            label: 'Jumlah Penelitian',
+            data: barChartData,
+            backgroundColor: 'rgba(54, 162, 235, 0.6)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1,
+            fill: false
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: { display: false }
+        }
+    }
+});
 
         // Data untuk Pie Chart
         const pieChartLabels = <?= json_encode(array_column($pieChartData, 'nama_kategori')); ?>;
