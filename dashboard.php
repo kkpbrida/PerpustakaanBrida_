@@ -1,4 +1,5 @@
 <?php
+//code
 require 'function.php';
 
 // Fetch data for Bar Chart (Penelitian per Tahun)
