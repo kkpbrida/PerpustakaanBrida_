@@ -283,18 +283,24 @@ new Chart(barCtx, {
         }]
     },
     options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            y: {
-                beginAtZero: true,
-                ticks: {
-                    stepSize: 1, // Adjust the step size as needed
-                    callback: function(value) { if (Number.isInteger(value)) { return value; } } // Ensure no decimal points
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+        y: {
+            beginAtZero: true, // Memastikan sumbu Y dimulai dari 0
+            ticks: {
+                stepSize: 1, // Sesuaikan ukuran langkahnya
+                callback: function(value) {
+                    // Pastikan hanya nilai integer yang ditampilkan
+                    if (Number.isInteger(value)) {
+                        return value;
+                    }
                 }
             }
         }
     }
+}
+
 });
 
 // Data for Pie Chart
