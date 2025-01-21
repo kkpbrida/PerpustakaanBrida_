@@ -157,7 +157,7 @@ $categories_result = $conn->query($categories_query);
                         <div class="sb-sidenav-menu-heading">Core</div>
                         <a class="nav-link" href="dashboard.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Welcome
+                            Dashboard
                         </a>
                         <a class="nav-link" href="form.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-clipboard-list"></i></div>
