@@ -415,25 +415,44 @@ $categories_result = $conn->query($categories_query);
         $(document).on('click', '.btn-delete', function(e) {
             e.preventDefault();
             var id = $(this).data('id');
-        
-            // Show confirmation dialog
-            if (confirm("Are you sure you want to delete this record?")) {
-                // Kirimkan request ke server untuk menghapus data penelitian
-                $.ajax({
-                    url: 'delete.php',
-                    type: 'POST',
-                    data: {id: id},
-                    success: function(response) {
-                        // Tampilkan pesan sukses
-                        alert('Data berhasil dihapus!');
-                        // Refresh data
-                        fetchData();
-                    },
-                    error: function(xhr, status, error) {
-                        alert('An error occurred: ' + error); // Tampilkan pesan kesalahan
-                    }
-                });
-            }
+
+            // Tampilkan dialog konfirmasi dengan SweetAlert2
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Kirimkan request ke server untuk menghapus data
+                    $.ajax({
+                        url: 'delete.php',
+                        type: 'POST',
+                        data: {id: id},
+                        success: function(response) {
+                            // Tampilkan pesan sukses
+                            Swal.fire(
+                                'Deleted!',
+                                'Your record has been deleted.',
+                                'success'
+                            );
+                            // Refresh data
+                            fetchData();
+                        },
+                        error: function(xhr, status, error) {
+                            Swal.fire(
+                                'Error!',
+                                'An error occurred: ' + error,
+                                'error'
+                            );
+                        }
+                    });
+                }
+            });
         });
     });
     </script>
