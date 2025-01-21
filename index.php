@@ -461,9 +461,9 @@ $categories_result = $conn->query($categories_query);
                 <input type="text" id="editNamaPenulis" name="nama_penulis[]" class="form-control" required>
                 <div id="editPenulisContainer"></div>
                 <button type="button" class="btn btn-secondary mt-2" id="addEditPenulisBtn" onclick="addEditPenulis()">Tambah Penulis</button>
-                <button type="button" class="btn btn-danger mt-2" id="removeEditPenulisBtn" onclick="removeEditPenulis()" style="display: none;">Hapus</button>
-              </div>
-              <script>
+                <button type="button" class="btn btn-danger mt-2" id="removeEditPenulisBtn" onclick="removeEditPenulis()">Hapus</button>
+            </div>
+            <script>
                 function addEditPenulis() {
                     var container = document.getElementById('editPenulisContainer');
                     var totalInputs = container.querySelectorAll('input[name="nama_penulis[]"]').length;
@@ -475,6 +475,7 @@ $categories_result = $conn->query($categories_query);
                         button.classList.remove('btn-secondary');
                         button.classList.add('btn-danger');
                         return;
+                        
                     }
 
                     var input = document.createElement('input');
@@ -483,11 +484,6 @@ $categories_result = $conn->query($categories_query);
                     input.className = 'form-control mt-2';
                     input.required = true;
                     container.appendChild(input);
-
-                    // Show the remove button if there are more than one input fields
-                    if (totalInputs + 1 > 0) {
-                        document.getElementById('removeEditPenulisBtn').style.display = 'inline-block';
-                    }
                 }
 
                 function removeEditPenulis() {
@@ -496,11 +492,6 @@ $categories_result = $conn->query($categories_query);
 
                     if (totalInputs > 0) {
                         container.removeChild(container.lastChild);
-                    }
-
-                    // Hide the remove button if there is only one input field left
-                    if (totalInputs - 1 <= 0) {
-                        document.getElementById('removeEditPenulisBtn').style.display = 'none';
                     }
 
                     // Re-enable the add button if it was disabled
@@ -513,14 +504,11 @@ $categories_result = $conn->query($categories_query);
                     }
                 }
 
-                // Initial check to hide the remove button if there is only one input field
+                // Always show the remove button on page load
                 document.addEventListener('DOMContentLoaded', function() {
-                    var totalInputs = document.querySelectorAll('input[name="nama_penulis[]"]').length;
-                    if (totalInputs <= 1) {
-                        document.getElementById('removeEditPenulisBtn').style.display = 'none';
-                    }
+                    document.getElementById('removeEditPenulisBtn').style.display = 'inline-block';
                 });
-              </script>
+            </script>
               <div class="mb-3">
                 <label for="editInstansi" class="form-label">Instansi:</label>
                 <div class="select-container">
@@ -529,7 +517,7 @@ $categories_result = $conn->query($categories_query);
                         <?php
                             $getdata = mysqli_query($conn, "SELECT * FROM instansi");
                             if (!$getdata) {
-                                die(ERROR_FETCHING_DATA . mysqli_error($conn));
+                                die("Error fetching data: " . mysqli_error($conn));
                             }
                             while ($fetcharray = mysqli_fetch_array($getdata)) {
                                 $nama_instansi = $fetcharray['nama_instansi'];
