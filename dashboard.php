@@ -61,6 +61,9 @@ $totalPenelitian = $totalPenelitianData['total'];
         <li class="nav-item">
             <a class="nav-link" href="index.php"><i class="fas fa-clipboard-list"></i> Penelitian</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="depan-admin.php"><i class="fas fa-search"></i> Search</a>
+        </li>
     </ul>
     <ul class="navbar-nav ms-auto">
         <li class="nav-item">
@@ -74,7 +77,7 @@ $totalPenelitian = $totalPenelitianData['total'];
             <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                <h1 class="mt-4">Welcome,</h1>
+                <h1 class="mt-4">Dashboard</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item active">Admin</li>
                 </ol>
