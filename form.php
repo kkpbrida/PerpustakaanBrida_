@@ -33,31 +33,33 @@ require 'cek.php';
         </style>
     </head>
     <body class="sb-nav-fixed">
-        <!-- Navbar -->
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand ps-3">SIAP BRIDA</a>
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" href="dashboard.php">E-BRAY</a>
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto me-3 me-lg-4">
+            <li class="nav-item">
+                <a class="nav-link" href="home.php"><i class="fas fa-home"></i> Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.php"><i class="fas fa-clipboard-list"></i> Penelitian</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="depan-admin.php"><i class="fas fa-search"></i> Search</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </li>
+        </ul>
         </nav>
-        <!-- Sidenav -->
-        <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="index.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Dashboard
-                            </a>
-                            <a class="nav-link" href="form.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-clipboard-list"></i></div>
-                                Tambah Penelitian
-                            </a>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-            <div id="layoutSidenav_content">
+        </nav>
+            <div style="margin-top: 56px;"></div> <!-- Batasan untuk menghindari overlap dengan navbar -->
+            </nav>
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Tambah Penelitian</h1>
