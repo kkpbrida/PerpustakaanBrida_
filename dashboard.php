@@ -267,7 +267,6 @@ while ($row = mysqli_fetch_assoc($pieChartResult)) {
         <script src="js/datatables-simple-demo.js"></script>
     </body>
 </html>
-<<<<<<< HEAD
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         fetchTableData();
@@ -347,77 +346,4 @@ while ($row = mysqli_fetch_assoc($pieChartResult)) {
             }
         });
 
-=======
-<script> 
-// Data for Bar Chart
-const barChartLabels = <?= json_encode(array_column($barChartData, 'tahun')); ?>;
-const barChartData = <?= json_encode(array_column($barChartData, 'jumlah')); ?>;
-const barCtx = document.getElementById('barChart').getContext('2d');
-new Chart(barCtx, {
-    type: 'bar',
-    data: {
-        labels: barChartLabels,
-        datasets: [{
-            label: 'Jumlah Penelitian',
-            data: barChartData,
-            backgroundColor: 'rgba(75, 192, 192, 1)',
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 1
-        }]
-    },
-    options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-        y: {
-            beginAtZero: true, // Memastikan sumbu Y dimulai dari 0
-            ticks: {
-                stepSize: 1, // Sesuaikan ukuran langkahnya
-                callback: function(value) {
-                    // Pastikan hanya nilai integer yang ditampilkan
-                    if (Number.isInteger(value)) {
-                        return value;
-                    }
-                }
-            }
-        }
-    }
-}
-
-});
-
-// Data for Pie Chart
-const pieChartLabels = <?= json_encode(array_column($pieChartData, 'nama_kategori')); ?>;
-const pieChartData = <?= json_encode(array_column($pieChartData, 'jumlah')); ?>;
-const pieCtx = document.getElementById('pieChart').getContext('2d');
-new Chart(pieCtx, {
-    type: 'pie',
-    data: {
-        labels: pieChartLabels,
-        datasets: [{
-            label: 'Jumlah Penelitian',
-            data: pieChartData,
-            backgroundColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false
-    }
-});
->>>>>>> df19399f704520d69f5f6cf9fbc1ca348c7a7784
 </script>
