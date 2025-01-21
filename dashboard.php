@@ -199,7 +199,7 @@ while ($row = mysqli_fetch_assoc($pieChartResult)) {
                                         <i class="fas fa-chart-pie me-1"></i>
                                         Pie Chart - Jumlah Penelitian per Kategori
                                     </div>
-                                    <div class="card-body"><canvas id="pieChart" width="100%" height="300"></canvas></div>
+                                    <div class="card-body"><canvas id="pieChart" width="100%" height="70"></canvas></div>
                                 </div>
                             </div>
                             <div class="col-xl-6">
@@ -208,7 +208,7 @@ while ($row = mysqli_fetch_assoc($pieChartResult)) {
                                         <i class="fas fa-chart-bar me-1"></i>
                                         Bar Chart - Jumlah Penelitian per Tahun
                                     </div>
-                                    <div class="card-body"><canvas id="barChart" width="100%" height="300"></canvas></div>
+                                    <div class="card-body"><canvas id="barChart" width="100%" height="70"></canvas></div>
                                 </div>
                             </div>
                         </div>
