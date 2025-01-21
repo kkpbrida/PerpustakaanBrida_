@@ -669,7 +669,6 @@ $categories_result = $conn->query($categories_query);
                         showConfirmButton: false
                     });
                 });
-
              </script>
               <script>
                 document.querySelectorAll('.select-container select').forEach(function(select) {
