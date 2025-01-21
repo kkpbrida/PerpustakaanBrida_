@@ -1,7 +1,7 @@
 <?php
-//code
+
 require 'function.php';
-//codeeee
+
 
 // Fetch data for Bar Chart (Penelitian per Tahun)
 $barChartQuery = "SELECT tahun, COUNT(*) as jumlah FROM penelitian GROUP BY tahun";
@@ -197,7 +197,7 @@ while ($row = mysqli_fetch_assoc($pieChartResult)) {
                                         <i class="fas fa-chart-pie me-1"></i>
                                         Pie Chart - Jumlah Penelitian per Kategori
                                     </div>
-                                    <div class="card-body"><canvas id="pieChart" width="100%" height="40"></canvas></div>
+                                    <div class="card-body"><canvas id="pieChart" width="100%" height="300"></canvas></div>
                                 </div>
                             </div>
                             <div class="col-xl-6">
@@ -206,7 +206,7 @@ while ($row = mysqli_fetch_assoc($pieChartResult)) {
                                         <i class="fas fa-chart-bar me-1"></i>
                                         Bar Chart - Jumlah Penelitian per Tahun
                                     </div>
-                                    <div class="card-body"><canvas id="barChart" width="100%" height="40"></canvas></div>
+                                    <div class="card-body"><canvas id="barChart" width="100%" height="300"></canvas></div>
                                 </div>
                             </div>
                         </div>
@@ -265,104 +265,69 @@ while ($row = mysqli_fetch_assoc($pieChartResult)) {
         <script src="js/datatables-simple-demo.js"></script>
     </body>
 </html>
-<script>
-$(document).ready(function() {
-    // // Inisialisasi Select2 pada elemen dropdown
-    // $('#year, #category').select2();
-
-    function fetchData(page = 1) {
-        $.ajax({
-            url: 'search.php',
-            type: 'POST',
-            data: {
-                search: $('#search').val(),
-                year: $('#year').val(),
-                category: $('#category').val(),
-                page: page,
-                page_type: 'depan'
-            },
-            success: function(data) {
-                try {
-                    $('#data-table tbody').html(data.data);
-                    $('#pagination').html(data.pagination);
-                    $('#data-info').html(data.info);
-                } catch (e) {
-                    console.error("Parsing error:", e);
+<script> 
+// Data for Bar Chart
+const barChartLabels = <?= json_encode(array_column($barChartData, 'tahun')); ?>;
+const barChartData = <?= json_encode(array_column($barChartData, 'jumlah')); ?>;
+const barCtx = document.getElementById('barChart').getContext('2d');
+new Chart(barCtx, {
+    type: 'bar',
+    data: {
+        labels: barChartLabels,
+        datasets: [{
+            label: 'Jumlah Penelitian',
+            data: barChartData,
+            backgroundColor: 'rgba(75, 192, 192, 1)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    stepSize: 1, // Adjust the step size as needed
+                    callback: function(value) { if (Number.isInteger(value)) { return value; } } // Ensure no decimal points
                 }
-            },
-            error: function(xhr, status, error) {
-                console.error("AJAX error:", status, error);
             }
-        });
+        }
     }
-
-    $('#search, #year, #category').on('input', function() {
-        fetchData();
-    });
-
-    $('#searchForm').on('submit', function(e) {
-        e.preventDefault();
-        fetchData();
-    });
-
-    fetchData();
-
-    $(document).on('click', '.page-link', function(e) {
-        e.preventDefault();
-        var page = $(this).data('page');
-        fetchData(page);
-    });
 });
 
- // Data untuk Bar Chart
- const barChartLabels = <?= json_encode(array_column($barChartData, 'tahun')); ?>;
-        const barChartData = <?= json_encode(array_column($barChartData, 'jumlah')); ?>;
-
-        const barCtx = document.getElementById('barChart').getContext('2d');
-        new Chart(barCtx, {
-            type: 'bar',
-            data: {
-                labels: barChartLabels,
-                datasets: [{
-                    label: 'Jumlah Penelitian',
-                    data: barChartData,
-                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: { display: false }
-                }
-            }
-        });
-
-        // Data untuk Pie Chart
-        const pieChartLabels = <?= json_encode(array_column($pieChartData, 'nama_kategori')); ?>;
-        const pieChartData = <?= json_encode(array_column($pieChartData, 'jumlah')); ?>;
-
-        const pieCtx = document.getElementById('pieChart').getContext('2d');
-        new Chart(pieCtx, {
-            type: 'pie',
-            data: {
-                labels: pieChartLabels,
-                datasets: [{
-                    data: pieChartData,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.6)',
-                        'rgba(54, 162, 235, 0.6)',
-                        'rgba(255, 206, 86, 0.6)',
-                        'rgba(75, 192, 192, 0.6)',
-                        'rgba(153, 102, 255, 0.6)',
-                        'rgba(255, 159, 64, 0.6)'
-                    ]
-                }]
-            },
-            options: {
-                responsive: true
-            }
-        });
-
+// Data for Pie Chart
+const pieChartLabels = <?= json_encode(array_column($pieChartData, 'nama_kategori')); ?>;
+const pieChartData = <?= json_encode(array_column($pieChartData, 'jumlah')); ?>;
+const pieCtx = document.getElementById('pieChart').getContext('2d');
+new Chart(pieCtx, {
+    type: 'pie',
+    data: {
+        labels: pieChartLabels,
+        datasets: [{
+            label: 'Jumlah Penelitian',
+            data: pieChartData,
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false
+    }
+});
 </script>
