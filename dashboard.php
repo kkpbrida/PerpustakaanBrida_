@@ -1,6 +1,7 @@
 <?php
 //code
 require 'function.php';
+//codeeee
 
 // Fetch data for Bar Chart (Penelitian per Tahun)
 $barChartQuery = "SELECT tahun, COUNT(*) as jumlah FROM penelitian GROUP BY tahun";
