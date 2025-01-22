@@ -544,6 +544,51 @@ $rak_result = mysqli_query($conn, "SELECT * FROM rak");
                 }
             });
         });
+
+        // Handle form submission for adding data
+        $('form').on('submit', function(e) {
+            e.preventDefault();
+
+            var form = $(this);
+            var formData = form.serialize();
+
+            $.ajax({
+                url: form.attr('action'),
+                method: form.attr('method'),
+                data: formData,
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: response.message,
+                            timer: 2000,
+                            showConfirmButton: false
+                        }).then(function() {
+                            window.location.reload();
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: response.message,
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'Terjadi kesalahan pada server: ' + error,
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+                }
+            });
+        });
     });
 </script>
 </body>

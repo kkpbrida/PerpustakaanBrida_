@@ -1,78 +1,71 @@
 <?php
 require 'function.php';
 
+header('Content-Type: application/json');
+
+$response = array('success' => false, 'message' => '');
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $instansi = isset($_POST['instansi']) ? $_POST['instansi'] : '';
-    $fakultas = isset($_POST['fakultas']) ? $_POST['fakultas'] : '';
-    $kategori = isset($_POST['kategori']) ? $_POST['kategori'] : '';
-    $rak = isset($_POST['rak']) ? $_POST['rak'] : '';
+    $instansi = isset($_POST['instansi']) ? trim($_POST['instansi']) : '';
+    $fakultas = isset($_POST['fakultas']) ? trim($_POST['fakultas']) : '';
+    $kategori = isset($_POST['kategori']) ? trim($_POST['kategori']) : '';
+    $rak = isset($_POST['rak']) ? trim($_POST['rak']) : '';
 
-    // Check if the data already exists in the database
-    $instansi_exists = mysqli_query($conn, "SELECT * FROM instansi WHERE nama_instansi = '$instansi'");
-    $fakultas_exists = mysqli_query($conn, "SELECT * FROM fakultas WHERE nama_fakultas = '$fakultas'");
-    $kategori_exists = mysqli_query($conn, "SELECT * FROM kategori WHERE nama_kategori = '$kategori'");
-    $rak_exists = mysqli_query($conn, "SELECT * FROM rak WHERE id_rak = '$rak'");
+    $success = true;
+    $errors = [];
 
-    if (mysqli_num_rows($instansi_exists) == 0) {
-        // Insert data into instansi table
-        $instansi_query = "INSERT INTO instansi (nama_instansi) VALUES ('$instansi')";
-        $instansi_result = mysqli_query($conn, $instansi_query);
-    } else {
-        $instansi_result = true;
+    // Check if the data already exists in the database and insert if not empty
+    if (!empty($instansi)) {
+        $instansi_exists = mysqli_query($conn, "SELECT * FROM instansi WHERE nama_instansi = '$instansi'");
+        if (mysqli_num_rows($instansi_exists) == 0) {
+            $instansi_query = "INSERT INTO instansi (nama_instansi) VALUES ('$instansi')";
+            if (!mysqli_query($conn, $instansi_query)) {
+                $success = false;
+                $errors[] = 'Instansi: ' . mysqli_error($conn);
+            }
+        }
     }
 
-    if (mysqli_num_rows($fakultas_exists) == 0) {
-        // Insert data into fakultas table
-        $fakultas_query = "INSERT INTO fakultas (nama_fakultas) VALUES ('$fakultas')";
-        $fakultas_result = mysqli_query($conn, $fakultas_query);
-    } else {
-        $fakultas_result = true;
+    if (!empty($fakultas)) {
+        $fakultas_exists = mysqli_query($conn, "SELECT * FROM fakultas WHERE nama_fakultas = '$fakultas'");
+        if (mysqli_num_rows($fakultas_exists) == 0) {
+            $fakultas_query = "INSERT INTO fakultas (nama_fakultas) VALUES ('$fakultas')";
+            if (!mysqli_query($conn, $fakultas_query)) {
+                $success = false;
+                $errors[] = 'Fakultas: ' . mysqli_error($conn);
+            }
+        }
     }
 
-    if (mysqli_num_rows($kategori_exists) == 0) {
-        // Insert data into kategori table
-        $kategori_query = "INSERT INTO kategori (nama_kategori) VALUES ('$kategori')";
-        $kategori_result = mysqli_query($conn, $kategori_query);
-    } else {
-        $kategori_result = true;
+    if (!empty($kategori)) {
+        $kategori_exists = mysqli_query($conn, "SELECT * FROM kategori WHERE nama_kategori = '$kategori'");
+        if (mysqli_num_rows($kategori_exists) == 0) {
+            $kategori_query = "INSERT INTO kategori (nama_kategori) VALUES ('$kategori')";
+            if (!mysqli_query($conn, $kategori_query)) {
+                $success = false;
+                $errors[] = 'Kategori: ' . mysqli_error($conn);
+            }
+        }
     }
 
-    if (mysqli_num_rows($rak_exists) == 0) {
-        // Insert data into rak table
-        $rak_query = "INSERT INTO rak (id_rak) VALUES ('$rak')";
-        $rak_result = mysqli_query($conn, $rak_query);
-    } else {
-        $rak_result = true;
+    if (!empty($rak)) {
+        $rak_exists = mysqli_query($conn, "SELECT * FROM rak WHERE id_rak = '$rak'");
+        if (mysqli_num_rows($rak_exists) == 0) {
+            $rak_query = "INSERT INTO rak (id_rak) VALUES ('$rak')";
+            if (!mysqli_query($conn, $rak_query)) {
+                $success = false;
+                $errors[] = 'Rak: ' . mysqli_error($conn);
+            }
+        }
     }
 
-    if ($instansi_result && $fakultas_result && $kategori_result && $rak_result) {
-        echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
-        echo "<script>
-            document.addEventListener('DOMContentLoaded', function() {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success',
-                    text: 'Data berhasil ditambahkan!',
-                    timer: 2000,
-                    showConfirmButton: false
-                }).then(function() {
-                    window.location.href = 'depan-admin.php';
-                });
-            });
-        </script>";
+    if ($success) {
+        $response['success'] = true;
+        $response['message'] = 'Data berhasil ditambahkan!';
     } else {
-        echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
-        echo "<script>
-            document.addEventListener('DOMContentLoaded', function() {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error!',
-                    text: 'Terjadi kesalahan: " . mysqli_error($conn) . "',
-                    timer: 2000,
-                    showConfirmButton: false
-                });
-            });
-        </script>";
+        $response['message'] = implode(', ', $errors);
     }
 }
+
+echo json_encode($response);
 ?>
