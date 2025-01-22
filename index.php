@@ -596,17 +596,7 @@ $categories_result = $conn->query($categories_query);
               </div>
               <div class="mb-3">
                 <label for="editTahun" class="form-label">Tahun:</label>
-                <div class="select-container">
-                    <select id="editTahun" name="tahun" class="form-control" required>
-                        <option value="" disabled selected>Pilih Tahun</option>
-                        <?php
-                            for ($year = 2019; $year <= 2029; $year++) {
-                                echo "<option value='$year'>$year</option>";
-                            }
-                        ?>
-                    </select>
-                    <i class="fa fa-caret-down"></i>
-                </div>
+                <input type="text" class="form-control" id="editTahun" name="tahun" required>
               </div>
               <div class="mb-3">
                 <label for="editRak" class="form-label">Rak:</label>

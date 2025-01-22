@@ -178,16 +178,7 @@ require 'cek.php';
                                     </div>
                                     <div class="mb-3">
                                         <label for="tahun" class="form-label">Tahun:</label>
-                                        <div class="select-container">
-                                            <select id="tahun" name="tahun" class="form-control" required>
-                                                <option value="" disabled selected>Pilih Tahun</option>
-                                                <?php
-                                                    for ($year = 2019; $year <= 2029; $year++) {
-                                                        echo "<option value='$year'>$year</option>";
-                                                    }
-                                                ?>
-                                            </select>
-                                        </div>
+                                        <input type="text" id="tahun" name="tahun" class="form-control" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="rak" class="form-label">Rak:</label>
@@ -269,7 +260,7 @@ require 'cek.php';
         window.addEventListener('resize', adjustInputWidth);
 
         $(document).ready(function() {
-            $('#instansi, #fakultas, #kategori, #tahun, #rak').select2({
+            $('#instansi, #fakultas, #kategori, #rak').select2({
                 width: 'resolve' // Pastikan lebar sesuai kontainer
             });
         });
@@ -331,7 +322,7 @@ require 'cek.php';
         });
 
         $(document).ready(function() {
-            $('#instansi, #fakultas, #kategori, #tahun, #rak').select2({
+            $('#instansi, #fakultas, #kategori, #rak').select2({
                 width: 'resolve' // Pastikan lebar sesuai kontainer
             });
         });

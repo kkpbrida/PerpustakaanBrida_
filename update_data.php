@@ -6,6 +6,7 @@ header('Content-Type: application/json');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $_POST['id'];
     $nama = $_POST['nama'];
+    $tahun = $_POST['tahun'];
     $type = isset($_POST['type']) ? $_POST['type'] : '';
 
     // Log the received data
