@@ -129,7 +129,7 @@ $categories_result = $conn->query($categories_query);
     <div class="d-flex justify-content-between align-items-center mt-4">
         <div class="d-flex align-items-center">
             <img src="assets/img/instansi-logo.png" alt="Logo BRIDA" height="40" class="me-2">
-            <h1>Selamat Datang di e-Library Perpustakaan BRIDA</h1>
+            <h1>Selamat Datang di E-Library Perpustakaan BRIDA</h1>
         </div>
         <div>
             <a href="home.php" class="btn" style="background-color: #FFC107; color: black;">Home</a>
@@ -209,7 +209,7 @@ $categories_result = $conn->query($categories_query);
 <footer class="py-4 bg-light mt-auto">
     <div class="container-fluid px-4">
         <div class="d-flex align-items-center justify-content-between small">
-            <div class="text-muted">Copyright &copy; KKP ILMU KOMPUTER</div>
+            <div class="text-muted"> &copy; KKP Ilmu Komputer UHO 2025</div>
         </div>
     </div>
 </footer>

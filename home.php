@@ -79,8 +79,8 @@
             <div class="d-flex align-items-center">
                 <img src="assets/img/instansi-logo.png" alt="Logo BRIDA" height="40" class="me-2">
                 <div>
-                    <a class="navbar-brand" href="#">SIAP BRIDA</a>
-                    <small class="d-block text-white">Sistem Informasi Akademik Perpustakaan BRIDA Provinsi  Sulawesi Tenggara</small>
+                    <a class="navbar-brand" href="#">E-BRAY BRIDA</a>
+                    <small class="d-block text-white">Electronic Library BRIDA Provinsi  Sulawesi Tenggara</small>
                 </div>
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -218,7 +218,7 @@
                     <img src="assets/img/logo_sultra.png" alt="Logo Sultra" height="80" class="me-2">
                     <div>
                         <h5>E-BRAY BRIDA</h5>
-                        <p>Sistem Informasi Perpustakaan Digital Badan Riset Inovasi Daerah</p>
+                        <p>Electronic Library Badan Riset Inovasi Daerah</p>
                         <p>Provinsi Sulawesi Tenggara</p>
                         <p>Kendari</p>
                         <p>Jl. Mayjend S. Parman No. 3, Kemaraya</p>
@@ -230,7 +230,7 @@
                     </style>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <p>© Kuliah Kerja Praktik Ilmu Komputer 2025.</p>
+                    <p>© KKP Ilmu Komputer UHO 2025.</p>
                 </div>
             </div>
         </div>
