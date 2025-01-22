@@ -63,7 +63,7 @@ $categories_result = $conn->query($categories_query);
         }
 
         .form-inline .col-lg-6,
-        .form-inline .col-lg-3 {
+        .form-inline .col-lg-2 {
             padding-right: 0;
             padding-left: 0;
         }
@@ -73,9 +73,9 @@ $categories_result = $conn->query($categories_query);
             width: 50%;
         }
 
-        .form-inline .col-lg-3 {
+        .form-inline .col-lg-2 {
             flex: 0 0 auto;
-            width: 25%;
+            width: 16.6667%;
         }
     
         .navbar {
@@ -175,35 +175,29 @@ $categories_result = $conn->query($categories_query);
                         </div>
                         <div class="card-header d-flex justify-content-between align-items-center">
                         <div class="card-body">
-                            <form method="POST" action="" class="form-inline" id="searchForm">
-                                <div class="row g-3">
-                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                        <input class="form-control w-100" type="text" id="search" name="search" 
-                                            placeholder="Cari Judul/Nama Penulis" aria-label="Cari Judul/Nama Penulis" />
+                            <form id="searchForm" class="form-inline">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <input type="text" id="search" class="form-control" placeholder="Cari Judul/Nama Penulis">
                                     </div>
-                                    <div class="col-lg-3 col-md-6 col-sm-12">
-                                        <div class="select-wrapper">
-                                            <select class="form-control w-100" id="year" name="year">
-                                                <option value="">Pilih Tahun</option>
-                                                <?php while ($year_row = mysqli_fetch_assoc($years_result)) { ?>
-                                                    <option value="<?php echo $year_row['tahun']; ?>">
-                                                        <?php echo $year_row['tahun']; ?>
-                                                    </option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
+                                    <div class="col-lg-2">
+                                        <select id="year" class="form-control">
+                                            <option value="">Pilih Tahun</option>
+                                            <?php while ($row = $years_result->fetch_assoc()): ?>
+                                                <option value="<?php echo $row['tahun']; ?>"><?php echo $row['tahun']; ?></option>
+                                            <?php endwhile; ?>
+                                        </select>
                                     </div>
-                                    <div class="col-lg-3 col-md-6 col-sm-12">
-                                        <div class="select-wrapper">
-                                            <select class="form-control w-100" id="category" name="category">
-                                                <option value="">Pilih Kategori</option>
-                                                <?php while ($category_row = mysqli_fetch_assoc($categories_result)) { ?>
-                                                    <option value="<?php echo $category_row['nama_kategori']; ?>">
-                                                        <?php echo $category_row['nama_kategori']; ?>
-                                                    </option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
+                                    <div class="col-lg-2">
+                                        <select id="category" class="form-control">
+                                            <option value="">Pilih Kategori</option>
+                                            <?php while ($row = $categories_result->fetch_assoc()): ?>
+                                                <option value="<?php echo $row['nama_kategori']; ?>"><?php echo $row['nama_kategori']; ?></option>
+                                            <?php endwhile; ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <input type="date" id="tgl_masuk" class="form-control" placeholder=" Masuk">
                                     </div>
                                 </div>
                             </form>
@@ -255,6 +249,7 @@ $categories_result = $conn->query($categories_query);
             var search = $('#search').val();
             var year = $('#year').val();
             var category = $('#category').val();
+            var tgl_masuk = $('#tgl_masuk').val();
             $.ajax({
                 url: 'search.php',
                 method: 'POST',
@@ -262,6 +257,7 @@ $categories_result = $conn->query($categories_query);
                     search: search,
                     year: year,
                     category: category,
+                    tgl_masuk: tgl_masuk,
                     page: page,
                     page_type: 'index'
                 },
@@ -273,7 +269,7 @@ $categories_result = $conn->query($categories_query);
             });
         }
 
-        $('#search, #year, #category').on('input', function() {
+        $('#search, #year, #category, #tgl_masuk').on('input', function() {
             fetchData();
         });
 

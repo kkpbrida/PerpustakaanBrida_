@@ -15,6 +15,7 @@ $search = isset($_POST['search']) ? $conn->real_escape_string($_POST['search']) 
 $year = isset($_POST['year']) ? $conn->real_escape_string($_POST['year']) : '';
 $category = isset($_POST['category']) ? $conn->real_escape_string($_POST['category']) : '';
 $instansi = isset($_POST['instansi']) ? $conn->real_escape_string($_POST['instansi']) : '';
+$tgl_masuk = isset($_POST['tgl_masuk']) ? $conn->real_escape_string($_POST['tgl_masuk']) : '';
 $page = isset($_POST['page']) ? (int)$_POST['page'] : 1;
 $limit = 10; // Jumlah record per halaman
 $offset = ($page - 1) * $limit;
@@ -40,6 +41,9 @@ if ($year != '') {
 if ($category != '') {
     $sql .= " AND k.nama_kategori = '$category'";
 }
+if ($tgl_masuk != '') {
+    $sql .= " AND p.tgl_masuk = '$tgl_masuk'";
+}
 $sql .= " ORDER BY p.tgl_masuk DESC, p.id_penelitian DESC"; 
 $sql .= " LIMIT $limit OFFSET $offset";
 
@@ -52,13 +56,13 @@ while ($row = $result->fetch_assoc()) {
         $data .= "<td>" . $row['tgl_masuk'] . "</td>";
         $data .= "<td><button type='button' class='btn btn-primary btn-edit' 
                     data-id='" . $row['id_penelitian'] . "' 
-                    data-tgl_masuk='" . $row['tgl_masuk'] . "'
-                    data-judul='" . $row['judul'] . "'
-                    data-nama_penulis='" . $row['nama_penulis'] . "'
-                    data-instansi='" . $row['nama_instansi'] . "'
-                    data-fakultas='" . $row['nama_fakultas'] . "'
-                    data-kategori='" . $row['nama_kategori'] . "'
-                    data-tahun='" . $row['tahun'] . "'
+                    data-tgl_masuk='" . $row['tgl_masuk'] . "' 
+                    data-judul='" . $row['judul'] . "' 
+                    data-nama_penulis='" . $row['nama_penulis'] . "' 
+                    data-instansi='" . $row['nama_instansi'] . "' 
+                    data-fakultas='" . $row['nama_fakultas'] . "' 
+                    data-kategori='" . $row['nama_kategori'] . "' 
+                    data-tahun='" . $row['tahun'] . "' 
                     data-rak='" . $row['id_rak'] . "'>Edit</button></td>";
         $data .= "<td><button type='button' class='btn btn-danger btn-delete' 
                     data-id='" . $row['id_penelitian'] . "'>Hapus</button></td>";
@@ -80,6 +84,9 @@ if ($year != '') {
 }
 if ($category != '') {
     $count_sql .= " AND k.nama_kategori = '$category'";
+}
+if ($tgl_masuk != '') {
+    $count_sql .= " AND p.tgl_masuk = '$tgl_masuk'";
 }
 
 $count_result = $conn->query($count_sql);
