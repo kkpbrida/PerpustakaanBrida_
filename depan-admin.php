@@ -151,14 +151,10 @@ $rak_result = mysqli_query($conn, "SELECT * FROM rak");
 </nav>
 <div class="container-fluid px-4">
     <div class="d-flex justify-content-between align-items-center mt-4">
-        <h1>Tambah Data Entitas</h1>
-        <div>
-            <a href="home.php" class="btn btn-secondary">Home</a>
-            <a href="dashboard.php" class="btn btn-primary">Back</a>
-        </div>
+        <h1>Tambah Data</h1>
     </div>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Halaman Tambah Data Entitas</li>
+        <li class="breadcrumb-item active">Admin</li>
     </ol>
     <div class="row">
         <div class="col-md-6">
