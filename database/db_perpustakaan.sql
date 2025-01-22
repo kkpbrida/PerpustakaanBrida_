@@ -11,7 +11,6 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -36,12 +35,24 @@ CREATE TABLE `fakultas` (
 -- Dumping data for table `fakultas`
 --
 
-INSERT INTO `fakultas` (`id_fakultas`, `nama_fakultas`) VALUES
-(1, 'Kesehatan Masyarakat'),
-(2, 'Kedokteran'),
-(3, 'Hukum'),
-(4, 'Pertanian'),
-(5, 'Ilmu Sosial dan Ilmu Politik');
+-- INSERT INTO `fakultas` (`id_fakultas`, `nama_fakultas`) VALUES
+-- (1, 'Kesehatan Masyarakat'),
+-- (2, 'Kedokteran'),
+-- (3, 'Hukum'),
+-- (4, 'Pertanian'),
+-- (5, 'Ilmu Sosial dan Ilmu Politik');
+
+
+
+
+
+
+
+
+
+
+
+
 
 -- --------------------------------------------------------
 
@@ -58,12 +69,12 @@ CREATE TABLE `instansi` (
 -- Dumping data for table `instansi`
 --
 
-INSERT INTO `instansi` (`id_instansi`, `nama_instansi`) VALUES
-(1, 'Universitas Halu Oleo'),
-(2, 'Universitas Halu Oleo'),
-(3, 'Institut Agama Islam Negeri Kendari'),
-(4, 'Universitas Mandala Waluya'),
-(5, 'Universitas Sulawesi Tenggara');
+-- INSERT INTO `instansi` (`id_instansi`, `nama_instansi`) VALUES
+-- (1, 'Universitas Halu Oleo'),
+-- (2, 'Universitas Halu Oleo'),
+-- (3, 'Institut Agama Islam Negeri Kendari'),
+-- (4, 'Universitas Mandala Waluya'),
+-- (5, 'Universitas Sulawesi Tenggara');
 
 -- --------------------------------------------------------
 
@@ -80,12 +91,12 @@ CREATE TABLE `kategori` (
 -- Dumping data for table `kategori`
 --
 
-INSERT INTO `kategori` (`id_kategori`, `nama_kategori`) VALUES
-(1, 'S1'),
-(2, 'BRIDA'),
-(3, 'S3'),
-(4, 'S2'),
-(5, 'BRIDA');
+-- INSERT INTO `kategori` (`id_kategori`, `nama_kategori`) VALUES
+-- (1, 'S1'),
+-- (2, 'BRIDA'),
+-- (3, 'S3'),
+-- (4, 'S2'),
+-- (5, 'BRIDA');
 
 -- --------------------------------------------------------
 
@@ -130,8 +141,8 @@ CREATE TABLE `penelitian` (
 -- Dumping data for table `penelitian`
 --
 
-INSERT INTO `penelitian` (`id_penelitian`, `judul`, `nama_penulis`, `tahun`, `id_fakultas`, `id_kategori`, `tgl_masuk`, `id_rak`, `petugas`, `id_instansi`) VALUES
-(26, 'Analisis Eror Pada kode hehe', 'Lala Bajo', '2024', 5, 1, '2025-01-17', 'A1', 'Admin', 4);
+-- INSERT INTO `penelitian` (`id_penelitian`, `judul`, `nama_penulis`, `tahun`, `id_fakultas`, `id_kategori`, `tgl_masuk`, `id_rak`, `petugas`, `id_instansi`) VALUES
+-- (26, 'Analisis Eror Pada kode hehe', 'Lala Bajo', '2024', 5, 1, '2025-01-17', 'A1', 'Admin', 4);
 
 -- --------------------------------------------------------
 
@@ -148,12 +159,12 @@ CREATE TABLE `rak` (
 -- Dumping data for table `rak`
 --
 
-INSERT INTO `rak` (`id_rak`, `keterangan`) VALUES
-('A1', NULL),
-('A2', NULL),
-('A3', NULL),
-('A4', NULL),
-('A5', NULL);
+-- INSERT INTO `rak` (`id_rak`, `keterangan`) VALUES
+-- ('A1', NULL),
+-- ('A2', NULL),
+-- ('A3', NULL),
+-- ('A4', NULL),
+-- ('A5', NULL);
 
 --
 -- Indexes for dumped tables
@@ -162,30 +173,35 @@ INSERT INTO `rak` (`id_rak`, `keterangan`) VALUES
 --
 -- Indexes for table `fakultas`
 --
+
 ALTER TABLE `fakultas`
   ADD PRIMARY KEY (`id_fakultas`);
 
 --
 -- Indexes for table `instansi`
 --
+
 ALTER TABLE `instansi`
   ADD PRIMARY KEY (`id_instansi`);
 
 --
 -- Indexes for table `kategori`
 --
+
 ALTER TABLE `kategori`
   ADD PRIMARY KEY (`id_kategori`);
 
 --
 -- Indexes for table `login`
 --
+
 ALTER TABLE `login`
   ADD PRIMARY KEY (`id_login`);
 
 --
 -- Indexes for table `penelitian`
 --
+
 ALTER TABLE `penelitian`
   ADD PRIMARY KEY (`id_penelitian`),
   ADD KEY `id_fakultas` (`id_fakultas`),
@@ -198,6 +214,7 @@ ALTER TABLE `penelitian` ADD FULLTEXT KEY `judul_2` (`judul`,`nama_penulis`);
 --
 -- Indexes for table `rak`
 --
+
 ALTER TABLE `rak`
   ADD PRIMARY KEY (`id_rak`);
 
@@ -208,30 +225,35 @@ ALTER TABLE `rak`
 --
 -- AUTO_INCREMENT for table `fakultas`
 --
+
 ALTER TABLE `fakultas`
   MODIFY `id_fakultas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `instansi`
 --
+
 ALTER TABLE `instansi`
   MODIFY `id_instansi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `kategori`
 --
+
 ALTER TABLE `kategori`
   MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `login`
 --
+
 ALTER TABLE `login`
   MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `penelitian`
 --
+
 ALTER TABLE `penelitian`
   MODIFY `id_penelitian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
@@ -242,6 +264,7 @@ ALTER TABLE `penelitian`
 --
 -- Constraints for table `penelitian`
 --
+
 ALTER TABLE `penelitian`
   ADD CONSTRAINT `penelitian_ibfk_1` FOREIGN KEY (`id_kategori`) REFERENCES `kategori` (`id_kategori`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `penelitian_ibfk_2` FOREIGN KEY (`id_fakultas`) REFERENCES `fakultas` (`id_fakultas`) ON DELETE CASCADE ON UPDATE CASCADE,
