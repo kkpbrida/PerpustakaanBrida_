@@ -12,9 +12,11 @@ require 'cek.php';
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Tambah Penelitian</title>
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <style>
             .select-container {
                 position: relative;
@@ -23,12 +25,18 @@ require 'cek.php';
                 width: 100%;
                 padding-right: 30px; /* Adjust this value based on the icon size */
             }
-            .select-container .fa-caret-down {
-                position: absolute;
-                right: 10px;
-                top: 50%;
-                transform: translateY(-50%);
-                pointer-events: none;
+            form .form-control {
+                width: 100%;
+                padding: 0.375rem 0.75rem;
+                font-size: 1rem;
+                line-height: 1.5;
+                color: #212529;
+                background-color: #fff;
+                background-clip: padding-box;
+                border: 1px solid #ced4da;
+                border-radius: 0.375rem;
+                box-shadow: inset 0 0 0 transparent;
+                transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
             }
         </style>
     </head>
@@ -58,7 +66,8 @@ require 'cek.php';
         </ul>
         </nav>
         </nav>
-            <div style="margin-top: 56px;"></div> <!-- Batasan untuk menghindari overlap dengan navbar -->
+            <!-- Batasan untuk menghindari overlap dengan navba -->
+            <div style="margin-top: 56px;"></div> 
             </nav>
                 <main>
                     <div class="container-fluid px-4">
@@ -81,64 +90,6 @@ require 'cek.php';
                                         <button type="button" class="btn btn-secondary mt-2" id="addPenulisBtn" onclick="addPenulis()">Tambah Penulis</button>
                                         <button type="button" class="btn btn-danger mt-2" id="removePenulisBtn" onclick="removePenulis()" style="display: none;">Hapus</button>
                                     </div>
-                                    <script>
-                                        function addPenulis() {
-                                            var container = document.getElementById('penulis_container');
-                                            var totalInputs = container.querySelectorAll('input[name="nama_penulis[]"]').length;
-
-                                            if (totalInputs >= 9) { // Kolom awal + 9 = 10
-                                                var button = document.getElementById('addPenulisBtn');
-                                                button.disabled = true;
-                                                button.textContent = 'Batas Maksimal Tercapai';
-                                                button.classList.remove('btn-secondary');
-                                                button.classList.add('btn-danger');
-                                                return;
-                                            }
-
-                                            var input = document.createElement('input');
-                                            input.type = 'text';
-                                            input.name = 'nama_penulis[]';
-                                            input.className = 'form-control mt-2';
-                                            input.required = true;
-                                            container.appendChild(input);
-
-                                            // Show the remove button if there are more than one input fields
-                                            if (totalInputs + 1 > 0) {
-                                                document.getElementById('removePenulisBtn').style.display = 'inline-block';
-                                            }
-                                        }
-
-                                        function removePenulis() {
-                                            var container = document.getElementById('penulis_container');
-                                            var totalInputs = container.querySelectorAll('input[name="nama_penulis[]"]').length;
-
-                                            if (totalInputs > 0) {
-                                                container.removeChild(container.lastChild);
-                                            }
-
-                                            // Hide the remove button if there is only one input field left
-                                            if (totalInputs - 1 <= 0) {
-                                                document.getElementById('removePenulisBtn').style.display = 'none';
-                                            }
-
-                                            // Re-enable the add button if it was disabled
-                                            var addButton = document.getElementById('addPenulisBtn');
-                                            if (totalInputs <= 10) {
-                                                addButton.disabled = false;
-                                                addButton.textContent = 'Tambah Penulis';
-                                                addButton.classList.remove('btn-danger');
-                                                addButton.classList.add('btn-secondary');
-                                            }
-                                        }
-
-                                        // Initial check to hide the remove button if there is only one input field
-                                        document.addEventListener('DOMContentLoaded', function() {
-                                            var totalInputs = document.querySelectorAll('input[name="nama_penulis[]"]').length;
-                                            if (totalInputs <= 1) {
-                                                document.getElementById('removePenulisBtn').style.display = 'none';
-                                            }
-                                        });
-                                    </script>
                                     <div class="mb-3">
                                         <label for="instansi" class="form-label">Instansi:</label>
                                         <div class="select-container">
@@ -158,7 +109,6 @@ require 'cek.php';
                                                     }
                                                 ?>
                                             </select>
-                                            <i class="fa fa-caret-down"></i>
                                         </div>
                                     </div>
                                     <div class="mb-3">
@@ -180,7 +130,6 @@ require 'cek.php';
                                                     }
                                                 ?>
                                             </select>
-                                            <i class="fa fa-caret-down"></i>
                                         </div>
                                     </div>
                                     <div class="mb-3">
@@ -202,7 +151,6 @@ require 'cek.php';
                                                     }
                                                 ?>
                                             </select>
-                                            <i class="fa fa-caret-down"></i>
                                         </div>
                                     </div>
                                     <div class="mb-3">
@@ -216,7 +164,6 @@ require 'cek.php';
                                                     }
                                                 ?>
                                             </select>
-                                            <i class="fa fa-caret-down"></i>
                                         </div>
                                     </div>
                                     <div class="mb-3">
@@ -237,7 +184,6 @@ require 'cek.php';
                                                     }
                                                 ?>
                                             </select>
-                                            <i class="fa fa-caret-down"></i>
                                         </div>
                                     </div>
                                     <script>
@@ -335,6 +281,10 @@ require 'cek.php';
             if (totalInputs <= 1) {
                 document.getElementById('removePenulisBtn').style.display = 'none';
             }
+        });
+
+        $(document).ready(function() {
+            $('#instansi, #fakultas, #kategori, #tahun, #rak').select2();
         });
         </script>
     </body>

@@ -197,7 +197,10 @@ $categories_result = $conn->query($categories_query);
                     <!-- Data akan dimuat di sini melalui AJAX -->
                 </tbody>
             </table>
-            <div id="data-info" class="mb-3"></div>
+            <div class="d-flex justify-content-between">
+                <div id="data-info" class="mb-3"></div>
+                <div id="total-records" class="mb-3"></div>
+            </div>
             <nav aria-label="Page navigation">
                 <ul class="pagination justify-content-center" id="pagination">
                     <!-- Pagination links will be generated here -->
@@ -236,6 +239,7 @@ $(document).ready(function() {
                     $('#data-table tbody').html(data.data);
                     $('#pagination').html(data.pagination);
                     $('#data-info').html(data.info);
+                    $('#total-records').html(data.total_records);
                 } catch (e) {
                     console.error("Parsing error:", e);
                 }
