@@ -251,6 +251,11 @@ new Chart(barCtx, {
         }]
     },
     options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        },
         responsive: true,
         plugins: {
             legend: { display: false }
