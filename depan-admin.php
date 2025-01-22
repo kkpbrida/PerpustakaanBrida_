@@ -3,10 +3,10 @@ require 'function.php';
 require 'cek.php';
 
 // Fetch data from each table
-$instansi_result = mysqli_query($conn, "SELECT * FROM instansi");
-$fakultas_result = mysqli_query($conn, "SELECT * FROM fakultas");
-$kategori_result = mysqli_query($conn, "SELECT * FROM kategori");
-$rak_result = mysqli_query($conn, "SELECT * FROM rak");
+$instansi_result = mysqli_query($conn, "SELECT * FROM instansi ORDER BY nama_instansi ASC");
+$fakultas_result = mysqli_query($conn, "SELECT * FROM fakultas ORDER BY nama_fakultas ASC");
+$kategori_result = mysqli_query($conn, "SELECT * FROM kategori ORDER BY nama_kategori ASC");
+$rak_result = mysqli_query($conn, "SELECT * FROM rak ORDER BY id_rak ASC");
 ?>
 
 <!DOCTYPE html>
