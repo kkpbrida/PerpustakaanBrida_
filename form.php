@@ -272,7 +272,7 @@ require 'cek.php';
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; kkp ilkom nihh bozzz</div>
+                            <div class="text-muted"> &copy; KKP Ilmu Komputer UHO 2025</div>
                         </div>
                     </div>
                 </footer>
