@@ -85,7 +85,7 @@ $totalPenelitian = $totalPenelitianData['total'];
                     <div class="col-xl-4 col-md-6">
                     <div class="card bg-primary text-white mb-4">
                         <div class="card-body">
-                        PENELITIAN
+                        JUMLAH KESELURUHAN PENELITIAN
                         <h2><?= $totalPenelitian; ?></h2>
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
@@ -95,7 +95,7 @@ $totalPenelitian = $totalPenelitianData['total'];
                             <div class="col-xl-4 col-md-6">
                                 <div class="card bg-warning text-white mb-4">
                                     <div class="card-body">
-                                        BRIDA
+                                        JUMLAH PENELITIAN BRIDA
                                         <h2>
                                             <?php
                                             $bridaCount = 0;
@@ -116,7 +116,7 @@ $totalPenelitian = $totalPenelitianData['total'];
                             <div class="col-xl-4 col-md-6">
                                 <div class="card bg-success text-white mb-4">
                                     <div class="card-body">
-                                        NON-BRIDA
+                                        JUMLAH PENELITIAN NON-BRIDA
                                         <h2>
                                             <?php
                                             $nonBridaCount = 0;
@@ -139,7 +139,7 @@ $totalPenelitian = $totalPenelitianData['total'];
                                 <div class="card mb-4">
                                     <div class="card-header">
                                         <i class="fas fa-chart-pie me-1"></i>
-                                        Pie Chart - Jumlah Penelitian per Kategori
+                                         Jumlah Penelitian per Kategori
                                     </div>
                                     <div class="card-body"><canvas id="pieChart" width="100%" height="50"></canvas></div>
                                 </div>
@@ -148,7 +148,7 @@ $totalPenelitian = $totalPenelitianData['total'];
                                 <div class="card mb-4">
                                     <div class="card-header">
                                         <i class="fas fa-chart-bar me-1"></i>
-                                        Bar Chart - Jumlah Penelitian per Tahun
+                                         Jumlah Penelitian per Tahun
                                     </div>
                                     <div class="card-body"><canvas id="barChart" width="100%" height="50"></canvas></div>
                                 </div>
