@@ -254,7 +254,7 @@ $rak_result = mysqli_query($conn, "SELECT * FROM rak");
                     <table>
                         <thead>
                             <tr>
-                                <th>ID Rak</th>
+                                <th>Lokasi</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
