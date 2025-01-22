@@ -68,7 +68,7 @@ require 'cek.php';
                                 <form action="form.php" method="post">
                                     <div class="mb-3">
                                         <label for="tgl_masuk" class="form-label">Tanggal Registrasi:</label>
-                                        <input type="date" id="tgl_masuk" name="tgl_masuk" class="form-control" required>
+                                        <input type="date" id="tgl_masuk" name="tgl_masuk" class="form-control">
                                     </div>
                                     <div class="mb-3">
                                         <label for="judul" class="form-label">Judul:</label>

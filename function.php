@@ -19,8 +19,15 @@ if(isset($_POST['addpenelitian'])) {
     // Concatenate all author names into a single string separated by commas 
     $nama_penulis = implode(", ", $_POST['nama_penulis']);
 
+    // Check if tgl_masuk is empty, if so, use CURRENT_TIMESTAMP
+    if (empty($tgl_masuk)) {
+        $tgl_masuk = "CURRENT_TIMESTAMP";
+    } else {
+        $tgl_masuk = "'$tgl_masuk'";
+    }
+
     $addtotable = mysqli_query($conn, "INSERT INTO penelitian (tgl_masuk, nama_penulis, id_kategori, judul, tahun, id_rak, id_instansi, id_fakultas) 
-        VALUES ('$tgl_masuk', '$nama_penulis', '$kategori', '$judul', '$tahun', '$rak', '$instansi', '$fakultas')");
+        VALUES ($tgl_masuk, '$nama_penulis', '$kategori', '$judul', '$tahun', '$rak', '$instansi', '$fakultas')");
 
     if ($addtotable) { 
         echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
