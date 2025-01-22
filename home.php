@@ -230,7 +230,7 @@
                     </style>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <p>© 2025 E-BRAY BRIDA. Kuliah Kerja Praktik Ilmu Komputer.</p>
+                    <p>© Kuliah Kerja Praktik Ilmu Komputer 2025.</p>
                 </div>
             </div>
         </div>
