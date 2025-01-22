@@ -37,6 +37,18 @@ require 'cek.php';
                 border-radius: 0.375rem;
                 box-shadow: inset 0 0 0 transparent;
                 transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+                height: auto; /* Pastikan height diatur otomatis */
+            }
+
+            .select2-container--default .select2-selection--single {
+                width: 100%;
+                height: calc(2.25rem + 2px); /* Sesuaikan dengan tinggi box input lainnya */
+                padding: 0.375rem 0.75rem; /* Sama dengan input */
+                font-size: 1rem;
+                line-height: 1.5;
+                color: #212529;
+                border: 1px solid #ced4da;
+                border-radius: 0.375rem;
             }
         </style>
     </head>
@@ -284,7 +296,9 @@ require 'cek.php';
         });
 
         $(document).ready(function() {
-            $('#instansi, #fakultas, #kategori, #tahun, #rak').select2();
+            $('#instansi, #fakultas, #kategori, #tahun, #rak').select2({
+                width: 'resolve' // Pastikan lebar sesuai kontainer
+            });
         });
         </script>
     </body>
