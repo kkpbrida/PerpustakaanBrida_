@@ -476,7 +476,7 @@ $rak_result = mysqli_query($conn, "SELECT * FROM rak ORDER BY id_rak ASC");
                 error: function(xhr, status, error) {
                     Swal.fire({
                         icon: 'error',
-                        title: 'Error!',
+                        title: 'Gagal!',
                         text: 'Terjadi kesalahan pada server: ' + error,
                         showConfirmButton: true
                     });
@@ -561,7 +561,7 @@ $rak_result = mysqli_query($conn, "SELECT * FROM rak ORDER BY id_rak ASC");
                     if (response.success) {
                         Swal.fire({
                             icon: 'success',
-                            title: 'Success',
+                            title: 'Berhasil!',
                             text: response.message,
                             timer: 2000,
                             showConfirmButton: false
@@ -571,7 +571,7 @@ $rak_result = mysqli_query($conn, "SELECT * FROM rak ORDER BY id_rak ASC");
                     } else {
                         Swal.fire({
                             icon: 'error',
-                            title: 'Error!',
+                            title: 'Gagal!',
                             text: response.message,
                             timer: 2000,
                             showConfirmButton: false
@@ -581,7 +581,7 @@ $rak_result = mysqli_query($conn, "SELECT * FROM rak ORDER BY id_rak ASC");
                 error: function(xhr, status, error) {
                     Swal.fire({
                         icon: 'error',
-                        title: 'Error!',
+                        title: 'Gagal!',
                         text: 'Terjadi kesalahan pada server: ' + error,
                         timer: 2000,
                         showConfirmButton: false
