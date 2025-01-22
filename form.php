@@ -19,12 +19,23 @@ require 'cek.php';
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <style>
             .select-container {
-                position: relative;
+                display: flex;
+                flex-direction: column;
+                width: 100%; /* Sesuaikan dengan container parent */
             }
+
             .select-container select {
-                width: 100%;
-                padding-right: 30px; /* Adjust this value based on the icon size */
-            }
+                width: 100%; /* Pastikan inputan menyesuaikan */
+                box-sizing: border-box; /* Mencegah overflow */
+                height: calc(2.25rem + 2px); /* Konsisten dengan tinggi elemen lainnya */
+                font-size: 1rem; /* Tetap proporsional */
+                padding: 0.375rem 0.75rem;
+                border: 1px solid #ced4da;
+                border-radius: 0.375rem;
+                background-color: #fff;
+                transition: all 0.2s ease-in-out; /* Transisi lembut saat window berubah */
+}
+
             form .form-control {
                 width: 100%;
                 padding: 0.375rem 0.75rem;
@@ -238,6 +249,30 @@ require 'cek.php';
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script>
+         // Fungsi untuk menyesuaikan ukuran box input
+        function adjustInputWidth() {
+            document.querySelectorAll('.select-container select').forEach(function(select) {
+                select.style.width = '100%'; // Pastikan lebar selalu 100% dari kontainer
+                select.style.boxSizing = 'border-box'; // Hindari overflow
+            });
+
+            document.querySelectorAll('.form-control').forEach(function(input) {
+                input.style.width = '100%'; // Pastikan lebar input juga mengikuti ukuran kontainer
+                input.style.boxSizing = 'border-box'; // Hindari overflow
+            });
+        }
+
+        // Panggil fungsi saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', adjustInputWidth);
+
+        // Panggil fungsi saat jendela diubah ukurannya
+        window.addEventListener('resize', adjustInputWidth);
+
+        $(document).ready(function() {
+            $('#instansi, #fakultas, #kategori, #tahun, #rak').select2({
+                width: 'resolve' // Pastikan lebar sesuai kontainer
+            });
+        });
         function addPenulis() {
             var container = document.getElementById('penulis_container');
             var totalInputs = container.querySelectorAll('input[name="nama_penulis[]"]').length;
