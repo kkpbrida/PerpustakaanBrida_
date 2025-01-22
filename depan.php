@@ -24,6 +24,7 @@ $categories_result = $conn->query($categories_query);
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         .table {
             width: 100%;
@@ -103,6 +104,20 @@ $categories_result = $conn->query($categories_query);
             display: none;
         }
 
+        .pagination .page-link {
+                    background-color: #FFC107;
+                    color: black;
+                }
+                .pagination .page-link:hover {
+                    background-color: #e0a800;
+                    color: black;
+                }
+                .pagination .page-item.active .page-link {
+                    background-color: #003366;
+                    border-color: #FFC107;
+                }
+
+
         /* Samakan tinggi elemen input dan dropdown */
         .form-control, .select2-container .select2-selection--single {
             height: calc(2.25rem + 2px); /* Sesuaikan dengan tinggi elemen input */
@@ -112,20 +127,27 @@ $categories_result = $conn->query($categories_query);
 <body>
 <div class="container-fluid px-4">
     <div class="d-flex justify-content-between align-items-center mt-4">
-        <h1>Selamat Datang di e-Library Perpustakaan BRIDA</h1>
+        <div class="d-flex align-items-center">
+            <img src="assets/img/instansi-logo.png" alt="Logo BRIDA" height="40" class="me-2">
+            <h1>Selamat Datang di e-Library Perpustakaan BRIDA</h1>
+        </div>
         <div>
-            <a href="home.php" class="btn btn-secondary">Home</a>
-            <a href="login.php" class="btn btn-primary">Login</a>
+            <a href="home.php" class="btn" style="background-color: #FFC107; color: black;">Home</a>
+            <a href="login.php" class="btn" style="background-color: #FFC107; color: black;">Login</a>
         </div>
     </div>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Halaman Pencarian Penelitian</li>
+        <li class="breadcrumb-item active"> </li>
     </ol>
-    <div class="card mb-4">
-        <div class="card-header">
-            <i class="fas fa-table me-1"></i>
-            Daftar Penelitian
-        </div>
+<div class="card mb-4">
+    <div class="card-header text-center" style="background-color: #003366; color: white;">
+        <i class="fas fa-book me-1"></i> <!-- Ikon perpustakaan di sebelah kiri -->
+        <i class="fas fa-university me-1"></i>
+        <span>Daftar Penelitian</span>
+        <i class="fas fa-university ms-1"></i>
+        <i class="fas fa-book ms-1"></i> <!-- Ikon perpustakaan di sebelah kanan -->
+    </div>
+</div>
         <div class="card-body">
             <form method="POST" action="" class="form-inline" id="searchForm">
                 <div class="row g-3">
