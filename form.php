@@ -66,7 +66,8 @@ require 'cek.php';
         </ul>
         </nav>
         </nav>
-            <div style="margin-top: 56px;"></div> Batasan untuk menghindari overlap dengan navbar
+            <!-- Batasan untuk menghindari overlap dengan navba -->
+            <div style="margin-top: 56px;"></div> 
             </nav>
                 <main>
                     <div class="container-fluid px-4">
