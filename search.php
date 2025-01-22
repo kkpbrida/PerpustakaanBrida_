@@ -103,7 +103,8 @@ for ($i = 1; $i <= $total_pages; $i++) {
 $response = [
     'data' => $data,
     'pagination' => $pagination,
-    'info' => "Showing page $page of $total_pages"
+    'info' => "Showing page $page of $total_pages",
+    'total_records' =>  "Showing $result->num_rows records out of $total_records"
 ];
 
 // Bersihkan output buffer dan kirim respons JSON

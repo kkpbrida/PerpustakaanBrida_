@@ -219,7 +219,10 @@ $categories_result = $conn->query($categories_query);
                                     <!-- Data akan dimuat di sini melalui AJAX -->
                                 </tbody>
                             </table>
-                            <div id="data-info" class="mb-3"></div>
+                            <div class="d-flex justify-content-between">
+                                <div id="data-info" class="mb-3"></div>
+                                <div id="total-records" class="mb-3"></div>
+                            </div>
                             <nav aria-label="Page navigation">
                                 <ul class="pagination justify-content-center" id="pagination">
                                     <!-- Pagination links will be generated here -->
@@ -265,6 +268,7 @@ $categories_result = $conn->query($categories_query);
                     $('#results').html(response.data);
                     $('#pagination').html(response.pagination);
                     $('#data-info').html(response.info);
+                    $('#total-records').text(response.total_records);
                 }
             });
         }
