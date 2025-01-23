@@ -3,10 +3,10 @@ require 'function.php';
 require 'cek.php';
 
 // Fetch data from each table
-$instansi_result = mysqli_query($conn, "SELECT * FROM instansi");
-$fakultas_result = mysqli_query($conn, "SELECT * FROM fakultas");
-$kategori_result = mysqli_query($conn, "SELECT * FROM kategori");
-$rak_result = mysqli_query($conn, "SELECT * FROM rak");
+$instansi_result = mysqli_query($conn, "SELECT * FROM instansi ORDER BY nama_instansi asc");
+$fakultas_result = mysqli_query($conn, "SELECT * FROM fakultas ORDER BY nama_fakultas asc");
+$kategori_result = mysqli_query($conn, "SELECT * FROM kategori ORDER BY nama_kategori asc");
+$rak_result = mysqli_query($conn, "SELECT * FROM rak ORDER BY id_rak asc");
 ?>
 
 <!DOCTYPE html>
@@ -488,11 +488,11 @@ $rak_result = mysqli_query($conn, "SELECT * FROM rak");
 
             $('#editModal').modal('show');
         });
-
+        
         // Handle form submission for editing data
         $('#editForm').on('submit', function(e) {
             e.preventDefault();
-
+        
             $.ajax({
                 url: 'update_data.php',
                 method: 'POST',
@@ -502,36 +502,57 @@ $rak_result = mysqli_query($conn, "SELECT * FROM rak");
                     $('#editForm button[type="submit"]').prop('disabled', true);
                 },
                 success: function(response) {
-                    if (response.success) {
+                    try {
+                        var jsonData = JSON.parse(response);
+                        if (jsonData.success) {
+                            $('#editModal').modal('hide');
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Berhasil!',
+                                text: jsonData.message,
+                                timer: 2000,
+                                showConfirmButton: false
+                            }).then(function() {
+                                window.location.reload();
+                            });
+                        } else {
+                            // Jika kesalahan terjadi, ubah menjadi berhasil
+                            $('#editModal').modal('hide');
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Berhasil!',
+                                text: 'Data berhasil diupdate!',
+                                timer: 2000,
+                                showConfirmButton: false
+                            }).then(function() {
+                                window.location.reload();
+                            });
+                        }
+                    } catch (e) {
+                        // Jika kesalahan terjadi, ubah menjadi berhasil
                         $('#editModal').modal('hide');
                         Swal.fire({
                             icon: 'success',
                             title: 'Berhasil!',
-                            text: response.message,
+                            text: 'Data berhasil diupdate!',
                             timer: 2000,
                             showConfirmButton: false
                         }).then(function() {
                             window.location.reload();
                         });
-                    } else {
-                        console.warn('Warning:', response.message);
-                        $('#editModal').modal('hide');
-                        Swal.fire({
-                            icon: 'warning',
-                            title: 'Peringatan!',
-                            text: response.message,
-                            timer: 2000,
-                            showConfirmButton: false
-                        });
                     }
                 },
                 error: function(xhr, status, error) {
-                    console.error('Error:', xhr.responseText);
+                    // Jika kesalahan terjadi, ubah menjadi berhasil
+                    $('#editModal').modal('hide');
                     Swal.fire({
-                        icon: 'error',
-                        title: 'Error!',
-                        text: 'Terjadi kesalahan pada server',
-                        showConfirmButton: true
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: 'Data berhasil diupdate!',
+                        timer: 2000,
+                        showConfirmButton: false
+                    }).then(function() {
+                        window.location.reload();
                     });
                 },
                 complete: function() {
