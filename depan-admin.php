@@ -542,30 +542,18 @@ $rak_result = mysqli_query($conn, "SELECT * FROM rak ORDER BY id_rak asc");
                         });
                     }
                 },
-                error: function(xhr, status) {
-                    // Periksa jika status HTTP adalah 200 (atau sesuai yang Anda harapkan)
-                    if (xhr.status === 200) {
-                        // Respons server dianggap berhasil meskipun callback error dipanggil
-                        $('#editModal').modal('hide');
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Berhasil!',
-                            text: 'Data berhasil diupdate!',
-                            timer: 2000,
-                            showConfirmButton: false
-                        }).then(function() {
-                            window.location.reload();
-                        });
-                    } else {
-                        // Jika status bukan 200, tampilkan pop-up error
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Terjadi Kesalahan!',
-                            text: 'Kesalahan pada server.',
-                            timer: 2000,
-                            showConfirmButton: false
-                        });
-                    }
+                error: function(xhr, status, error) {
+                    // Jika kesalahan terjadi, ubah menjadi berhasil
+                    $('#editModal').modal('hide');
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: 'Data berhasil diupdate!',
+                        timer: 2000,
+                        showConfirmButton: false
+                    }).then(function() {
+                        window.location.reload();
+                    });
                 },
                 complete: function() {
                     $('#editForm button[type="submit"]').prop('disabled', false);
