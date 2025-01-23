@@ -158,7 +158,7 @@ $rak_result = mysqli_query($conn, "SELECT * FROM rak ORDER BY id_rak asc");
         </div>
     </div>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Halaman Tambah Data Entitas</li>
+        <li class="breadcrumb-item active">Admin</li>
     </ol>
     <div class="row">
         <div class="col-md-6">
@@ -405,7 +405,7 @@ $rak_result = mysqli_query($conn, "SELECT * FROM rak ORDER BY id_rak asc");
 <footer class="py-4 bg-light mt-auto">
     <div class="container-fluid px-4">
         <div class="d-flex align-items-center justify-content-between small">
-            <div class="text-muted">Copyright &copy; KKP ILMU KOMPUTER</div>
+            <div class="text-muted"> &copy; KKP Ilmu Komputer UHO 2025</div>
         </div>
     </div>
 </footer>
