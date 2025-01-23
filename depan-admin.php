@@ -3,10 +3,10 @@ require 'function.php';
 require 'cek.php';
 
 // Fetch data from each table
-$instansi_result = mysqli_query($conn, "SELECT * FROM instansi ORDER BY nama_instansi ASC");
-$fakultas_result = mysqli_query($conn, "SELECT * FROM fakultas ORDER BY nama_fakultas ASC");
-$kategori_result = mysqli_query($conn, "SELECT * FROM kategori ORDER BY nama_kategori ASC");
-$rak_result = mysqli_query($conn, "SELECT * FROM rak ORDER BY id_rak ASC");
+$instansi_result = mysqli_query($conn, "SELECT * FROM instansi");
+$fakultas_result = mysqli_query($conn, "SELECT * FROM fakultas");
+$kategori_result = mysqli_query($conn, "SELECT * FROM kategori");
+$rak_result = mysqli_query($conn, "SELECT * FROM rak");
 ?>
 
 <!DOCTYPE html>
@@ -151,10 +151,14 @@ $rak_result = mysqli_query($conn, "SELECT * FROM rak ORDER BY id_rak ASC");
 </nav>
 <div class="container-fluid px-4">
     <div class="d-flex justify-content-between align-items-center mt-4">
-        <h1>Tambah Data</h1>
+        <h1>Tambah Data Entitas</h1>
+        <div>
+            <a href="home.php" class="btn btn-secondary">Home</a>
+            <a href="dashboard.php" class="btn btn-primary">Back</a>
+        </div>
     </div>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Admin</li>
+        <li class="breadcrumb-item active">Halaman Tambah Data Entitas</li>
     </ol>
     <div class="row">
         <div class="col-md-6">
@@ -254,7 +258,7 @@ $rak_result = mysqli_query($conn, "SELECT * FROM rak ORDER BY id_rak ASC");
                     <table>
                         <thead>
                             <tr>
-                                <th>Lokasi</th>
+                                <th>ID Rak</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -401,7 +405,7 @@ $rak_result = mysqli_query($conn, "SELECT * FROM rak ORDER BY id_rak ASC");
 <footer class="py-4 bg-light mt-auto">
     <div class="container-fluid px-4">
         <div class="d-flex align-items-center justify-content-between small">
-            <div class="text-muted"> &copy;KKP Ilmu Komputer UHO 2025</div>
+            <div class="text-muted">Copyright &copy; KKP ILMU KOMPUTER</div>
         </div>
     </div>
 </footer>
@@ -476,7 +480,7 @@ $rak_result = mysqli_query($conn, "SELECT * FROM rak ORDER BY id_rak ASC");
                 error: function(xhr, status, error) {
                     Swal.fire({
                         icon: 'error',
-                        title: 'Gagal!',
+                        title: 'Error!',
                         text: 'Terjadi kesalahan pada server: ' + error,
                         showConfirmButton: true
                     });
@@ -540,51 +544,6 @@ $rak_result = mysqli_query($conn, "SELECT * FROM rak ORDER BY id_rak ASC");
                                 'error'
                             );
                         }
-                    });
-                }
-            });
-        });
-
-        // Handle form submission for adding data
-        $('form').on('submit', function(e) {
-            e.preventDefault();
-
-            var form = $(this);
-            var formData = form.serialize();
-
-            $.ajax({
-                url: form.attr('action'),
-                method: form.attr('method'),
-                data: formData,
-                dataType: 'json',
-                success: function(response) {
-                    if (response.success) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Berhasil!',
-                            text: response.message,
-                            timer: 2000,
-                            showConfirmButton: false
-                        }).then(function() {
-                            window.location.reload();
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Gagal!',
-                            text: response.message,
-                            timer: 2000,
-                            showConfirmButton: false
-                        });
-                    }
-                },
-                error: function(xhr, status, error) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Gagal!',
-                        text: 'Terjadi kesalahan pada server: ' + error,
-                        timer: 2000,
-                        showConfirmButton: false
                     });
                 }
             });
