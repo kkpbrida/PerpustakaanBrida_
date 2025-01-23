@@ -550,7 +550,7 @@ $rak_result = mysqli_query($conn, "SELECT * FROM rak ORDER BY id_rak asc");
                     $('#editModal').modal('hide');
                     Swal.fire({
                         icon: 'error',
-                        title: 'Terjadi Kesalahan!',
+                        title: 'Gagal!',
                         text: 'Kesalahan pada server.',
                         timer: 2000,
                         showConfirmButton: false
