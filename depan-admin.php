@@ -3,10 +3,10 @@ require 'function.php';
 require 'cek.php';
 
 // Fetch data from each table
-$instansi_result = mysqli_query($conn, "SELECT * FROM instansi ORDER BY nama_instansi ASC");
-$fakultas_result = mysqli_query($conn, "SELECT * FROM fakultas ORDER BY nama_fakultas ASC");
-$kategori_result = mysqli_query($conn, "SELECT * FROM kategori ORDER BY nama_kategori ASC");
-$rak_result = mysqli_query($conn, "SELECT * FROM rak ORDER BY id_rak ASC");
+$instansi_result = mysqli_query($conn, "SELECT * FROM instansi");
+$fakultas_result = mysqli_query($conn, "SELECT * FROM fakultas");
+$kategori_result = mysqli_query($conn, "SELECT * FROM kategori");
+$rak_result = mysqli_query($conn, "SELECT * FROM rak");
 ?>
 
 <!DOCTYPE html>
@@ -151,10 +151,14 @@ $rak_result = mysqli_query($conn, "SELECT * FROM rak ORDER BY id_rak ASC");
 </nav>
 <div class="container-fluid px-4">
     <div class="d-flex justify-content-between align-items-center mt-4">
-        <h1>Tambah Data</h1>
+        <h1>Tambah Data Entitas</h1>
+        <div>
+            <a href="home.php" class="btn btn-secondary">Home</a>
+            <a href="dashboard.php" class="btn btn-primary">Back</a>
+        </div>
     </div>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Admin</li>
+        <li class="breadcrumb-item active">Halaman Tambah Data Entitas</li>
     </ol>
     <div class="row">
         <div class="col-md-6">
@@ -254,7 +258,7 @@ $rak_result = mysqli_query($conn, "SELECT * FROM rak ORDER BY id_rak ASC");
                     <table>
                         <thead>
                             <tr>
-                                <th>Lokasi</th>
+                                <th>ID Rak</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -401,7 +405,7 @@ $rak_result = mysqli_query($conn, "SELECT * FROM rak ORDER BY id_rak ASC");
 <footer class="py-4 bg-light mt-auto">
     <div class="container-fluid px-4">
         <div class="d-flex align-items-center justify-content-between small">
-            <div class="text-muted"> &copy;KKP Ilmu Komputer UHO 2025</div>
+            <div class="text-muted">Copyright &copy; KKP ILMU KOMPUTER</div>
         </div>
     </div>
 </footer>
@@ -409,140 +413,9 @@ $rak_result = mysqli_query($conn, "SELECT * FROM rak ORDER BY id_rak ASC");
 <script src="js/scripts.js"></script>
 <script>
     $(document).ready(function() {
-        // Handle edit button click
-        $(document).on('click', '.btn-edit', function(e) {
-            e.preventDefault();
-
-            // Ambil data dari tombol
-            var id = $(this).data('id');
-            var nama = $(this).data('nama');
-            var buttonId = $(this).attr('id');
-
-            // Tentukan jenis entitas berdasarkan ID tombol
-            var type = '';
-            if (buttonId.startsWith('edit-instansi-')) {
-                type = 'instansi';
-            } else if (buttonId.startsWith('edit-fakultas-')) {
-                type = 'fakultas';
-            } else if (buttonId.startsWith('edit-kategori-')) {
-                type = 'kategori';
-            } else if (buttonId.startsWith('edit-rak-')) {
-                type = 'rak';
-            }
-
-            // Set data ke form
-            $('#editId').val(id);
-            $('#editNama').val(nama);
-            $('#editType').val(type);
-
-            // Tampilkan modal
-            $('#editModal').modal('show');
-        });
-
-        // Handle form submission
-        $('#editForm').on('submit', function(e) {
-            e.preventDefault();
-
-            $.ajax({
-                url: 'update_data.php',
-                method: 'POST',
-                data: $(this).serialize(),
-                dataType: 'json',
-                beforeSend: function() {
-                    // Disable submit button
-                    $('#editForm button[type="submit"]').prop('disabled', true);
-                },
-                success: function(response) {
-                    if (response.success) {
-                        $('#editModal').modal('hide');
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Berhasil!',
-                            text: response.message,
-                            timer: 2000,
-                            showConfirmButton: false
-                        }).then(function() {
-                            window.location.reload();
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Gagal!',
-                            text: response.message || 'Terjadi kesalahan saat memperbarui data',
-                            showConfirmButton: true
-                        });
-                    }
-                },
-                error: function(xhr, status, error) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Gagal!',
-                        text: 'Terjadi kesalahan pada server: ' + error,
-                        showConfirmButton: true
-                    });
-                },
-                complete: function() {
-                    // Re-enable submit button
-                    $('#editForm button[type="submit"]').prop('disabled', false);
-                }
-            });
-        });
-
-        // Handle delete button click
-        $(document).on('click', '.btn-delete', function(e) {
-            e.preventDefault();
-            var id = $(this).data('id');
-            var buttonId = $(this).attr('id');
-
-            // Tentukan jenis entitas berdasarkan ID tombol
-            var type = '';
-            if (buttonId.startsWith('delete-instansi-')) {
-                type = 'instansi';
-            } else if (buttonId.startsWith('delete-fakultas-')) {
-                type = 'fakultas';
-            } else if (buttonId.startsWith('delete-kategori-')) {
-                type = 'kategori';
-            } else if (buttonId.startsWith('delete-rak-')) {
-                type = 'rak';
-            }
-
-            // Tampilkan dialog konfirmasi dengan SweetAlert2
-            Swal.fire({
-                title: 'Apakah Anda yakin?',
-                text: "Data ini akan dihapus secara permanen!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, hapus!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Kirimkan request ke server untuk menghapus data
-                    $.ajax({
-                        url: 'delete_data.php',
-                        type: 'POST',
-                        data: {id: id, type: type},
-                        success: function(response) {
-                            // Tampilkan pesan sukses
-                            Swal.fire(
-                                'Berhasil!',
-                                'Data berhasil dihapus.',
-                                'success'
-                            ).then(function() {
-                                window.location.reload();
-                            });
-                        },
-                        error: function(xhr, status, error) {
-                            Swal.fire(
-                                'Gagal!',
-                                'Terjadi kesalahan: ' + error,
-                                'error'
-                            );
-                        }
-                    });
-                }
-            });
+        // Inisialisasi Select2 pada elemen dropdown
+        $('#editInstansi, #editFakultas, #editKategori, #editRak').select2({
+            width: 'resolve' // Pastikan lebar sesuai kontainer
         });
 
         // Handle form submission for adding data
@@ -585,6 +458,145 @@ $rak_result = mysqli_query($conn, "SELECT * FROM rak ORDER BY id_rak ASC");
                         text: 'Terjadi kesalahan pada server: ' + error,
                         timer: 2000,
                         showConfirmButton: false
+                    });
+                }
+            });
+        });
+
+        // Handle edit button click
+        $(document).on('click', '.btn-edit', function(e) {
+            e.preventDefault();
+
+            var id = $(this).data('id');
+            var nama = $(this).data('nama');
+            var buttonId = $(this).attr('id');
+
+            var type = '';
+            if (buttonId.startsWith('edit-instansi-')) {
+                type = 'instansi';
+            } else if (buttonId.startsWith('edit-fakultas-')) {
+                type = 'fakultas';
+            } else if (buttonId.startsWith('edit-kategori-')) {
+                type = 'kategori';
+            } else if (buttonId.startsWith('edit-rak-')) {
+                type = 'rak';
+            }
+
+            $('#editId').val(id);
+            $('#editNama').val(nama);
+            $('#editType').val(type);
+
+            $('#editModal').modal('show');
+        });
+
+        // Handle form submission for editing data
+        $('#editForm').on('submit', function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: 'update_data.php',
+                method: 'POST',
+                data: $(this).serialize(),
+                dataType: 'json',
+                beforeSend: function() {
+                    $('#editForm button[type="submit"]').prop('disabled', true);
+                },
+                success: function(response) {
+                    if (response.success) {
+                        $('#editModal').modal('hide');
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil!',
+                            text: response.message,
+                            timer: 2000,
+                            showConfirmButton: false
+                        }).then(function() {
+                            window.location.reload();
+                        });
+                    } else {
+                        console.warn('Warning:', response.message);
+                        $('#editModal').modal('hide');
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Peringatan!',
+                            text: response.message,
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', xhr.responseText);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'Terjadi kesalahan pada server',
+                        showConfirmButton: true
+                    });
+                },
+                complete: function() {
+                    $('#editForm button[type="submit"]').prop('disabled', false);
+                }
+            });
+        });
+
+        // Handle delete button click
+        $(document).on('click', '.btn-delete', function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            var buttonId = $(this).attr('id');
+
+            var type = '';
+            if (buttonId.startsWith('delete-instansi-')) {
+                type = 'instansi';
+            } else if (buttonId.startsWith('delete-fakultas-')) {
+                type = 'fakultas';
+            } else if (buttonId.startsWith('delete-kategori-')) {
+                type = 'kategori';
+            } else if (buttonId.startsWith('delete-rak-')) {
+                type = 'rak';
+            }
+
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Data ini akan dihapus secara permanen!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: 'delete_data.php',
+                        method: 'POST',
+                        data: { id: id, type: type },
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.success) {
+                                Swal.fire(
+                                    'Berhasil!',
+                                    'Data berhasil dihapus.',
+                                    'success'
+                                ).then(function() {
+                                    window.location.reload();
+                                });
+                            } else {
+                                Swal.fire(
+                                    'Gagal!',
+                                    response.message,
+                                    'error'
+                                );
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            Swal.fire(
+                                'Gagal!',
+                                'Terjadi kesalahan: ' + error,
+                                'error'
+                            );
+                        }
                     });
                 }
             });
