@@ -420,6 +420,9 @@ $rak_result = mysqli_query($conn, "SELECT * FROM rak ORDER BY id_rak asc");
 
         // Handle form submission for adding data
         $('form').on('submit', function(e) {
+            if ($(this).attr('id') === 'editForm') {
+                return;
+            }
             e.preventDefault();
 
             var form = $(this);
@@ -546,13 +549,11 @@ $rak_result = mysqli_query($conn, "SELECT * FROM rak ORDER BY id_rak asc");
                     // Jika kesalahan terjadi, ubah menjadi berhasil
                     $('#editModal').modal('hide');
                     Swal.fire({
-                        icon: 'success',
-                        title: 'Berhasil!',
-                        text: 'Data berhasil diupdate!',
+                        icon: 'error',
+                        title: 'Terjadi Kesalahan!',
+                        text: 'Kesalahan pada server.',
                         timer: 2000,
                         showConfirmButton: false
-                    }).then(function() {
-                        window.location.reload();
                     });
                 },
                 complete: function() {
