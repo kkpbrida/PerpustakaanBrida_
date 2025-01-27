@@ -129,6 +129,10 @@ $categories_result = $conn->query($categories_query);
             transform: translateY(-50%);
             pointer-events: none;
         }
+        .card {
+            max-width: 100%;
+            overflow: hidden;
+        }
     </style>
 </head>
 <body class="sb-nav-fixed">
@@ -164,61 +168,62 @@ $categories_result = $conn->query($categories_query);
                     <h1 class="mt-4">Penelitian</h1>
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active">Admin</li>
-                    </ol> 
-                    <div class="card mb-4">
-                    <div class="card-header d-flex justify-content-between align-items-center">
+                    </ol>
+                    <div class="card mb-4 w-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
                             <div>
                                 <i class="fas fa-table me-1"></i>
                                 Daftar Penelitian
                             </div>
                             <a href="form.php" class="btn btn-warning">Tambah Penelitian</a>
                         </div>
-                        <div class="card-header d-flex justify-content-between align-items-center">
                         <div class="card-body">
-                            <form id="searchForm" class="form-inline">
+                            <form id="searchForm" class="form-inline mb-3">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <input type="text" id="search" class="form-control" placeholder="Cari Judul/Nama Penulis">
+                                        <input type="text" id="search" class="form-control w-100" placeholder="Cari Judul/Nama Penulis">
                                     </div>
-                                    <div class="col-lg-2">
-                                        <select id="year" class="form-control">
+                                    <div class="col-lg-2 mb-2">
+                                        <select id="year" class="form-control w-100">
                                             <option value="">Pilih Tahun</option>
                                             <?php while ($row = $years_result->fetch_assoc()): ?>
                                                 <option value="<?php echo $row['tahun']; ?>"><?php echo $row['tahun']; ?></option>
                                             <?php endwhile; ?>
                                         </select>
                                     </div>
-                                    <div class="col-lg-2">
-                                        <select id="category" class="form-control">
+                                    <div class="col-lg-2 mb-2">
+                                        <select id="category" class="form-control w-100">
                                             <option value="">Pilih Kategori</option>
                                             <?php while ($row = $categories_result->fetch_assoc()): ?>
                                                 <option value="<?php echo $row['nama_kategori']; ?>"><?php echo $row['nama_kategori']; ?></option>
                                             <?php endwhile; ?>
                                         </select>
                                     </div>
-                                    <div class="col-lg-2">
-                                        <input type="date" id="tgl_masuk" class="form-control" placeholder=" Masuk">
+                                    <div class="col-lg-2 mb-2">
+                                        <input type="date" id="tgl_masuk" class="form-control w-100">
                                     </div>
                                 </div>
                             </form>
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Judul</th>
-                                        <th>Nama Penulis</th>
-                                        <th>Instansi</th>
-                                        <th>Fakultas</th>
-                                        <th>Tahun</th>
-                                        <th>Kategori</th>
-                                        <th>Lokasi</th>
-                                        <th>Tanggal Masuk</th>
-                                        <th colspan="2" style="text-align: center;">Aksi</th> <!-- Pusatkan teks di header -->
-                                    </tr>
-                                </thead>
-                                <tbody id="results">
-                                    <!-- Data akan dimuat di sini melalui AJAX -->
-                                </tbody>
-                            </table>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Judul</th>
+                                            <th>Nama Penulis</th>
+                                            <th>Instansi</th>
+                                            <th>Fakultas</th>
+                                            <th>Tahun</th>
+                                            <th>Kategori</th>
+                                            <th>Lokasi</th>
+                                            <th>Tanggal Masuk</th>
+                                            <th colspan="2" style="text-align: center;">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="results">
+                                        <!-- Data akan dimuat di sini melalui AJAX -->
+                                    </tbody>
+                                </table>
+                            </div>
                             <div class="d-flex justify-content-between">
                                 <div id="data-info" class="mb-3"></div>
                                 <div id="total-records" class="mb-3"></div>
