@@ -53,6 +53,15 @@ $totalPenelitian = $totalPenelitianData['total'];
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <style>
+            .table-responsive {
+                overflow-x: auto;
+            }
+
+            table.table {
+                min-width: 1000px; /* Menjamin tabel tetap proporsional */
+            }
+        </style>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -87,18 +96,16 @@ $totalPenelitian = $totalPenelitianData['total'];
                     </ol>
                     <div class="row">
                         <!-- Stats Cards -->
-                        <div class="col-xl-4 col-md-6">
-                            <div class="card bg-primary text-white mb-4">
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                            <div class="card bg-primary text-white h-100">
                                 <div class="card-body">
                                     JUMLAH KESELURUHAN PENELITIAN
                                     <h2><?= $totalPenelitian; ?></h2>
                                 </div>
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-                                </div>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-md-6">
-                            <div class="card bg-warning text-white mb-4">
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                            <div class="card bg-warning text-white h-100">
                                 <div class="card-body">
                                     JUMLAH PENELITIAN BRIDA
                                     <h2>
@@ -109,17 +116,15 @@ $totalPenelitian = $totalPenelitianData['total'];
                                                 $bridaCount = $data['jumlah'];
                                                 break;
                                             }
-                                        } 
+                                        }
                                         echo $bridaCount;
                                         ?>
                                     </h2>
                                 </div>
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-                                </div>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-md-6">
-                            <div class="card bg-success text-white mb-4">
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                            <div class="card bg-success text-white h-100">
                                 <div class="card-body">
                                     JUMLAH PENELITIAN NON-BRIDA
                                     <h2>
@@ -133,8 +138,6 @@ $totalPenelitian = $totalPenelitianData['total'];
                                         echo $nonBridaCount;
                                         ?>
                                     </h2>
-                                </div>
-                                <div class="card-footer d-flex align-items-center justify-content-between">
                                 </div>
                             </div>
                         </div>
@@ -165,8 +168,8 @@ $totalPenelitian = $totalPenelitianData['total'];
                             <i class="fas fa-table me-1"></i>
                             Latest Data
                         </div>
-                        <div class="card-body">
-                            <table class="table table-striped" id="data-table">
+                        <div class="card-body table-responsive">
+                            <table class="table table-striped table-bordered" id="data-table">
                                 <thead>
                                     <tr>
                                         <th>Judul</th>
@@ -181,11 +184,6 @@ $totalPenelitian = $totalPenelitianData['total'];
                                 <tbody>
                                 </tbody>
                             </table>
-                            <div id="data-info" class="mb-3"></div>
-                            <nav aria-label="Page navigation">
-                                <ul class="pagination justify-content-center" id="pagination">
-                                </ul>
-                            </nav>
                         </div>
                     </div>
                 </div>
