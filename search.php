@@ -6,7 +6,7 @@ ini_set('display_errors', 1);
 // Tangkap output buffer untuk memastikan tidak ada output lain
 ob_start();
 
-require 'function.php';
+require_once '../config/function.php';
 
 // Pastikan tidak ada output lain sebelum ini
 header('Content-Type: application/json');
@@ -94,11 +94,41 @@ $count_row = $count_result->fetch_assoc();
 $total_records = $count_row['total'];
 $total_pages = ceil($total_records / $limit);
 
-$pagination = '';
-for ($i = 1; $i <= $total_pages; $i++) {
+$pagination = '<ul class="pagination">';
+
+// Tombol "Prev"
+if ($page > 1) {
+    $pagination .= "<li class='page-item'><a class='page-link' href='#' data-page='" . ($page - 1) . "'>Prev</a></li>";
+}
+
+// Tampilkan halaman pertama
+if ($page > 3) {
+    $pagination .= "<li class='page-item'><a class='page-link' href='#' data-page='1'>1</a></li>";
+    $pagination .= "<li class='page-item disabled'><a class='page-link'>...</a></li>";
+}
+
+// Menampilkan 3 halaman di sekitar halaman aktif
+$start = max(1, $page - 1);
+$end = min($total_pages, $page + 1);
+
+for ($i = $start; $i <= $end; $i++) {
     $active = ($i == $page) ? 'active' : '';
     $pagination .= "<li class='page-item $active'><a class='page-link' href='#' data-page='$i'>$i</a></li>";
 }
+
+// Tambahkan "..." sebelum halaman terakhir jika masih ada ruang
+if ($page < $total_pages - 2) {
+    $pagination .= "<li class='page-item disabled'><a class='page-link'>...</a></li>";
+    $pagination .= "<li class='page-item'><a class='page-link' href='#' data-page='$total_pages'>$total_pages</a></li>";
+}
+
+// Tombol "Next"
+if ($page < $total_pages) {
+    $pagination .= "<li class='page-item'><a class='page-link' href='#' data-page='" . ($page + 1) . "'>Next</a></li>";
+}
+
+$pagination .= '</ul>';
+
 
 $response = [
     'data' => $data,
