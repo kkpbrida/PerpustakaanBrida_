@@ -119,7 +119,7 @@ require 'cek.php';
                                             <select id="instansi" name="instansi" class="form-control" required>
                                                 <option value="" disabled selected>Pilih Instansi</option>
                                                 <?php
-                                                    $getdata = mysqli_query($conn, "SELECT * FROM instansi");
+                                                    $getdata = mysqli_query($conn, "SELECT * FROM instansi ORDER BY nama_instansi ASC");
                                                     if (!$getdata) {
                                                         die("Error fetching data: " . mysqli_error($conn));
                                                     }
@@ -140,7 +140,7 @@ require 'cek.php';
                                             <select id="fakultas" name="fakultas" class="form-control" required>
                                                 <option value="" disabled selected>Pilih Fakultas</option>
                                                 <?php
-                                                    $getdata = mysqli_query($conn, "SELECT * FROM fakultas");
+                                                    $getdata = mysqli_query($conn, "SELECT * FROM fakultas ORDER BY nama_fakultas ASC");
                                                     if (!$getdata) {
                                                         die("Error fetching data: " . mysqli_error($conn));
                                                     }
@@ -161,7 +161,7 @@ require 'cek.php';
                                             <select id="kategori" name="kategori" class="form-control" required>
                                                 <option value="" disabled selected>Pilih Kategori</option>
                                                 <?php
-                                                    $getdata = mysqli_query($conn, "SELECT * FROM kategori");
+                                                    $getdata = mysqli_query($conn, "SELECT * FROM kategori ORDER BY nama_kategori ASC");
                                                     if (!$getdata) {
                                                         die("Error fetching data: " . mysqli_error($conn));
                                                     }

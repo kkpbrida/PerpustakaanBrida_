@@ -539,7 +539,7 @@ $categories_result = $conn->query($categories_query);
                     <select id="editInstansi" name="instansi" class="form-control" required>
                         <option value="" disabled selected>Pilih instansi</option>
                         <?php
-                            $getdata = mysqli_query($conn, "SELECT * FROM instansi");
+                            $getdata = mysqli_query($conn, "SELECT * FROM instansi ORDER BY nama_instansi ASC");
                             if (!$getdata) {
                                 die("Error fetching data: " . mysqli_error($conn));
                             }
@@ -561,7 +561,7 @@ $categories_result = $conn->query($categories_query);
                     <select id="editFakultas" name="fakultas" class="form-control" required>
                         <option value="" disabled selected>Pilih Fakultas</option>
                         <?php
-                            $getdata = mysqli_query($conn, "SELECT * FROM fakultas");
+                            $getdata = mysqli_query($conn, "SELECT * FROM fakultas ORDER BY nama_fakultas ASC");
                             if (!$getdata) {
                                 die("Error fetching data: " . mysqli_error($conn));
                             }
@@ -583,7 +583,7 @@ $categories_result = $conn->query($categories_query);
                     <select id="editKategori" name="kategori" class="form-control" required>
                         <option value="" disabled selected>Pilih Kategori</option>
                         <?php
-                            $getdata = mysqli_query($conn, "SELECT * FROM kategori");
+                            $getdata = mysqli_query($conn, "SELECT * FROM kategori ORDER BY nama_kategori ASC");
                             if (!$getdata) {
                                 die("Error fetching data: " . mysqli_error($conn));
                             }
