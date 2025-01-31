@@ -609,7 +609,7 @@ $categories_result = $conn->query($categories_query);
                     <select id="editRak" name="rak" class="form-control" required>
                         <option value="" disabled selected>Pilih Rak</option>
                         <?php
-                            $getdata = mysqli_query($conn, "SELECT id_rak FROM rak");
+                            $getdata = mysqli_query($conn, "SELECT id_rak FROM rak ORDER BY id_rak ASC");
                             if (!$getdata) {
                                 die("Error fetching data: " . mysqli_error($conn));
                             }
