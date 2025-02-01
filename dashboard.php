@@ -37,6 +37,18 @@ $totalPenelitianQuery = "SELECT COUNT(*) as total FROM penelitian";
 $totalPenelitianResult = mysqli_query($conn, $totalPenelitianQuery);
 $totalPenelitianData = mysqli_fetch_assoc($totalPenelitianResult);
 $totalPenelitian = $totalPenelitianData['total'];
+
+// Fetch data for Bar Chart (Penelitian per Instansi)
+$instansiChartQuery = "SELECT instansi.nama_instansi, COUNT(*) as jumlah 
+                       FROM penelitian 
+                       INNER JOIN instansi ON penelitian.id_instansi = instansi.id_instansi 
+                       GROUP BY instansi.nama_instansi 
+                       ORDER BY jumlah DESC";
+$instansiChartResult = mysqli_query($conn, $instansiChartQuery);
+$instansiChartData = [];
+while ($row = mysqli_fetch_assoc($instansiChartResult)) {
+    $instansiChartData[] = $row;
+}
 ?>
 
 <!DOCTYPE html>
@@ -143,7 +155,7 @@ $totalPenelitian = $totalPenelitianData['total'];
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xxl-4">
+                        <div class="col-xl-6">
                             <div class="card mb-4 h-100">
                                 <div class="card-header">
                                     <i class="fas fa-chart-pie me-1"></i>
@@ -152,13 +164,24 @@ $totalPenelitian = $totalPenelitianData['total'];
                                 <div class="card-body"><canvas id="pieChart" style="max-height: 300px;"></canvas></div>
                             </div>
                         </div>
-                        <div class="col-xl-8">
+                        <div class="col-xl-6">
                             <div class="card mb-4 h-100">
                                 <div class="card-header">
                                     <i class="fas fa-chart-bar me-1"></i>
                                     Tren Penelitian per Bulan dan Tahun
                                 </div>
                                 <div class="card-body"><canvas id="barChart" style="max-height: 300px;"></canvas></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card mb-4 h-100">
+                                <div class="card-header">
+                                    <i class="fas fa-chart-bar me-1"></i>
+                                    Jumlah Penelitian per Instansi
+                                </div>
+                                <div class="card-body"><canvas id="instansiChart" style="max-height: 300px;"></canvas></div>
                             </div>
                         </div>
                     </div>
@@ -283,6 +306,53 @@ $totalPenelitian = $totalPenelitianData['total'];
                                 title: {
                                     display: true,
                                     text: 'Bulan'
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // Process instansi chart data
+                const instansiLabels = <?= json_encode(array_column($instansiChartData, 'nama_instansi')); ?>;
+                const instansiData = <?= json_encode(array_column($instansiChartData, 'jumlah')); ?>;
+
+                // Create bar chart for instansi data
+                const instansiCtx = document.getElementById('instansiChart').getContext('2d');
+                new Chart(instansiCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: instansiLabels,
+                        datasets: [{
+                            label: 'Jumlah Penelitian',
+                            data: instansiData,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Jumlah Penelitian per Instansi'
+                            },
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Jumlah Penelitian'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Instansi'
                                 }
                             }
                         }
