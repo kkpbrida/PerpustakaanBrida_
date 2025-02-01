@@ -1,0 +1,1063 @@
+[33mcommit 960f14c61cc54d75fef1f228b414dae5c4d548fb[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Mon Jan 27 21:34:11 2025 +0800
+
+    memperbaiki tampilan index.php agar adjustable dengan window
+
+[33mcommit dba0c8ae5314df8282bf1e3f317fe52515ea136a[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Mon Jan 27 20:48:32 2025 +0800
+
+    menghapus pagination dan memperbaiki tampilan dashboard agar adjustable dengan window
+
+[33mcommit e4b4a29c59c1be6a0f2e97a03f071b196c09e74c[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Thu Jan 23 18:10:31 2025 +0800
+
+    Modifikasi Teks Pop Up
+
+[33mcommit 6f9f0320382ac1a40940bb3fdfe6697228aef7c2[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Thu Jan 23 18:06:27 2025 +0800
+
+    Mengatasi bentrok id form
+
+[33mcommit 2458d987b7ac7997922fa48a02e1ecc143c114d2[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Thu Jan 23 17:49:37 2025 +0800
+
+    Update Pop Up
+
+[33mcommit 9d8744dbaf8d073d995b55d9cd877f2d1e974d2d[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Thu Jan 23 17:37:38 2025 +0800
+
+    memperbaiki masalah pop up eror
+
+[33mcommit a00933c8f7d708e7321ed8a3bec80d3126a57439[m
+Author: Muhammad Dimas R. <draxozy@gmail.com>
+Date:   Thu Jan 23 11:59:34 2025 +0800
+
+    update dashboard
+
+[33mcommit aaa0a25b10bf94b70a377f8e8c53673d7304d6b8[m
+Author: selinggg <selinrahmadani91@gmail.com>
+Date:   Thu Jan 23 11:02:33 2025 +0800
+
+    memperbaiki footer dan header
+
+[33mcommit f63e6229c0d3a5d12c9a06592eef3660d286bd24[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Thu Jan 23 10:10:52 2025 +0800
+
+    Memperbaiki tampilan pop up dan urutan data di depan-admin.php
+
+[33mcommit 9f8e3267c546c42ceb0b7b2726f90f40a204518b[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Thu Jan 23 09:55:23 2025 +0800
+
+    mempebaiki pop up edit data entitas
+
+[33mcommit 14fc997e156fee5e2f49f5fbcc9dc7572ec2f071[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Thu Jan 23 08:24:53 2025 +0800
+
+    Memperbaiki masalah pop up tambah data
+
+[33mcommit f41d3d8daae6c6dda8eb615b1ce33fc56de35615[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Thu Jan 23 08:15:09 2025 +0800
+
+    mempush kembali file uodate_data.php
+
+[33mcommit e170703dffa5dc6d7a6f0674d53a855a75bfffdf[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Thu Jan 23 08:12:50 2025 +0800
+
+    Update depan-admin.php
+
+[33mcommit d220665430399abe6e411ffecb7ac768d46a404a[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Wed Jan 22 15:17:55 2025 +0800
+
+    meperbaiki kolom tahun di form tambah dan edit data
+
+[33mcommit ca1a2d215baea0dc4f4908e29e3c61ed5d04c246[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Wed Jan 22 15:03:36 2025 +0800
+
+    memperbaiki tampilan box inputan di form.php agar adjust dengan ukuran window
+
+[33mcommit 91371863480779b359c88f51d5ebcdcbe42b1dfa[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Wed Jan 22 14:43:56 2025 +0800
+
+    mengatur ukuran border kolom dropdown di form.php
+
+[33mcommit 96fa720334139cc18139afc8d88c89942d274e3a[m
+Merge: 4ddd807 b0ad4f6
+Author: Muhammad Dimas R. <draxozy@gmail.com>
+Date:   Wed Jan 22 14:38:01 2025 +0800
+
+    Merge branch 'main' of https://github.com/kkpbrida/PerpustakaanBrida_
+
+[33mcommit 4ddd807fc3113c38da34255261117fe823f92acd[m
+Author: Muhammad Dimas R. <draxozy@gmail.com>
+Date:   Wed Jan 22 14:37:27 2025 +0800
+
+    Update dashboard.php
+
+[33mcommit b0ad4f6fc6306c8bfe47d019edf5955c018d7ab5[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Wed Jan 22 14:36:57 2025 +0800
+
+    Menambahkan Teks Jumlah Data Pada Halaman Depan.php dan Index.php
+
+[33mcommit 2fe2e42c81f4d847fe3554099ddd9c78af87a15a[m
+Author: selinggg <selinrahmadani91@gmail.com>
+Date:   Wed Jan 22 14:27:22 2025 +0800
+
+    mengubah tampilan form.php
+
+[33mcommit 13d58b1c51b504ea660b1bb91ebf3f561bc45f88[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Wed Jan 22 14:23:11 2025 +0800
+
+    menambahkan fitur search dan scroll di form.php
+
+[33mcommit 27f6325ccbab953b3f15dc8c968a94fbc5360dd6[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Wed Jan 22 13:56:29 2025 +0800
+
+    meghapus required di kolom tgl registrasi dan tgl registrasi default time.now
+
+[33mcommit 5b292e192242a5f6c0393dc57c0a99859a7720d7[m
+Author: Muhammad Dimas R. <draxozy@gmail.com>
+Date:   Wed Jan 22 13:44:10 2025 +0800
+
+    Menambahkan Logika Pencarian Tanggal Masuk
+
+[33mcommit d3b986b69fa9e02472ab8e3ba225832daa796e42[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Wed Jan 22 12:51:32 2025 +0800
+
+    Mengubah Kalimat Pada Beberapa Pop Up
+
+[33mcommit 3378ea28671749547d70deeebbf030c463db3dca[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Wed Jan 22 12:45:54 2025 +0800
+
+    Update Sortir Data pada Halaman depan-admin.php
+
+[33mcommit de3d75058b618aadb5d339b3c26707a9c2a3ceff[m
+Author: Muhammad Dimas R. <draxozy@gmail.com>
+Date:   Wed Jan 22 12:42:30 2025 +0800
+
+    update
+
+[33mcommit 0b4044c4db9019496ca93fc9bf2027a919a29eec[m
+Author: Muhammad Dimas R. <draxozy@gmail.com>
+Date:   Wed Jan 22 12:09:15 2025 +0800
+
+    Update depan-admin.php
+
+[33mcommit b9c8166d0d19239099bcec7f63e9e7ce4a3ea354[m
+Author: Muhammad Dimas R. <draxozy@gmail.com>
+Date:   Wed Jan 22 12:08:03 2025 +0800
+
+    Update form.php
+
+[33mcommit 09f3dbb5a35a6b2a4098f28630ea743bea306f4e[m
+Author: Muhammad Dimas R. <draxozy@gmail.com>
+Date:   Wed Jan 22 12:07:38 2025 +0800
+
+    Update index.php
+
+[33mcommit 397e7cbc14cb8e695bd4803c0082986075671b80[m
+Author: Muhammad Dimas R. <draxozy@gmail.com>
+Date:   Wed Jan 22 12:06:40 2025 +0800
+
+    Update depan-admin.php
+
+[33mcommit af1bee630541279d1e7cf13b2eb5fb4c6bbf5f7d[m
+Author: Muhammad Dimas R. <draxozy@gmail.com>
+Date:   Wed Jan 22 12:05:27 2025 +0800
+
+    Update dashboard.php
+
+[33mcommit f7492e0fa07102b6f7ce6c20855a1e80a39eb5b8[m
+Author: Muhammad Dimas R. <draxozy@gmail.com>
+Date:   Wed Jan 22 12:04:08 2025 +0800
+
+    update depan
+
+[33mcommit 11065b0e6f24f4206f2879d80d9e85b84b29ad60[m
+Author: Muhammad Dimas R. <draxozy@gmail.com>
+Date:   Wed Jan 22 11:55:09 2025 +0800
+
+    update
+
+[33mcommit 2642ac0177a1efc1b87dea270a986c6d7d2573d4[m
+Merge: bb371b0 d2d5d23
+Author: Muhammad Dimas R. <draxozy@gmail.com>
+Date:   Wed Jan 22 11:53:10 2025 +0800
+
+    Merge branch 'main' of https://github.com/kkpbrida/PerpustakaanBrida_
+
+[33mcommit bb371b0a9e2738ab769e74b8c18d599ebcc2246b[m
+Author: Muhammad Dimas R. <draxozy@gmail.com>
+Date:   Wed Jan 22 11:53:06 2025 +0800
+
+    Update depan.php
+
+[33mcommit d2d5d23be2db8fbd05207ef074f32f2ff47f3b1b[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Wed Jan 22 11:04:19 2025 +0800
+
+    menhapus button back dan home di depan-admin.php serta menggganti judul halaman
+
+[33mcommit fad5b09cbe141c5706c728569239dd470e22a050[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Wed Jan 22 11:01:24 2025 +0800
+
+    Mengubah tampilan navbar pada halaman dashboard.php
+
+[33mcommit faca532406b0094512d27b93c451c1eb3786f84d[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Wed Jan 22 10:58:12 2025 +0800
+
+    mengubah navbar search menjadi add data
+
+[33mcommit e954b72bb7c47f727af699a5939b62dfc5bf7d7c[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Wed Jan 22 10:53:41 2025 +0800
+
+    nenambahkan fitur edit dan hapus pada data instansi, fakultas, kategori, dan rak
+
+[33mcommit 1bd374f0731669f366201d52e219c5088c89d765[m
+Merge: ace410b 1ea2f82
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Wed Jan 22 10:46:03 2025 +0800
+
+    Merge branch 'main' of https://github.com/kkpbrida/PerpustakaanBrida_
+
+[33mcommit ace410bace7f9116dca69b3b2f49eff70ee4bc6e[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Wed Jan 22 10:45:54 2025 +0800
+
+    Memperbaiki struktur file
+
+[33mcommit 1ea2f82b054f228b56adb0e17f6c12b8d4b1191b[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Wed Jan 22 10:44:46 2025 +0800
+
+    Menambahkan Logika Untuk Tambah Data
+
+[33mcommit 8dfffa096eda8ec70b9ca70574766bf16558351c[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Wed Jan 22 08:13:08 2025 +0800
+
+    Menghapus code yang tidak diperlukan pada halaman depan-admin.php
+
+[33mcommit e3fb0428b20bafc15aa9c51c3193907f5b617159[m
+Merge: 9b4a0ff 1e7f30f
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Wed Jan 22 08:10:10 2025 +0800
+
+    Merge branch 'main' of https://github.com/kkpbrida/PerpustakaanBrida_
+
+[33mcommit 9b4a0ff81cc6f965c51a965abc5ac2495789e6cd[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Wed Jan 22 08:10:04 2025 +0800
+
+    Mengubah teks copyright pada home.php
+
+[33mcommit f58d7433d5c57d300e47162ed8876dd5ed0f0699[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Wed Jan 22 08:09:45 2025 +0800
+
+    Menghapus code yang tidak diperlukan pada depan.php
+
+[33mcommit 1e7f30fc5d9d8291e9b3c55e7c5c4d67a84b182e[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Wed Jan 22 02:16:19 2025 +0800
+
+    penyesuaian grafik untuk line chart
+
+[33mcommit ef3947d874139ab0919ee24a236ea585cf312b83[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Tue Jan 21 15:52:15 2025 +0800
+
+    Mengubah Kalimat Pada Pop Up Hapus
+
+[33mcommit 21b54ecabd2ada9748c5d7d0c9a5b2744f3163b7[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Tue Jan 21 15:47:54 2025 +0800
+
+    Memperbaiki Pop Up Delete
+
+[33mcommit 4bbe6660b9c446415f568d9a33aabad8f1305874[m
+Merge: 9cb33af 72b0cfe
+Author: Muhammad Dimas R. <draxozy@gmail.com>
+Date:   Tue Jan 21 15:37:47 2025 +0800
+
+    Merge branch 'main' of https://github.com/kkpbrida/PerpustakaanBrida_
+
+[33mcommit 9cb33af8795803f387bf4345c79c1eb6c3782c67[m
+Author: Muhammad Dimas R. <draxozy@gmail.com>
+Date:   Tue Jan 21 15:37:44 2025 +0800
+
+    update function.php
+    
+    popoutnya
+
+[33mcommit 72b0cfe1657113ef7b054d4c43d1bb5aa8af72cd[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Tue Jan 21 14:45:33 2025 +0800
+
+    mengubah navbar di form.php
+
+[33mcommit 54987f366c648cfb94534515577aac10ee4e43b4[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Tue Jan 21 14:39:44 2025 +0800
+
+    memperbaiki error
+
+[33mcommit 2e6f5d0de40be594754ca1a8f5a98956cc4966a2[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Tue Jan 21 14:38:41 2025 +0800
+
+    memperbaiki error
+
+[33mcommit 310f25a052170520a778f60ecefce5d024340cfc[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Tue Jan 21 14:38:12 2025 +0800
+
+    menambahkan fitur hapus penulis di form edit
+
+[33mcommit 0186d85dd2d65c427963e72fa5c29f7dfe264a40[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Tue Jan 21 14:27:12 2025 +0800
+
+    Menambahkan struktur untuk database laragon
+
+[33mcommit 97a4f9545ab51986ab3a0664d4192e17cf93e001[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Tue Jan 21 14:24:46 2025 +0800
+
+    penyesuasian navbar
+
+[33mcommit f86edf1f1950c6dbbc17e69afeef0ea49568b6b5[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Tue Jan 21 14:16:03 2025 +0800
+
+    penyesuaian navbar untuk tiap halaman
+
+[33mcommit eee342c74f52b00df72b6c67ba7d2cd77ff9144e[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Tue Jan 21 14:00:44 2025 +0800
+
+    routing dengan penyesuaian
+
+[33mcommit 2f949155bda85f48cf067e45a2dfd516db63d513[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Tue Jan 21 13:53:10 2025 +0800
+
+    routing dan penyelesaian
+
+[33mcommit 5bf36e31dc549a3b133b01d1c70f21b80dd4357d[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Tue Jan 21 13:40:14 2025 +0800
+
+    routing dan tampulan diubah
+
+[33mcommit a832df77f5faf7e9708d9bb2f7183342e7bba823[m
+Merge: e9b92ca 7bb0245
+Author: Muhammad Dimas R. <draxozy@gmail.com>
+Date:   Tue Jan 21 13:15:01 2025 +0800
+
+    Merge branch 'main' of https://github.com/kkpbrida/PerpustakaanBrida_
+
+[33mcommit e9b92ca5020d0eb7188a39e4693e79a03709b331[m
+Author: Muhammad Dimas R. <draxozy@gmail.com>
+Date:   Tue Jan 21 13:14:58 2025 +0800
+
+    update edit index
+
+[33mcommit 7bb0245c2401d4b343f3a2100e58514116957540[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Tue Jan 21 11:25:03 2025 +0800
+
+    final chart
+
+[33mcommit 6deb1be7b9f3fd7437adf04ebe224ea630f80a62[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Tue Jan 21 09:48:10 2025 +0800
+
+    perubahan pada size grafik
+
+[33mcommit 3bf78d85735fe1c95b3c306f7ed22b17c54e0e42[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Tue Jan 21 09:46:49 2025 +0800
+
+    Memperbaiki ukuran chart dashboard.php
+
+[33mcommit 49cee2289f549d7f625f573eec79821d536eac56[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Tue Jan 21 09:44:45 2025 +0800
+
+    Masalah Kolom Chart
+
+[33mcommit 25ae452275437fb86ea7cc6480024c4fa899168c[m
+Merge: 3c704b1 df19399
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Tue Jan 21 09:41:36 2025 +0800
+
+    Merge dashboard.php
+
+[33mcommit 3c704b1709c6d299be91d9a2d4429fac4ff9805b[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Tue Jan 21 09:40:52 2025 +0800
+
+    Menampilkan data di tabel dashboard.php
+
+[33mcommit df19399f704520d69f5f6cf9fbc1ca348c7a7784[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Tue Jan 21 09:40:15 2025 +0800
+
+    graph
+
+[33mcommit 4062fc3d38d74a706710e87e53e8c640b1f1cda2[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Tue Jan 21 09:24:35 2025 +0800
+
+    menyesuaikan grafik
+
+[33mcommit 7fe760f5250a906872d55989223c143d279eaf89[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Tue Jan 21 08:59:08 2025 +0800
+
+    m
+
+[33mcommit 62ec756c0c275dbefb107d139f3222d02fd7ddcd[m
+Merge: 9572c8b 803a280
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Tue Jan 21 08:58:14 2025 +0800
+
+    login
+
+[33mcommit 9572c8bb2eb7e9383279b3dcdcb1a2fc4e6a7eb4[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Tue Jan 21 08:54:50 2025 +0800
+
+    perubahan pada dashboard
+
+[33mcommit 26e5ffb1049a3af5780b9b87df7f9408838a3436[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Tue Jan 21 08:50:27 2025 +0800
+
+    menambahkan bagian dashboard
+
+[33mcommit 803a2807f60af1e7698dd905d19d00ebf2675e14[m
+Author: selinggg <selinrahmadani91@gmail.com>
+Date:   Tue Jan 21 08:02:31 2025 +0800
+
+    menambahkan ikon home di form login
+
+[33mcommit 164863a52ff76b3645ab6a1b105cfeda96e0b9bf[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Tue Jan 21 07:56:23 2025 +0800
+
+    hilang settings dan act log
+
+[33mcommit d8bbc6d87ac09a68ef00a3c36a7c33494a264f77[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Mon Jan 20 15:54:40 2025 +0800
+
+    routing ke dari login ke dashboard
+
+[33mcommit 9530945add57f8cc70a88f43b692de8fca855643[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Mon Jan 20 15:48:20 2025 +0800
+
+    insert reporting feature_BY NAZWAH
+
+[33mcommit 3a1184bdfca897feb71ed04c88aa0e1799e82214[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Mon Jan 20 15:32:39 2025 +0800
+
+    Menambahkan parameter order by  (id penelitian)
+
+[33mcommit a39ac92dae271c4a2ee0e83ba11e4b42576ee20a[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Mon Jan 20 15:24:44 2025 +0800
+
+    Memperbaiki tampilan urutan data berdasarkan tanggal masuk
+
+[33mcommit 827d54ae17ee429b7eebe18a7a6b827f83f5b61a[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Mon Jan 20 15:18:05 2025 +0800
+
+    Memperbaiki tampilan kolom Aksi pada tabel
+
+[33mcommit 5fd0232598282c047de036c8c0904c29401b1e1e[m
+Author: Muhammad Dimas R. <draxozy@gmail.com>
+Date:   Mon Jan 20 13:31:03 2025 +0800
+
+    update login
+
+[33mcommit ff73d547e5943c4d1120a588f8f89a9ba2e4105b[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Mon Jan 20 11:51:58 2025 +0800
+
+    Mengubah Nama Kolom Id Rak pada halaman depan.php
+
+[33mcommit eed2322d56497775da2b5e25e6081bd279bf656a[m
+Author: Muhammad Dimas R. <draxozy@gmail.com>
+Date:   Mon Jan 20 11:27:50 2025 +0800
+
+    Update home.php
+
+[33mcommit 7df2c40abc041de8ccb0acce17fd69509ab432f7[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Mon Jan 20 11:13:51 2025 +0800
+
+    menambahkan tombol back to homr
+
+[33mcommit d93953b1919660066df2bb52615c548e82c12051[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Mon Jan 20 11:10:17 2025 +0800
+
+    mengubah routing logout
+
+[33mcommit e3a27b831b396553844c02af657117c5363a12e8[m
+Merge: a32c1d5 3a20040
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Mon Jan 20 11:00:24 2025 +0800
+
+    Merge branch 'main' of https://github.com/kkpbrida/PerpustakaanBrida_
+
+[33mcommit a32c1d501f97ed2c314f107c8256caf04693a4c9[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Mon Jan 20 11:00:18 2025 +0800
+
+    Menambah Logika dan Tombol delete di Index.php
+
+[33mcommit 3a200405e0a4fc436b0bd2b4e85cad30ad42268b[m
+Merge: 1094033 d8886d7
+Author: Muhammad Dimas R. <draxozy@gmail.com>
+Date:   Mon Jan 20 10:43:56 2025 +0800
+
+    Merge branch 'main' of https://github.com/kkpbrida/PerpustakaanBrida_
+
+[33mcommit 1094033ec6106ff3ce21db6c533ae4fe20588ef3[m
+Author: Muhammad Dimas R. <draxozy@gmail.com>
+Date:   Mon Jan 20 10:43:51 2025 +0800
+
+    update home
+
+[33mcommit d8886d77ce04b549976ce2b6d668812152679408[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Mon Jan 20 10:04:40 2025 +0800
+
+    menambahkan tombol tambah penelitian
+
+[33mcommit 47a4f43a5216eab362b199526e157809c803ddcf[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Mon Jan 20 09:44:45 2025 +0800
+
+    testing buat charts sederhana
+
+[33mcommit 42c826639ebc294085d220b101935c55de2ff495[m
+Author: Muhammad Dimas R. <draxozy@gmail.com>
+Date:   Mon Jan 20 09:31:44 2025 +0800
+
+    update home
+
+[33mcommit fe2c3caed6c7441d17a8be17f8a9517b248dac17[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Mon Jan 20 08:31:51 2025 +0800
+
+    Memperbaiki urutan tabel di index.php dan depan.php
+
+[33mcommit 28f44fec6d4a7199fcd738cf70217a70369a07a5[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Mon Jan 20 01:02:30 2025 +0800
+
+    menghubungkan form edit dengan db untuk melakukan update data penelitian
+
+[33mcommit 3b4b17288e9b28ba20d6ea55d901b9effa3d5b49[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Sun Jan 19 20:25:27 2025 +0800
+
+    menampilkan data yang kurang di form db (instansi, fakultas, dan kategori)
+
+[33mcommit ab898890972686b939b9ea16d5ec54d1e09ed789[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Sun Jan 19 19:30:47 2025 +0800
+
+    menampilkan data di db pada form edit (-instansi, -fakultas, -kategori)
+
+[33mcommit 16d6ce266625674d3cdad3bcdd801aabb746f4b3[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Sun Jan 19 13:32:34 2025 +0800
+
+    menyempurnakan struktur kolom di form edit
+
+[33mcommit 8ccf38b05cad9b813b484ae094457df79268ccf0[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Sat Jan 18 20:27:02 2025 +0800
+
+    Menambah form edit di index.php
+
+[33mcommit 067daff28105c1eb82b95e0a74db59c6e669e7dd[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Sat Jan 18 16:32:09 2025 +0800
+
+    mengubah route ke index.php ketika berhasil menambahkan data
+
+[33mcommit 71270a533cc66914563c41bdb076e0c1b81370e1[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Sat Jan 18 16:07:56 2025 +0800
+
+    membuat tampilan dropdown di form lebih dinamis
+
+[33mcommit 6a7ec72ffd57798d7ce409bc22c78fec0da6b7b2[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Fri Jan 17 20:59:02 2025 +0800
+
+    perbaikan inputan data nama_penulis
+
+[33mcommit a76e48deb2bf7ece6e33517657fe93b9a1880ac5[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Fri Jan 17 19:08:18 2025 +0800
+
+    Menambah data dummy
+
+[33mcommit 3b598bdfb0a4a0ab5da5569cde48570ab0046d7c[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Fri Jan 17 18:52:08 2025 +0800
+
+    Mengabaikan error_log.txt
+
+[33mcommit 220ff2ed23fb249b848a1b8a2e8d74f886bf0f41[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Fri Jan 17 18:49:03 2025 +0800
+
+    menambahkan .gitignore untuk error_log.txt
+
+[33mcommit 2790aaaef6f6646d425467e42bbd044aab674678[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Fri Jan 17 18:36:06 2025 +0800
+
+    Memperbaiki error search di index.php dan depan.php
+
+[33mcommit bfee1ec9305b51285987093290147d80f09e6f51[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Fri Jan 17 15:37:27 2025 +0800
+
+    tambah popup ketika berhasil input data
+
+[33mcommit d777eed57f824aaed0d86e6399e845485c211e55[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Fri Jan 17 15:36:23 2025 +0800
+
+    Memperbaiki Struktur Database pada table penelitian
+
+[33mcommit 0d8a57ddecb1e1d62410a72734c23d39c72d3684[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Fri Jan 17 15:17:17 2025 +0800
+
+    tambahkan tombol reset
+
+[33mcommit e99991ddbdf4919da8b9df846fa1651995e5a94c[m
+Merge: c7e3095 b495689
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Fri Jan 17 15:10:13 2025 +0800
+
+    Merge branch 'main' of https://github.com/kkpbrida/PerpustakaanBrida_
+
+[33mcommit c7e3095209a4431ca0129885ca6f79ffbb63c692[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Fri Jan 17 15:09:28 2025 +0800
+
+    menambahkan icon dropbox di form tambah penelitian
+
+[33mcommit b495689b542216f143048e9a84c2da735e7b4a4a[m
+Merge: 836ce2c 67de5d6
+Author: Muhammad Dimas R. <161185827+Dimsss09@users.noreply.github.com>
+Date:   Fri Jan 17 15:09:14 2025 +0800
+
+    Merge branch 'main' of https://github.com/kkpbrida/PerpustakaanBrida_
+
+[33mcommit 836ce2c6602297300f78f77e5b5fe78bba0ac231[m
+Author: Muhammad Dimas R. <161185827+Dimsss09@users.noreply.github.com>
+Date:   Fri Jan 17 15:07:15 2025 +0800
+
+    Update home.php
+
+[33mcommit 67de5d66a0caf8e8db115024f5bccfd74053f252[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Fri Jan 17 15:07:12 2025 +0800
+
+    Menambah icon dropbox di depan.php dan index.php
+
+[33mcommit 1a1891feb9e9dbadc533003a5102ebec491a10d3[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Fri Jan 17 14:40:27 2025 +0800
+
+    Menambah Logika Hapus di Form.php
+
+[33mcommit c03e8290b8e2793cd391b833522e2bfe969e5a0f[m
+Merge: d5ecfe4 165b370
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Fri Jan 17 14:39:19 2025 +0800
+
+    Merge branch 'main' of https://github.com/kkpbrida/PerpustakaanBrida_
+
+[33mcommit d5ecfe4e2b4f2ef5422e19f071f639959efdb1c4[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Fri Jan 17 14:39:09 2025 +0800
+
+    Memperbaiki logika form.php
+
+[33mcommit 165b370b8ffe8eb1dcd5470b91a904fa65bf89a9[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Fri Jan 17 13:56:14 2025 +0800
+
+    Menambah Struktur Database
+
+[33mcommit 2eb69a4a5df0ce0342660bbd5cf02bcfe0400aeb[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Fri Jan 17 13:54:03 2025 +0800
+
+    Modifikasi jumlah karakter atribut judul
+
+[33mcommit f6d09a9019fea06bcdf0148b9d2fda1ca32f54f1[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Fri Jan 17 13:48:30 2025 +0800
+
+    Mengubah Batas Karakter Penulis
+
+[33mcommit 5571ec6727c87722b11c2bd974a232f4e69f5159[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Fri Jan 17 13:42:18 2025 +0800
+
+    Memperbaiki Bug Enter Pada Search
+
+[33mcommit a0b75fff1b199ddc5676de072cfed5933c9fe477[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Fri Jan 17 13:37:18 2025 +0800
+
+    watermark bootstrap
+
+[33mcommit b8311ec3b3245d721a06e2e1c85d47379fafa602[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Fri Jan 17 13:35:47 2025 +0800
+
+    memperbaiki stashing index.php
+
+[33mcommit 125d5ee6521ded68caf5ee86428faca7c7e270ad[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Fri Jan 17 13:28:27 2025 +0800
+
+    menambah form tambah penelitian
+
+[33mcommit e953ae0d9304b04c6327a5faa7a5c6a02a7f59b9[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Fri Jan 17 10:33:56 2025 +0800
+
+    Menambahkan pengaturan posisi navbar
+
+[33mcommit f334096f19ba6b17534a6a8165635deba34e4655[m
+Merge: e0205f6 2025178
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Fri Jan 17 10:31:32 2025 +0800
+
+    membuat grafik sederhana
+
+[33mcommit e0205f684c8e4f131c7c055b70994ff6d1f3369f[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Fri Jan 17 10:24:38 2025 +0800
+
+    Based membuat grafik
+
+[33mcommit 2025178a2552543897c205475e629f0ea4ea91e8[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Fri Jan 17 10:22:51 2025 +0800
+
+    memperbaiki posisi navbar
+
+[33mcommit 179b9ae9336009ee8850462fbd2c2c0b6a46027e[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Fri Jan 17 10:01:12 2025 +0800
+
+    Memperbaiki posisi search bar pada halaman depan dan halaman admin
+
+[33mcommit 29e795248e86e66309b618b5e6f565c25aeea306[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Fri Jan 17 09:31:23 2025 +0800
+
+    Tambahkan tombol edit
+
+[33mcommit c0637ea2ba47924c6e1394edde861a191e3541a9[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Fri Jan 17 09:22:41 2025 +0800
+
+    Menghapus searchbar duplikat
+
+[33mcommit 7819e7f10cd1a188e59617c65e0f4f219b6e9115[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Fri Jan 17 09:19:35 2025 +0800
+
+    Menerapkan search ke halaman index.php
+
+[33mcommit cfa9d823631f337b761ba651559e866b49502a19[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Fri Jan 17 08:31:00 2025 +0800
+
+    Memodifikasi tampilan search di depan.php
+
+[33mcommit 3e0b7c8c964e2e0d0614e9f5a122ee7eb8d7190a[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Thu Jan 16 15:35:13 2025 +0800
+
+    mengatasi eror data dummy
+
+[33mcommit 53ceb2780494f013597cdc9a750008f0f8739c88[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Thu Jan 16 15:34:28 2025 +0800
+
+    edit home
+
+[33mcommit 38800703e749f14f6250464b884a6cefca9d0904[m
+Author: selinggg <selinrahmadani91@gmail.com>
+Date:   Thu Jan 16 15:27:49 2025 +0800
+
+    modifikasi data dummy
+
+[33mcommit 8198887ff1686a173189af6318f52a41ae98ae96[m
+Author: selinggg <selinrahmadani91@gmail.com>
+Date:   Thu Jan 16 15:20:35 2025 +0800
+
+    menambah data dummy
+
+[33mcommit 79ad777f39e36f1e30eae0a5a67e9586d7e59140[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Thu Jan 16 14:49:45 2025 +0800
+
+    menambahkan query update dan modif tabel
+
+[33mcommit d20c2aca97856430a6e6f70ed6111ba9794b148e[m
+Merge: 7d4b734 0bbc57b
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Thu Jan 16 14:21:57 2025 +0800
+
+    Merge branches 'main' and 'main' of https://github.com/kkpbrida/PerpustakaanBrida_
+
+[33mcommit 7d4b7343cc86324d0903fefc1c4b873c9ab6acde[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Thu Jan 16 14:21:50 2025 +0800
+
+    mengubah struktur database
+
+[33mcommit 0bbc57b50f61297098de34cae8e35e0d86f83910[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Thu Jan 16 14:13:29 2025 +0800
+
+    menambahkan roouting kembali ke home
+
+[33mcommit 21c424fa6e5aa2e3cba07d5bb2842518310365d3[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Thu Jan 16 11:07:45 2025 +0800
+
+    Memperbaiki Responsif Search
+
+[33mcommit a5f318caf7b102f99b95e756111a8068adb93f2f[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Thu Jan 16 10:30:58 2025 +0800
+
+    mengubah duplicate query
+
+[33mcommit 8f8778449fbe15146cd3dfd7f251dd59b4453742[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Thu Jan 16 10:28:53 2025 +0800
+
+    Memperbaiki urutan input data
+
+[33mcommit 2824464b07693da332a78e8d48ccea6f4a58aa3a[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Thu Jan 16 10:24:43 2025 +0800
+
+    mengubah routing
+
+[33mcommit 521fb594012f6da01a54b218d34cedce2419a74f[m
+Merge: 96dfffa ef4e71e
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Thu Jan 16 10:13:00 2025 +0800
+
+    Merge branch 'main' of https://github.com/kkpbrida/PerpustakaanBrida_
+
+[33mcommit 96dfffa0a0f9572926ccf26252489c888294ad49[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Thu Jan 16 10:12:55 2025 +0800
+
+    Menambahkan Logika Search di Halaman Depan
+
+[33mcommit ef4e71e53d0c46f67b33b882ccc923440d6ff78d[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Thu Jan 16 10:10:59 2025 +0800
+
+    menambahkan homepagge
+
+[33mcommit d4e40ea0d153391ddf4a485c106c23d2b4b2b36e[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Wed Jan 15 15:18:00 2025 +0800
+
+    tambah popup di login_by NAZWAH
+
+[33mcommit fe728e9bcb4d01d9c369c3c626b5f6da0a6e9dce[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Wed Jan 15 15:13:00 2025 +0800
+
+    update db2
+
+[33mcommit d9e456b933b84f8348b239e831a760d206af9ff2[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Wed Jan 15 15:08:19 2025 +0800
+
+    update db
+
+[33mcommit 457150017ffdbaa891d88e9f4b200257b7dbc736[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Wed Jan 15 14:29:06 2025 +0800
+
+    menghubungkan dengan halaman depan
+
+[33mcommit 38aa6cee0b389f0b6184df47685e59184983e017[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Wed Jan 15 14:22:56 2025 +0800
+
+    menambah db_perpustakaan
+
+[33mcommit 4ee983c427e299d9b9c3d38cb0a063d8605c6533[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Wed Jan 15 14:22:03 2025 +0800
+
+    debugging tombol dashboard
+
+[33mcommit f9ee632bc4a18d3b40bfff1e77c44d698cfe7638[m
+Merge: d6e1119 820644c
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Wed Jan 15 13:52:13 2025 +0800
+
+    Merge branch 'main' of https://github.com/kkpbrida/PerpustakaanBrida_
+
+[33mcommit d6e111949977c1009d0b4ec485049b23cc7b3af6[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Wed Jan 15 13:52:08 2025 +0800
+
+    Mengubah database perpustakaandb
+
+[33mcommit 820644c2d38a64107444be63b4ef41c33abf80c9[m
+Merge: 5aa6e71 7118053
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Wed Jan 15 13:48:50 2025 +0800
+
+    menambahkan fitur session
+
+[33mcommit 5aa6e7136781c2d0cde2bb39f3dfdf28ee4718ce[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Wed Jan 15 13:43:13 2025 +0800
+
+    menambah halaman depan (user)
+
+[33mcommit 7118053b8a04bfc120ff5c6c085af7fdc6842211[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Wed Jan 15 12:08:30 2025 +0800
+
+    memperbaiki nama atribut database
+
+[33mcommit 045520b18b6fcc52282b0578c42a50059c84d68f[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Wed Jan 15 11:39:20 2025 +0800
+
+    Menambahkan database original
+
+[33mcommit eff249644fc21225db8cfc4f1563e8ea4fbae459[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Wed Jan 15 11:33:45 2025 +0800
+
+    menambah data di tabel login
+
+[33mcommit ab1ebc67792a2cd3973595d989369add7998ab45[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Wed Jan 15 11:31:13 2025 +0800
+
+    menambah tabel login
+
+[33mcommit cd75e9524193e38da4d9cf55a8eab0f71c2e57a4[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Wed Jan 15 11:25:59 2025 +0800
+
+    memperbaiki databse bagian penelitian
+
+[33mcommit d8a5bd804473da9a40759b0c92b4f16d6230bffb[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Wed Jan 15 11:23:36 2025 +0800
+
+    memperbaiki database
+
+[33mcommit 4c48f37906f165590181d7e429ae02ae329ee553[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Wed Jan 15 11:00:52 2025 +0800
+
+    menambahkan fitu session dsb
+
+[33mcommit 28e144e9ce6560297a7c0fb8cb709103ac494f71[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Wed Jan 15 10:01:17 2025 +0800
+
+    membuat database perpustakaan
+
+[33mcommit bb5198f7d4b5e750f74d8a9b43620141161b8dda[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Wed Jan 15 10:00:11 2025 +0800
+
+    menambah fitur login dan logout
+
+[33mcommit 53eca5d1ecfc46aa924f08ec84a898fc9c51c009[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Wed Jan 15 09:09:43 2025 +0800
+
+    menambahkan database dummy
+
+[33mcommit 6f0a4d7c7999ddb0249012f57b01a97750ed8b7c[m
+Author: selinggg <selinrahmadani91@gmail.com>
+Date:   Wed Jan 15 09:00:23 2025 +0800
+
+    menambahkan folder db
+
+[33mcommit 04d530f719e6e3a2c7c5e881d685c5d5fcbd4878[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Wed Jan 15 08:28:14 2025 +0800
+
+    menambahkan form untuk input data
+
+[33mcommit fddba631a1bf43920edf3ba27ab884a8959f0649[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Tue Jan 14 15:10:32 2025 +0800
+
+    menambahkan tutorial run web
+
+[33mcommit 9b78e918b73a6d6985f80c542e62e9695a00f547[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Tue Jan 14 14:35:42 2025 +0800
+
+    Inisialisasi repo
+
+[33mcommit dd8295a774a81ace1df68b79a173050d36440692[m
+Author: kkpbrida <kkpbridailkom@gmail.com>
+Date:   Tue Jan 14 13:39:40 2025 +0800
+
+    Initial commit
