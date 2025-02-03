@@ -149,64 +149,63 @@ $categories_result = $conn->query($categories_query);
     </div>
 </div>
         <div class="card-body">
-            <form method="POST" action="" class="form-inline" id="searchForm">
-                <div class="row g-3">
+                <!-- Form Pencarian -->
+                <form method="POST" action="" class="row g-3 align-items-center" id="searchForm">
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <input class="form-control w-100" type="text" id="search" name="search" 
-                            placeholder="Cari Judul/Nama Penulis" aria-label="Cari Judul/Nama Penulis" />
+                            placeholder="Cari Judul/Nama Penulis" aria-label="Cari Judul/Nama Penulis">
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="select-wrapper">
-                            <select class="form-control w-100" id="year" name="year">
-                                <option value="">Pilih Tahun</option>
-                                <?php while ($year_row = mysqli_fetch_assoc($years_result)) { ?>
-                                    <option value="<?php echo $year_row['tahun']; ?>">
-                                        <?php echo $year_row['tahun']; ?>
-                                    </option>
-                                <?php } ?>
-                            </select>
-                        </div>
+                        <select class="form-control w-100" id="year" name="year">
+                            <option value="">Pilih Tahun</option>
+                            <?php while ($year_row = mysqli_fetch_assoc($years_result)) { ?>
+                                <option value="<?php echo $year_row['tahun']; ?>">
+                                    <?php echo $year_row['tahun']; ?>
+                                </option>
+                            <?php } ?>
+                        </select>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="select-wrapper">
-                            <select class="form-control w-100" id="category" name="category">
-                                <option value="">Pilih Kategori</option>
-                                <?php while ($category_row = mysqli_fetch_assoc($categories_result)) { ?>
-                                    <option value="<?php echo $category_row['nama_kategori']; ?>">
-                                        <?php echo $category_row['nama_kategori']; ?>
-                                    </option>
-                                <?php } ?>
-                            </select>
-                        </div>
+                        <select class="form-control w-100" id="category" name="category">
+                            <option value="">Pilih Kategori</option>
+                            <?php while ($category_row = mysqli_fetch_assoc($categories_result)) { ?>
+                                <option value="<?php echo $category_row['nama_kategori']; ?>">
+                                    <?php echo $category_row['nama_kategori']; ?>
+                                </option>
+                            <?php } ?>
+                        </select>
                     </div>
+                </form>
+                <div class="table-responsive">
+                    <table class="table table-striped" id="data-table">
+                        <thead>
+                            <tr>
+                                <th>Judul</th>
+                                <th>Nama Penulis</th>
+                                <th>Instansi</th>
+                                <th>Fakultas</th>
+                                <th>Tahun</th>
+                                <th>Kategori</th>
+                                <th>Lokasi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data akan dimuat di sini melalui AJAX -->
+                        </tbody>
+                    </table>
                 </div>
-            </form>
-            <table class="table table-striped" id="data-table">
-                <thead>
-                    <tr>
-                        <th>Judul</th>
-                        <th>Nama Penulis</th>
-                        <th>Instansi</th>
-                        <th>Fakultas</th>
-                        <th>Tahun</th>
-                        <th>Kategori</th>
-                        <th>Lokasi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Data akan dimuat di sini melalui AJAX -->
-                </tbody>
-            </table>
-            <div class="d-flex justify-content-between">
-                <div id="data-info" class="mb-3"></div>
-                <div id="total-records" class="mb-3"></div>
+
+                <div class="d-flex justify-content-between">
+                    <div id="data-info" class="mb-3"></div>
+                    <div id="total-records" class="mb-3"></div>
+                </div>
+
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center" id="pagination">
+                        <!-- Pagination links will be generated here -->
+                    </ul>
+                </nav>
             </div>
-            <nav aria-label="Page navigation">
-                <ul class="pagination justify-content-center" id="pagination">
-                    <!-- Pagination links will be generated here -->
-                </ul>
-            </nav>
-        </div>
     </div>
 </div>
 <footer class="py-4 bg-light mt-auto">
