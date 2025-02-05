@@ -9,7 +9,12 @@ $years_result = $conn->query($years_query);
 // Fetch distinct categories from the database for the dropdown
 $categories_query = "SELECT DISTINCT nama_kategori FROM kategori ORDER BY nama_kategori ASC";
 $categories_result = $conn->query($categories_query);
+
+// Fetch distinct locations from the database for the dropdown
+$locations_query = "SELECT DISTINCT id_rak FROM rak ORDER BY id_rak ASC";
+$locations_result = $conn->query($locations_query);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -200,106 +205,114 @@ $categories_result = $conn->query($categories_query);
                                         </select>
                                     </div>
                                     <div class="col-lg-2 mb-2">
+                                        <select id="location" class="form-control w-100">
+                                            <option value="">Pilih Lokasi</option>
+                                            <?php while ($row = $locations_result->fetch_assoc()): ?>
+                                                <option value="<?php echo $row['id_rak']; ?>"><?php echo $row['id_rak']; ?></option>
+                                            <?php endwhile; ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2 mb-2">
                                         <input type="date" id="tgl_masuk" class="form-control w-100">
                                     </div>
                                 </div>
                             </form>
-                            <div class="table-responsive">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Judul</th>
-                                            <th>Nama Penulis</th>
-                                            <th>Instansi</th>
-                                            <th>Fakultas</th>
-                                            <th>Tahun</th>
-                                            <th>Kategori</th>
-                                            <th>Lokasi</th>
-                                            <th>Tanggal Masuk</th>
-                                            <th colspan="2" style="text-align: center;">Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="results">
-                                        <!-- Data akan dimuat di sini melalui AJAX -->
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <div id="data-info" class="mb-3"></div>
-                                <div id="total-records" class="mb-3"></div>
-                            </div>
-                            <nav aria-label="Page navigation">
-                                <ul class="pagination justify-content-center" id="pagination">
-                                    <!-- Pagination links will be generated here -->
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Judul</th>
+                                <th>Nama Penulis</th>
+                                <th>Instansi</th>
+                                <th>Fakultas</th>
+                                <th>Tahun</th>
+                                <th>Kategori</th>
+                                <th>Lokasi</th>
+                                <th>Tanggal Masuk</th>
+                                <th colspan="2" style="text-align: center;">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="results">
+                            <!-- Data akan dimuat di sini melalui AJAX -->
+                        </tbody>
+                    </table>
                 </div>
-            </main>
-            <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid px-4">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted"> &copy; KKP Ilmu Komputer UHO 2025</div>
-                    </div>
+                <div class="d-flex justify-content-between">
+                    <div id="data-info" class="mb-3"></div>
+                    <div id="total-records" class="mb-3"></div>
                 </div>
-            </footer>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center" id="pagination">
+                        <!-- Pagination links will be generated here -->
+                    </ul>
+                </nav>
+            </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="js/scripts.js"></script>
-    <script>
-    $(document).ready(function() {
-        // Inisialisasi Select2 pada elemen dropdown
-        $('#year, #category').select2();
+</main>
+<footer class="py-4 bg-light mt-auto">
+    <div class="container-fluid px-4">
+        <div class="d-flex align-items-center justify-content-between small">
+            <div class="text-muted"> &copy; KKP Ilmu Komputer UHO 2025</div>
+        </div>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="js/scripts.js"></script>
+<script>
+$(document).ready(function() {
+    // Inisialisasi Select2 pada elemen dropdown
+    $('#year, #category, #location').select2();
 
-        function fetchData(page = 1) {
-            var search = $('#search').val();
-            var year = $('#year').val();
-            var category = $('#category').val();
-            var tgl_masuk = $('#tgl_masuk').val();
-            $.ajax({
-                url: 'search.php',
-                method: 'POST',
-                data: {
-                    search: search,
-                    year: year,
-                    category: category,
-                    tgl_masuk: tgl_masuk,
-                    page: page,
-                    page_type: 'index'
-                },
-                success: function(response) {
-                    $('#results').html(response.data);
-                    $('#pagination').html(response.pagination);
-                    $('#data-info').html(response.info);
-                    $('#total-records').text(response.total_records);
-                }
-            });
-        }
-
-        $('#search, #year, #category, #tgl_masuk').on('input', function() {
-            fetchData();
+    function fetchData(page = 1) {
+        var search = $('#search').val();
+        var year = $('#year').val();
+        var category = $('#category').val();
+        var location = $('#location').val();
+        var tgl_masuk = $('#tgl_masuk').val();
+        $.ajax({
+            url: 'search.php',
+            method: 'POST',
+            data: {
+                search: search,
+                year: year,
+                category: category,
+                location: location,
+                tgl_masuk: tgl_masuk,
+                page: page,
+                page_type: 'index'
+            },
+            success: function(response) {
+                $('#results').html(response.data);
+                $('#pagination').html(response.pagination);
+                $('#data-info').html(response.info);
+                $('#total-records').text(response.total_records);
+            }
         });
+    }
 
-        // Prevent form submission on Enter key press
-        $('#searchForm').on('submit', function(e) {
-            e.preventDefault();
-            fetchData();
-        });
-
-        // Fetch initial data
+    $('#search, #year, #category, #location, #tgl_masuk').on('input', function() {
         fetchData();
+    });
 
-        // Handle pagination click
-        $(document).on('click', '.page-link', function(e) {
-            e.preventDefault();
-            var page = $(this).data('page');
-            fetchData(page);
-        });
+    // Prevent form submission on Enter key press
+    $('#searchForm').on('submit', function(e) {
+        e.preventDefault();
+        fetchData();
+    });
 
-        // Handle edit button click
-        $(document).on('click', '.btn-edit', function(e) {
+    // Fetch initial data
+    fetchData();
+
+    // Handle pagination click
+    $(document).on('click', '.page-link', function(e) {
+        e.preventDefault();
+        var page = $(this).data('page');
+        fetchData(page);
+    });
+    
+    // Handle edit button click
+    $(document).on('click', '.btn-edit', function(e) {
             e.preventDefault();
 
             // Ambil data dari tombol
@@ -365,41 +378,41 @@ $categories_result = $conn->query($categories_query);
         });
 
         // Handle form submission
-            $('#editForm').on('submit', function(e) {
-            e.preventDefault();
+        $('#editForm').on('submit', function(e) {
+        e.preventDefault();
             
-            $.ajax({
-                url: 'update_penelitian.php',
-                method: 'POST',
-                data: $(this).serialize(),
-                dataType: 'json',
-                beforeSend: function() {
-                    // Disable submit button
-                    $('#editForm button[type="submit"]').prop('disabled', true);
-                },
-                success: function(response) {
-                    console.log('Response:', response); // Debug log
-                    if (response.success) {
-                        $('#editModal').modal('hide');
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Berhasil!',
-                            text: response.message,
-                            timer: 2000,
-                            showConfirmButton: false
-                        }).then(function() {
-                            window.location.reload();
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Gagal!',
-                            text: response.message || 'Terjadi kesalahan saat memperbarui data',
-                            showConfirmButton: true
-                        });
-                    }
-                },
-                error: function(xhr, status, error) {
+        $.ajax({
+            url: 'update_penelitian.php',
+            method: 'POST',
+            data: $(this).serialize(),
+            dataType: 'json',
+            beforeSend: function() {
+                // Disable submit button
+                $('#editForm button[type="submit"]').prop('disabled', true);
+            },
+            success: function(response) {
+                console.log('Response:', response); // Debug log
+                if (response.success) {
+                    $('#editModal').modal('hide');
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: response.message,
+                        timer: 2000,
+                        showConfirmButton: false
+                    }).then(function() {
+                        window.location.reload();
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal!',
+                        text: response.message || 'Terjadi kesalahan saat memperbarui data',
+                        showConfirmButton: true
+                    });
+                }
+            },
+            error: function(xhr, status, error) {
                     console.error('Error:', xhr.responseText); // Debug log
                     Swal.fire({
                         icon: 'error',

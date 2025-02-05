@@ -8,6 +8,10 @@ $years_result = $conn->query($years_query);
 // Fetch distinct categories from the database for the dropdown
 $categories_query = "SELECT DISTINCT nama_kategori FROM kategori ORDER BY nama_kategori ASC";
 $categories_result = $conn->query($categories_query);
+
+// Fetch distinct locations from the database for the dropdown
+$locations_query = "SELECT DISTINCT id_rak FROM rak ORDER BY id_rak ASC";
+$locations_result = $conn->query($locations_query);
 ?>
 
 <!DOCTYPE html>
@@ -175,37 +179,48 @@ $categories_result = $conn->query($categories_query);
                             <?php } ?>
                         </select>
                     </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <select class="form-control w-100" id="location" name="location">
+                            <option value="">Pilih Lokasi</option>
+                            <?php while ($locations_row = mysqli_fetch_assoc($locations_result)) { ?>
+                                <option value="<?php echo $locations_row['id_rak']; ?>">
+                                    <?php echo $locations_row['id_rak']; ?>
+                                </option>
+                            <?php } ?>
+                        </select>
+                    </div>
                 </form>
-                <div class="table-responsive">
-                    <table class="table table-striped" id="data-table">
-                        <thead>
-                            <tr>
-                                <th>Judul</th>
-                                <th>Nama Penulis</th>
-                                <th>Instansi</th>
-                                <th>Fakultas</th>
-                                <th>Tahun</th>
-                                <th>Kategori</th>
-                                <th>Lokasi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Data akan dimuat di sini melalui AJAX -->
-                        </tbody>
-                    </table>
-                </div>
 
-                <div class="d-flex justify-content-between">
-                    <div id="data-info" class="mb-3"></div>
-                    <div id="total-records" class="mb-3"></div>
-                </div>
-
-                <nav aria-label="Page navigation">
-                    <ul class="pagination justify-content-center" id="pagination">
-                        <!-- Pagination links will be generated here -->
-                    </ul>
-                </nav>
+            <div class="table-responsive">
+                <table class="table table-striped" id="data-table">
+                    <thead>
+                        <tr>
+                            <th>Judul</th>
+                            <th>Nama Penulis</th>
+                            <th>Instansi</th>
+                            <th>Fakultas</th>
+                            <th>Tahun</th>
+                            <th>Kategori</th>
+                            <th>Lokasi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data akan dimuat di sini melalui AJAX -->
+                    </tbody>
+                </table>
             </div>
+
+            <div class="d-flex justify-content-between">
+                <div id="data-info" class="mb-3"></div>
+                <div id="total-records" class="mb-3"></div>
+            </div>
+
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center" id="pagination">
+                    <!-- Pagination links will be generated here -->
+                </ul>
+            </nav>
+        </div>
     </div>
 </div>
 <footer class="py-4 bg-light mt-auto">
@@ -220,7 +235,7 @@ $categories_result = $conn->query($categories_query);
 <script>
 $(document).ready(function() {
     // Inisialisasi Select2 pada elemen dropdown
-    $('#year, #category').select2();
+    $('#year, #category, #location').select2();
 
     function fetchData(page = 1) {
         $.ajax({
@@ -230,6 +245,7 @@ $(document).ready(function() {
                 search: $('#search').val(),
                 year: $('#year').val(),
                 category: $('#category').val(),
+                location : $('#location').val(),
                 page: page,
                 page_type: 'depan'
             },
@@ -249,7 +265,7 @@ $(document).ready(function() {
         });
     }
 
-    $('#search, #year, #category').on('input', function() {
+    $('#search, #year, #category, #location').on('input', function() {
         fetchData();
     });
 
