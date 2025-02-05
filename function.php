@@ -19,13 +19,23 @@ if(isset($_POST['addpenelitian'])) {
     // Concatenate all author names into a single string separated by commas 
     $nama_penulis = implode(", ", $_POST['nama_penulis']);
 
+    // Escape all user inputs to prevent SQL injection and handle special characters
+    $nama_penulis = mysqli_real_escape_string($conn, $nama_penulis);
+    $kategori = mysqli_real_escape_string($conn, $_POST['kategori']);
+    $judul = mysqli_real_escape_string($conn, $_POST['judul']);
+    $tahun = mysqli_real_escape_string($conn, $_POST['tahun']);
+    $rak = mysqli_real_escape_string($conn, $_POST['rak']);
+    $instansi = mysqli_real_escape_string($conn, $_POST['instansi']);
+    $fakultas = mysqli_real_escape_string($conn, $_POST['fakultas']);
+
     // Check if tgl_masuk is empty, if so, use CURRENT_TIMESTAMP
-    if (empty($tgl_masuk)) {
+    if (empty($_POST['tgl_masuk'])) {
         $tgl_masuk = "CURRENT_TIMESTAMP";
     } else {
-        $tgl_masuk = "'$tgl_masuk'";
+        $tgl_masuk = "'" . mysqli_real_escape_string($conn, $_POST['tgl_masuk']) . "'";
     }
 
+    // Insert data into the database
     $addtotable = mysqli_query($conn, "INSERT INTO penelitian (tgl_masuk, nama_penulis, id_kategori, judul, tahun, id_rak, id_instansi, id_fakultas) 
         VALUES ($tgl_masuk, '$nama_penulis', '$kategori', '$judul', '$tahun', '$rak', '$instansi', '$fakultas')");
 
@@ -44,7 +54,7 @@ if(isset($_POST['addpenelitian'])) {
                 });
             });
         </script>";
-    } else { 
+    }else { 
         echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
         echo "<script>
             document.addEventListener('DOMContentLoaded', function() {
