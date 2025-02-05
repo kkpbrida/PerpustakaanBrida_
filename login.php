@@ -6,18 +6,25 @@ if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    //cekking database
-    $result = mysqli_query($conn, "SELECT * FROM login WHERE username = '$username' AND password = '$password'");
-    //hitung jumlah data
-    $cek = mysqli_num_rows($result);
+    // Prepare the SQL statement
+    $stmt = $conn->prepare("SELECT * FROM login WHERE username = ? AND password = ?");
+    $stmt->bind_param("ss", $username, $password);
 
-    if ($cek > 0) {
+    // Execute the statement
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Check if any rows were returned
+    if ($result->num_rows > 0) {
         $_SESSION['login'] = true;
-        header("location: dashboard.php");
-        // exit();
+        header("location: ../public/dashboard.php");
+        exit();
     } else {
         $error = "Invalid username or password!";
     }
+
+    // Close the statement
+    $stmt->close();
 }
 
 if (isset($_SESSION['login'])) {
