@@ -17,7 +17,7 @@ if (isset($_POST['login'])) {
     // Check if any rows were returned
     if ($result->num_rows > 0) {
         $_SESSION['login'] = true;
-        header("location: ../public/dashboard.php");
+        header("location: dashboard.php");
         exit();
     } else {
         $error = "Invalid username or password!";
