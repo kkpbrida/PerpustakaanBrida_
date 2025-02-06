@@ -1,4 +1,64 @@
-[33mcommit 960f14c61cc54d75fef1f228b414dae5c4d548fb[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+[33mcommit d1c71b6be4aa26e800c7847e627862ff89ed09e0[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Thu Feb 6 08:26:20 2025 +0800
+
+    Modifikasi Route Login
+
+[33mcommit 190b9fdd77c7d0e825d51139b47e245cf4f7610b[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Wed Feb 5 20:54:48 2025 +0800
+
+    Mengatasi bug saat input tanda petik (')
+
+[33mcommit 1012e72480b82817622bdf0d3bbf4b23e920be31[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Wed Feb 5 20:54:25 2025 +0800
+
+    Menambahkan Prepared Statements
+
+[33mcommit 87459f962825ef8d58d380ce60720ad38c98f476[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Wed Feb 5 19:00:17 2025 +0800
+
+    Menambahkan Fitur Search Lokasi
+
+[33mcommit 53337055c74727f08a39e283c4047e3f856bcef1[m
+Author: NazwahIlmi <nazwahilmi05@gmail.com>
+Date:   Mon Feb 3 09:00:47 2025 +0800
+
+    memperbaiki tampilan depan.php agar lebih responsif
+
+[33mcommit 3b5814882f5d0aee6003ea01c6abe2b8c9d09170[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Sat Feb 1 19:30:49 2025 +0800
+
+    perubahan grafik bar chart
+
+[33mcommit 6913df7d41ff3d9699fd55da866dad722d2a4aee[m
+Author: kalinggasakti <kalinggasakti007@gmail.com>
+Date:   Sat Feb 1 19:07:18 2025 +0800
+
+    tambahan grafik bar chart untuk instansi
+
+[33mcommit 34505f8520e198c5de5a9d7c53d78cfcc127a2cd[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Fri Jan 31 15:44:13 2025 +0800
+
+    Update tampilan dropdown
+
+[33mcommit 0e8b0f5e3b7c55022cadf739b79d28abc7b1315e[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Fri Jan 31 15:21:06 2025 +0800
+
+    Memperbaiki tampilan dropdown pada form.php dan index.php
+
+[33mcommit 5037056d0b9026ecd479d9ebaae4004704db0481[m
+Author: Seynz <elverandirham212@gmail.com>
+Date:   Thu Jan 30 15:49:10 2025 +0800
+
+    Memperbaiki Logika Pagination Search.php
+
+[33mcommit 960f14c61cc54d75fef1f228b414dae5c4d548fb[m
 Author: NazwahIlmi <nazwahilmi05@gmail.com>
 Date:   Mon Jan 27 21:34:11 2025 +0800
 
