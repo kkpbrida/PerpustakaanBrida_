@@ -321,12 +321,12 @@ $(document).ready(function() {
         });
     }
 
-    $('#search, #year, #category, #instansi, #fakultas, #location, #tgl_masuk').on('change', function() {
+    $('#search, #year, #category, #instansi, #fakultas, #location, #tgl_masuk').on('input', function() {
         fetchData();
     });
 
     // Prevent form submission on Enter key press
-    $('#searchForm').on('submit', function(e) {
+    $('#searchForm').on('change', function(e) {
         e.preventDefault();
         fetchData();
     });
