@@ -6,6 +6,14 @@ require_once 'cek.php';
 $years_query = "SELECT DISTINCT tahun FROM penelitian ORDER BY tahun DESC";
 $years_result = $conn->query($years_query);
 
+// Fetch distinct instances from the database for the dropdown
+$instansi_query = "SELECT DISTINCT nama_instansi FROM instansi ORDER BY nama_instansi ASC";
+$instansi_result = $conn->query($instansi_query);
+
+// Fetch distinct faculties from the database for the dropdown
+$fakultas_query = "SELECT DISTINCT nama_fakultas FROM fakultas ORDER BY nama_fakultas ASC";
+$fakultas_result = $conn->query($fakultas_query);
+
 // Fetch distinct categories from the database for the dropdown
 $categories_query = "SELECT DISTINCT nama_kategori FROM kategori ORDER BY nama_kategori ASC";
 $categories_result = $conn->query($categories_query);
@@ -188,6 +196,24 @@ $locations_result = $conn->query($locations_query);
                                     <div class="col-lg-4 col-md-6 col-sm-12">
                                         <input type="text" id="search" class="form-control w-100" placeholder="Cari Judul/Nama Penulis">
                                     </div>
+                                    <!-- Dropdown Instansi -->
+                                     <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <select id="instansi" class="form-control w-100">
+                                            <option value="">Pilih Instansi</option>
+                                            <?php while ($row = $instansi_result->fetch_assoc()): ?>
+                                                <option value="<?php echo $row['nama_instansi']; ?>"><?php echo $row['nama_instansi']; ?></option>
+                                            <?php endwhile; ?>
+                                        </select>
+                                    </div>
+                                    <!-- Dropdown Fakultas -->
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <select id="fakultas" class="form-control w-100">
+                                            <option value="">Pilih Fakultas</option>
+                                            <?php while ($row = $fakultas_result->fetch_assoc()): ?>
+                                                <option value="<?php echo $row['nama_fakultas']; ?>"><?php echo $row['nama_fakultas']; ?></option>
+                                            <?php endwhile; ?>
+                                        </select>
+                                    </div>
                                     <div class="col-lg-2 col-md-3 col-sm-12">
                                         <select id="year" class="form-control w-100">
                                             <option value="">Pilih Tahun</option>
@@ -262,10 +288,12 @@ $locations_result = $conn->query($locations_query);
 <script>
 $(document).ready(function() {
     // Inisialisasi Select2 pada elemen dropdown
-    $('#year, #category, #location').select2();
+    $('#year, #category, #instansi, #fakultas, #location').select2();
 
     function fetchData(page = 1) {
         var search = $('#search').val();
+        var instansi = $('#instansi').val();
+        var fakultas = $('#fakultas').val();
         var year = $('#year').val();
         var category = $('#category').val();
         var location = $('#location').val();
@@ -276,6 +304,8 @@ $(document).ready(function() {
             data: {
                 search: search,
                 year: year,
+                instansi: instansi,
+                fakultas: fakultas,
                 category: category,
                 location: location,
                 tgl_masuk: tgl_masuk,
@@ -291,7 +321,7 @@ $(document).ready(function() {
         });
     }
 
-    $('#search, #year, #category, #location, #tgl_masuk').on('input', function() {
+    $('#search, #year, #category, #instansi, #fakultas, #location, #tgl_masuk').on('change', function() {
         fetchData();
     });
 

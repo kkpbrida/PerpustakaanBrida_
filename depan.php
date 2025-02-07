@@ -5,6 +5,14 @@ require 'function.php';
 $years_query = "SELECT DISTINCT tahun FROM penelitian ORDER BY tahun DESC";
 $years_result = $conn->query($years_query);
 
+// Fetch distinct instances from the database for the dropdown
+$instansi_query = "SELECT DISTINCT nama_instansi FROM instansi ORDER BY nama_instansi ASC";
+$instansi_result = $conn->query($instansi_query);
+
+// Fetch distinct faculties from the database for the dropdown
+$fakultas_query = "SELECT DISTINCT nama_fakultas FROM fakultas ORDER BY nama_fakultas ASC";
+$fakultas_result = $conn->query($fakultas_query);
+
 // Fetch distinct categories from the database for the dropdown
 $categories_query = "SELECT DISTINCT nama_kategori FROM kategori ORDER BY nama_kategori ASC";
 $categories_result = $conn->query($categories_query);
@@ -159,6 +167,28 @@ $locations_result = $conn->query($locations_query);
                         <input class="form-control" type="text" id="search" name="search" 
                             placeholder="Cari Judul/Nama Penulis" aria-label="Cari Judul/Nama Penulis">
                     </div>
+                    <!-- Dropdown Instansi -->
+                     <div class="col-lg-3 col-md-3 col-sm-12">
+                        <select class="form-control" id="instansi" name="instansi">
+                            <option value="">Pilih Instansi</option>
+                            <?php while ($instansi_row = mysqli_fetch_assoc($instansi_result)) { ?>
+                                <option value="<?php echo $instansi_row['nama_instansi']; ?>">
+                                    <?php echo $instansi_row['nama_instansi']; ?>
+                                </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <!-- Dropdown Fakultas -->
+                    <div class="col-lg-3 col-md-3 col-sm-12">
+                        <select class="form-control" id="fakultas" name="fakultas">
+                            <option value="">Pilih Fakultas</option>
+                            <?php while ($fakultas_row = mysqli_fetch_assoc($fakultas_result)) { ?>
+                                <option value="<?php echo $fakultas_row['nama_fakultas']; ?>">
+                                    <?php echo $fakultas_row['nama_fakultas']; ?>
+                                </option>
+                            <?php } ?>
+                        </select>
+                    </div>
                     <div class="col-lg-2 col-md-3 col-sm-12">
                         <select class="form-control" id="year" name="year">
                             <option value="">Pilih Tahun</option>
@@ -233,54 +263,56 @@ $locations_result = $conn->query($locations_query);
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="js/scripts.js"></script>
 <script>
-$(document).ready(function() {
-    // Inisialisasi Select2 pada elemen dropdown
-    $('#year, #category, #location').select2();
+    $(document).ready(function() {
+        // Inisialisasi Select2 pada elemen dropdown
+        $('#year, #category, #instansi, #fakultas, #location').select2();
 
-    function fetchData(page = 1) {
-        $.ajax({
-            url: 'search.php',
-            type: 'POST',
-            data: {
-                search: $('#search').val(),
-                year: $('#year').val(),
-                category: $('#category').val(),
-                location : $('#location').val(),
-                page: page,
-                page_type: 'depan'
-            },
-            success: function(data) {
-                try {
-                    $('#data-table tbody').html(data.data);
-                    $('#pagination').html(data.pagination);
-                    $('#data-info').html(data.info);
-                    $('#total-records').html(data.total_records);
-                } catch (e) {
-                    console.error("Parsing error:", e);
+        function fetchData(page = 1) {
+            $.ajax({
+                url: 'search.php',
+                type: 'POST',
+                data: {
+                    search: $('#search').val(),
+                    instansi: $('#instansi').val(),
+                    fakultas: $('#fakultas').val(),
+                    year: $('#year').val(),
+                    category: $('#category').val(),
+                    location : $('#location').val(),
+                    page: page,
+                    page_type: 'depan'
+                },
+                success: function(data) {
+                    try {
+                        $('#data-table tbody').html(data.data);
+                        $('#pagination').html(data.pagination);
+                        $('#data-info').html(data.info);
+                        $('#total-records').html(data.total_records);
+                    } catch (e) {
+                        console.error("Parsing error:", e);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX error:", status, error);
                 }
-            },
-            error: function(xhr, status, error) {
-                console.error("AJAX error:", status, error);
-            }
+            });
+        }
+
+        $('#search, #year, #category, #instansi, #fakultas, #location').on('input', function() {
+            fetchData();
         });
-    }
 
-    $('#search, #year, #category, #location').on('input', function() {
+        $('#searchForm').on('change', function(e) {
+            e.preventDefault();
+            fetchData();
+        });
+
         fetchData();
-    });
 
-    $('#searchForm').on('submit', function(e) {
-        e.preventDefault();
-        fetchData();
+        $(document).on('click', '.page-link', function(e) {
+            e.preventDefault();
+            var page = $(this).data('page');
+            fetchData(page);
+        });
     });
-
-    fetchData();
-
-    $(document).on('click', '.page-link', function(e) {
-        e.preventDefault();
-        var page = $(this).data('page');
-        fetchData(page);
-    });
-});
 </script>
 </body>

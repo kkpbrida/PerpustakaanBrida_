@@ -15,6 +15,7 @@ $search = isset($_POST['search']) ? $conn->real_escape_string($_POST['search']) 
 $year = isset($_POST['year']) ? $conn->real_escape_string($_POST['year']) : '';
 $category = isset($_POST['category']) ? $conn->real_escape_string($_POST['category']) : '';
 $instansi = isset($_POST['instansi']) ? $conn->real_escape_string($_POST['instansi']) : '';
+$fakultas = isset($_POST['fakultas']) ? $conn->real_escape_string($_POST['fakultas']) : '';
 $tgl_masuk = isset($_POST['tgl_masuk']) ? $conn->real_escape_string($_POST['tgl_masuk']) : '';
 $location = isset($_POST['location']) ? $conn->real_escape_string($_POST['location']) : '';
 $page = isset($_POST['page']) ? (int)$_POST['page'] : 1;
@@ -35,7 +36,13 @@ $sql = "SELECT $columns
 $sql .= " WHERE 1=1";
 
 if ($search != '') {
-    $sql .= " AND (p.judul LIKE '%$search%' OR p.nama_penulis LIKE '%$search%' OR i.nama_instansi LIKE '%$search%' OR f.nama_fakultas LIKE '%$search%')";
+    $sql .= " AND (p.judul LIKE '%$search%' OR p.nama_penulis LIKE '%$search%')";
+}
+if ($instansi != '') {
+    $sql .= " AND i.nama_instansi = '$instansi'";
+}
+if ($fakultas != '') {
+    $sql .= " AND f.nama_fakultas = '$fakultas'";
 }
 if ($year != '') {
     $sql .= " AND p.tahun = '$year'";
@@ -85,7 +92,13 @@ $count_sql = "SELECT COUNT(*) AS total FROM penelitian p
               
 $count_sql .= " WHERE 1=1";
 if ($search != '') {
-    $count_sql .= " AND (p.judul LIKE '%$search%' OR p.nama_penulis LIKE '%$search%' OR i.nama_instansi LIKE '%$search%' OR f.nama_fakultas LIKE '%$search%')";
+    $count_sql .= " AND (p.judul LIKE '%$search%' OR p.nama_penulis LIKE '%$search%')";
+}
+if ($instansi != '') {
+    $count_sql .= " AND i.nama_instansi = '$instansi'";
+}
+if ($fakultas != '') {
+    $count_sql .= " AND f.nama_fakultas = '$fakultas'";
 }
 if ($year != '') {
     $count_sql .= " AND p.tahun = '$year'";
