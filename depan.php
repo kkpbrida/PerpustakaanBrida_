@@ -154,13 +154,13 @@ $locations_result = $conn->query($locations_query);
 </div>
         <div class="card-body">
                 <!-- Form Pencarian -->
-                <form method="POST" action="" class="row g-3 align-items-center" id="searchForm">
+                <form method="POST" action="" class="row g-2 align-items-center" id="searchForm">
                     <div class="col-lg-6 col-md-6 col-sm-12">
-                        <input class="form-control w-100" type="text" id="search" name="search" 
+                        <input class="form-control" type="text" id="search" name="search" 
                             placeholder="Cari Judul/Nama Penulis" aria-label="Cari Judul/Nama Penulis">
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <select class="form-control w-100" id="year" name="year">
+                    <div class="col-lg-2 col-md-3 col-sm-12">
+                        <select class="form-control" id="year" name="year">
                             <option value="">Pilih Tahun</option>
                             <?php while ($year_row = mysqli_fetch_assoc($years_result)) { ?>
                                 <option value="<?php echo $year_row['tahun']; ?>">
@@ -169,8 +169,8 @@ $locations_result = $conn->query($locations_query);
                             <?php } ?>
                         </select>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <select class="form-control w-100" id="category" name="category">
+                    <div class="col-lg-2 col-md-3 col-sm-12">
+                        <select class="form-control" id="category" name="category">
                             <option value="">Pilih Kategori</option>
                             <?php while ($category_row = mysqli_fetch_assoc($categories_result)) { ?>
                                 <option value="<?php echo $category_row['nama_kategori']; ?>">
@@ -179,8 +179,8 @@ $locations_result = $conn->query($locations_query);
                             <?php } ?>
                         </select>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <select class="form-control w-100" id="location" name="location">
+                    <div class="col-lg-2 col-md-3 col-sm-12">
+                        <select class="form-control" id="location" name="location">
                             <option value="">Pilih Lokasi</option>
                             <?php while ($locations_row = mysqli_fetch_assoc($locations_result)) { ?>
                                 <option value="<?php echo $locations_row['id_rak']; ?>">
