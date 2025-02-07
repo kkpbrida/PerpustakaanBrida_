@@ -131,7 +131,7 @@ CREATE TABLE `penelitian` (
   `tahun` varchar(4) NOT NULL,
   `id_fakultas` int(11) DEFAULT NULL,
   `id_kategori` int(11) NOT NULL,
-  `tgl_masuk` date NOT NULL DEFAULT current_timestamp(),
+  `tgl_masuk` date NOT NULL,
   `id_rak` varchar(10) NOT NULL,
   `petugas` varchar(50) NOT NULL DEFAULT 'Admin',
   `id_instansi` int(11) NOT NULL

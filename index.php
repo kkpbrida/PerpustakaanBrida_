@@ -183,12 +183,12 @@ $locations_result = $conn->query($locations_query);
                             <a href="form.php" class="btn btn-warning">Tambah Penelitian</a>
                         </div>
                         <div class="card-body">
-                            <form id="searchForm" class="form-inline mb-3">
-                                <div class="row">
-                                    <div class="col-lg-6">
+                        <form id="searchForm" class="form-inline mb-3">
+                                <div class="row g-2 align-items-center">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
                                         <input type="text" id="search" class="form-control w-100" placeholder="Cari Judul/Nama Penulis">
                                     </div>
-                                    <div class="col-lg-2 mb-2">
+                                    <div class="col-lg-2 col-md-3 col-sm-12">
                                         <select id="year" class="form-control w-100">
                                             <option value="">Pilih Tahun</option>
                                             <?php while ($row = $years_result->fetch_assoc()): ?>
@@ -196,7 +196,7 @@ $locations_result = $conn->query($locations_query);
                                             <?php endwhile; ?>
                                         </select>
                                     </div>
-                                    <div class="col-lg-2 mb-2">
+                                    <div class="col-lg-2 col-md-3 col-sm-6">
                                         <select id="category" class="form-control w-100">
                                             <option value="">Pilih Kategori</option>
                                             <?php while ($row = $categories_result->fetch_assoc()): ?>
@@ -204,7 +204,7 @@ $locations_result = $conn->query($locations_query);
                                             <?php endwhile; ?>
                                         </select>
                                     </div>
-                                    <div class="col-lg-2 mb-2">
+                                    <div class="col-lg-2 col-md-3 col-sm-6">
                                         <select id="location" class="form-control w-100">
                                             <option value="">Pilih Lokasi</option>
                                             <?php while ($row = $locations_result->fetch_assoc()): ?>
@@ -212,7 +212,7 @@ $locations_result = $conn->query($locations_query);
                                             <?php endwhile; ?>
                                         </select>
                                     </div>
-                                    <div class="col-lg-2 mb-2">
+                                    <div class="col-lg-2 col-md-3 col-sm-6">
                                         <input type="date" id="tgl_masuk" class="form-control w-100">
                                     </div>
                                 </div>
