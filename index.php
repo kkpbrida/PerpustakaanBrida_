@@ -193,11 +193,14 @@ $locations_result = $conn->query($locations_query);
                         <div class="card-body">
                         <form id="searchForm" class="form-inline mb-3">
                                 <div class="row g-2 align-items-center">
-                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="col-lg-10 col-md-6 col-sm-12">
                                         <input type="text" id="search" class="form-control w-100" placeholder="Cari Judul/Nama Penulis">
                                     </div>
+                                    <div class="col-lg-2 col-md-3 col-sm-6">
+                                        <input type="date" id="tgl_masuk" class="form-control w-100">
+                                    </div>
                                     <!-- Dropdown Instansi -->
-                                     <div class="col-lg-4 col-md-6 col-sm-12">
+                                     <div class="col-lg-3 col-md-6 col-sm-12">
                                         <select id="instansi" class="form-control w-100">
                                             <option value="">Pilih Instansi</option>
                                             <?php while ($row = $instansi_result->fetch_assoc()): ?>
@@ -206,7 +209,7 @@ $locations_result = $conn->query($locations_query);
                                         </select>
                                     </div>
                                     <!-- Dropdown Fakultas -->
-                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
                                         <select id="fakultas" class="form-control w-100">
                                             <option value="">Pilih Fakultas</option>
                                             <?php while ($row = $fakultas_result->fetch_assoc()): ?>
@@ -237,9 +240,6 @@ $locations_result = $conn->query($locations_query);
                                                 <option value="<?php echo $row['id_rak']; ?>"><?php echo $row['id_rak']; ?></option>
                                             <?php endwhile; ?>
                                         </select>
-                                    </div>
-                                    <div class="col-lg-2 col-md-3 col-sm-6">
-                                        <input type="date" id="tgl_masuk" class="form-control w-100">
                                     </div>
                                 </div>
                             </form>
