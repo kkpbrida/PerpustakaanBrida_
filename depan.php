@@ -149,7 +149,7 @@ $locations_result = $conn->query($locations_query);
         <div class="card-body">
                 <!-- Form Pencarian -->
                 <form method="POST" action="" class="row g-2 align-items-center" id="searchForm">
-                    <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
                         <input class="form-control" type="text" id="search" name="search" 
                             placeholder="Cari Judul/Nama Penulis" aria-label="Cari Judul/Nama Penulis">
                     </div>
