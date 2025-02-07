@@ -116,20 +116,6 @@ $locations_result = $conn->query($locations_query);
             display: none;
         }
 
-        .pagination .page-link {
-                    background-color: #FFC107;
-                    color: black;
-                }
-                .pagination .page-link:hover {
-                    background-color: #e0a800;
-                    color: black;
-                }
-                .pagination .page-item.active .page-link {
-                    background-color: #003366;
-                    border-color: #FFC107;
-                }
-
-
         /* Samakan tinggi elemen input dan dropdown */
         .form-control, .select2-container .select2-selection--single {
             height: calc(2.25rem + 2px); /* Sesuaikan dengan tinggi elemen input */

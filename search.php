@@ -132,8 +132,8 @@ if ($page > 3) {
 }
 
 // Menampilkan 3 halaman di sekitar halaman aktif
-$start = max(1, $page - 1);
-$end = min($total_pages, $page + 1);
+$start = max(1, $page - 2);
+$end = min($total_pages, $page + 2);
 
 for ($i = $start; $i <= $end; $i++) {
     $active = ($i == $page) ? 'active' : '';
