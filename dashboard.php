@@ -273,18 +273,29 @@ while ($row = mysqli_fetch_assoc($instansiChartResult)) {
                 const rawData = <?= json_encode($barChartData) ?>;
                 const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
                 
-                // Process data for the chart
-                const processedData = rawData.reduce((acc, item) => {
+                // Ambil tahun saat ini
+                const currentYear = new Date().getFullYear();
+                const minYear = currentYear - 2; // Ambil 3 tahun terakhir
+
+                // Pastikan setiap tahun memiliki array kosong (diisi 0)
+                const processedData = {};
+
+                // Inisialisasi semua tahun dengan array 12 bulan berisi 0
+                for (let year = minYear; year <= currentYear; year++) {
+                    processedData[year] = Array(12).fill(0);
+                }
+
+                // Proses data dari rawData
+                rawData.forEach(item => {
                     const year = parseInt(item.tahun);
-                    const month = parseInt(item.bulan) - 1; // Convert to 0-based index
+                    const month = parseInt(item.bulan) - 1; // Convert ke index 0-based
                     const count = parseInt(item.jumlah);
                     
-                    if (!acc[year]) {
-                        acc[year] = Array(12).fill(0);
+                    if (year >= minYear && year <= currentYear) {
+                        processedData[year][month] = count;
                     }
-                    acc[year][month] = count;
-                    return acc;
-                }, {});
+                });
+
 
                 // Create datasets for each year
                 const datasets = Object.entries(processedData).map(([year, counts]) => ({
