@@ -64,6 +64,20 @@ $locations_result = $conn->query($locations_query);
         .table-striped tbody tr:nth-of-type(odd) {
             background-color: rgba(0, 0, 0, 0.05);
         }
+        @media (max-width: 768px) {
+            .form-inline .form-control {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            .form-inline .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            .form-inline .d-flex {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
       
         .form-inline .form-control,
         .form-inline .btn {
@@ -145,6 +159,29 @@ $locations_result = $conn->query($locations_query);
         .card {
             max-width: 100%;
             overflow: hidden;
+        }
+        /* Aturan khusus untuk placeholder */
+        .form-control, .select2-container .select2-selection--single, .select-container select {
+        color: #000000 !important; /* Warna teks lebih gelap */
+        border: 1px solid #000000; /* Warna border lebih gelap */
+        border-radius: 0.25rem; /* Radius border */
+        }
+        /* Aturan khusus untuk placeholder */
+        .form-control::placeholder {
+            color: #000000 !important; /* Warna placeholder lebih gelap */
+            opacity: 1; /* Pastikan opacity diatur ke 1 untuk menghindari transparansi */
+        }
+        /* Aturan khusus untuk teks input */
+        .form-control {
+        color: #000000 !important; /* Warna teks hitam solid */
+        }
+        /* Aturan khusus untuk teks dropdown */
+        .select2-container .select2-selection--single .select2-selection__rendered {
+        color: #000000 !important; /* Warna teks hitam solid */
+        }
+        .btn-clear {
+            background-color: #dc3545; /* Background merah */
+            color: white; /* Warna teks putih */
         }
     </style>
 </head>
@@ -242,6 +279,10 @@ $locations_result = $conn->query($locations_query);
                                         <input type="date" id="tgl_masuk" class="form-control w-100">
                                     </div>
                                 </div>
+                                <div class="col-lg-2 col-md-3 col-sm-12 d-flex ms-auto justify-content-end mt-2">
+                                    <button type="button" class="btn btn-clear me-2" id="clearSearch">Clear</button>
+                                    <button type="submit" class="btn btn-primary">Search</button>
+                                </div>
                             </form>
                 <div class="table-responsive">
                     <table class="table table-striped">
@@ -330,6 +371,38 @@ $(document).ready(function() {
         e.preventDefault();
         fetchData();
     });
+    
+    // Simpan nilai pencarian di localStorage sebelum halaman di-reload
+    $('#searchForm').on('submit', function(e) {
+        localStorage.setItem('search', $('#search').val());
+        localStorage.setItem('instansi', $('#instansi').val());
+        localStorage.setItem('fakultas', $('#fakultas').val());
+        localStorage.setItem('year', $('#year').val());
+        localStorage.setItem('category', $('#category').val());
+        localStorage.setItem('location', $('#location').val());
+        localStorage.setItem('tgl_masuk', $('#tgl_masuk').val());
+    });
+
+
+    // Tambahkan fungsi untuk tombol "X" untuk menghapus semua pencarian
+    $('#clearSearch').on('click', function() {
+        $('#search').val('');
+        $('#instansi').val('').trigger('change');
+        $('#fakultas').val('').trigger('change');
+        $('#year').val('').trigger('change');
+        $('#category').val('').trigger('change');
+        $('#location').val('').trigger('change');
+        $('#tgl_masuk').val('').trigger('change');
+        localStorage.removeItem('search');
+        localStorage.removeItem('instansi');
+        localStorage.removeItem('fakultas');
+        localStorage.removeItem('year');
+        localStorage.removeItem('category');
+        localStorage.removeItem('location');
+        localStorage.removeItem('tgl_masuk');
+        fetchData();
+    });
+
 
     // Fetch initial data
     fetchData();
@@ -410,7 +483,16 @@ $(document).ready(function() {
         // Handle form submission
         $('#editForm').on('submit', function(e) {
         e.preventDefault();
-            
+        
+        // Simpan nilai-nilai pencarian saat ini
+        var search = $('#search').val();
+        var instansi = $('#instansi').val();
+        var fakultas = $('#fakultas').val();
+        var year = $('#year').val();
+        var category = $('#category').val();
+        var location = $('#location').val();
+        var tgl_masuk = $('#tgl_masuk').val();
+
         $.ajax({
             url: 'update_penelitian.php',
             method: 'POST',
@@ -431,7 +513,15 @@ $(document).ready(function() {
                         timer: 2000,
                         showConfirmButton: false
                     }).then(function() {
-                        window.location.reload();
+                        // Kembalikan nilai-nilai pencarian setelah reload
+                        $('#search').val(search);
+                        $('#instansi').val(instansi).trigger('change');
+                        $('#fakultas').val(fakultas).trigger('change');
+                        $('#year').val(year).trigger('change');
+                        $('#category').val(category).trigger('change');
+                        $('#location').val(location).trigger('change');
+                        $('#tgl_masuk').val(tgl_masuk);
+                        fetchData();
                     });
                 } else {
                     Swal.fire({
@@ -463,7 +553,14 @@ $(document).ready(function() {
         $(document).on('click', '.btn-delete', function(e) {
             e.preventDefault();
             var id = $(this).data('id');
-
+            // Simpan nilai-nilai pencarian saat ini
+            var search = $('#search').val();
+            var instansi = $('#instansi').val();
+            var fakultas = $('#fakultas').val();
+            var year = $('#year').val();
+            var category = $('#category').val();
+            var location = $('#location').val();
+            var tgl_masuk = $('#tgl_masuk').val();
             // Tampilkan dialog konfirmasi dengan SweetAlert2
             Swal.fire({
                 title: 'Apakah Anda yakin?',
@@ -488,7 +585,14 @@ $(document).ready(function() {
                                 'Data berhasil dihapus.',
                                 'success'
                             );
-                            // Refresh data
+                            // Kembalikan nilai-nilai pencarian setelah reload
+                            $('#search').val(search);
+                            $('#instansi').val(instansi).trigger('change');
+                            $('#fakultas').val(fakultas).trigger('change');
+                            $('#year').val(year).trigger('change');
+                            $('#category').val(category).trigger('change');
+                            $('#location').val(location).trigger('change');
+                            $('#tgl_masuk').val(tgl_masuk);
                             fetchData();
                         },
                         error: function(xhr, status, error) {

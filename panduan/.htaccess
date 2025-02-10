@@ -1,0 +1,8 @@
+# Blokir akses langsung ke folder
+Order Deny,Allow
+Deny from all
+
+# Kecualikan akses dari panduan.php
+<Files "panduan.php">
+    Allow from all
+</Files>

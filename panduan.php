@@ -1,20 +1,29 @@
 <?php
 session_start();
-require 'cek.php';
-// File path to the PDF
-$pdfFile = 'panduan.pdf';
+require_once 'cek.php'; // Pastikan ini berisi validasi login
 
-// Check if the file exists
-if (file_exists($pdfFile)) {
-    // Set headers to open the PDF file
-    header('Content-type: application/pdf');
-    header('Content-Disposition: inline; filename="' . $pdfFile . '"');
-    header('Content-Transfer-Encoding: binary');
-    header('Accept-Ranges: bytes');
+$pdfFile = './panduan/panduan.pdf';
 
-    // Read the file and send it to the output buffer
-    @readfile($pdfFile);
-} else {
-    echo "File not found.";
+if (!file_exists($pdfFile)) {
+    http_response_code(404);
+    die("File tidak ditemukan.");
 }
+
+if (isset($_GET['download'])) {
+    // Set header agar file dikirim sebagai unduhan
+    header("Content-Type: application/pdf");
+    header("Content-Disposition: attachment; filename=panduan.pdf");
+    header("Content-Length: " . filesize($pdfFile));
+
+    readfile($pdfFile);
+    exit;
+}
+
+header("Content-Type: application/pdf");
+header("Content-Disposition: inline; filename=panduan.pdf");
+header("Content-Length: " . filesize($pdfFile));
+header("Accept-Ranges: bytes");
+
+readfile($pdfFile);
+exit;
 ?>

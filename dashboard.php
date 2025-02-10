@@ -61,6 +61,7 @@ while ($row = mysqli_fetch_assoc($instansiChartResult)) {
         <meta name="author" content="" />
         <title>Ebray - ADMIN</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -92,7 +93,7 @@ while ($row = mysqli_fetch_assoc($instansiChartResult)) {
                     <a class="nav-link" href="depan-admin.php"><i class="fas fa-plus"></i> Add Data</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="panduan.php"><i class="fas fa-book"></i> Panduan</a>
+                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#pdfModal"><i class="fas fa-book"></i> Panduan</a>
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto">
@@ -103,6 +104,23 @@ while ($row = mysqli_fetch_assoc($instansiChartResult)) {
         </nav>
         <div style="margin-top: 56px;"></div>
         <div id="layoutSidenav_content">
+        <!-- Modal -->
+        <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="pdfModalLabel">Panduan PDF</h5>
+                        <a href="panduan.php?download=1" class="btn btn-primary ms-3">
+                            <i class="bi bi-cloud-download" style="font-size: 1.5rem;"></i> Unduh
+                        </a>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="pdfImagesContainer"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
             <main>
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">Dashboard</h1>
@@ -391,6 +409,45 @@ while ($row = mysqli_fetch_assoc($instansiChartResult)) {
                                 position: 'bottom'
                             }
                         }
+                    }
+                });
+            });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                let pdfUrl = "panduan.php"; // Ambil PDF dari server privat
+
+                let loadingTask = pdfjsLib.getDocument(pdfUrl);
+                loadingTask.promise.then(function (pdf) {
+                    console.log("PDF loaded");
+
+                    let container = document.getElementById("pdfImagesContainer");
+                    container.innerHTML = ""; // Kosongkan sebelum menambahkan gambar baru
+
+                    for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                        pdf.getPage(pageNum).then(function (page) {
+                            let scale = 2; // Ubah skala untuk resolusi lebih tinggi
+                            let viewport = page.getViewport({ scale: scale });
+
+                            let canvas = document.createElement("canvas");
+                            let context = canvas.getContext("2d");
+                            canvas.width = viewport.width;
+                            canvas.height = viewport.height;
+
+                            let renderContext = {
+                                canvasContext: context,
+                                viewport: viewport
+                            };
+
+                            page.render(renderContext).promise.then(function () {
+                                let img = document.createElement("img");
+                                img.src = canvas.toDataURL("image/png"); // Ubah canvas ke gambar PNG
+                                img.style.width = "100%"; // Sesuaikan lebar
+                                container.appendChild(img);
+                            });
+                        });
                     }
                 });
             });

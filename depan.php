@@ -68,6 +68,11 @@ $locations_result = $conn->query($locations_query);
             }
             .form-inline .btn {
                 width: 100%;
+                margin-bottom: 10px;
+            }
+            .form-inline .d-flex {
+                flex-direction: column;
+                align-items: stretch;
             }
         }
 
@@ -120,6 +125,30 @@ $locations_result = $conn->query($locations_query);
         .form-control, .select2-container .select2-selection--single {
             height: calc(2.25rem + 2px); /* Sesuaikan dengan tinggi elemen input */
         }
+        /* Aturan khusus untuk placeholder */
+        .form-control, .select2-container .select2-selection--single, .select-container select {
+        color: #000000 !important; /* Warna teks lebih gelap */
+        border: 1px solid #000000; /* Warna border lebih gelap */
+        border-radius: 0.25rem; /* Radius border */
+        }
+        /* Aturan khusus untuk placeholder */
+        .form-control::placeholder {
+            color: #000000 !important; /* Warna placeholder lebih gelap */
+            opacity: 1; /* Pastikan opacity diatur ke 1 untuk menghindari transparansi */
+        }
+        /* Aturan khusus untuk teks input */
+        .form-control {
+        color: #000000 !important; /* Warna teks hitam solid */
+        }
+        /* Aturan khusus untuk teks dropdown */
+        .select2-container .select2-selection--single .select2-selection__rendered {
+        color: #000000 !important; /* Warna teks hitam solid */
+        }
+        .btn-clear {
+            background-color: #dc3545; /* Background merah */
+            color: white; /* Warna teks putih */
+        }
+
     </style>
 </head>
 <body>
@@ -205,6 +234,10 @@ $locations_result = $conn->query($locations_query);
                             <?php } ?>
                         </select>
                     </div>
+                    <div class="col-lg-2 col-md-3 col-sm-12 d-flex ms-auto justify-content-end">
+                        <button type="button" class="btn btn-clear me-2" id="clearSearch">Clear</button>
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
                 </form>
 
             <div class="table-responsive">
@@ -252,7 +285,25 @@ $locations_result = $conn->query($locations_query);
     $(document).ready(function() {
         // Inisialisasi Select2 pada elemen dropdown
         $('#year, #category, #instansi, #fakultas, #location').select2();
-
+        // Ambil nilai pencarian dari localStorage dan isi kembali form pencarian
+        if (localStorage.getItem('search')) {
+            $('#search').val(localStorage.getItem('search'));
+        }
+        if (localStorage.getItem('instansi')) {
+            $('#instansi').val(localStorage.getItem('instansi')).trigger('change');
+        }
+        if (localStorage.getItem('fakultas')) {
+            $('#fakultas').val(localStorage.getItem('fakultas')).trigger('change');
+        }
+        if (localStorage.getItem('year')) {
+            $('#year').val(localStorage.getItem('year')).trigger('change');
+        }
+        if (localStorage.getItem('category')) {
+            $('#category').val(localStorage.getItem('category')).trigger('change');
+        }
+        if (localStorage.getItem('location')) {
+            $('#location').val(localStorage.getItem('location')).trigger('change');
+        }
         function fetchData(page = 1) {
             $.ajax({
                 url: 'search.php',
@@ -292,6 +343,34 @@ $locations_result = $conn->query($locations_query);
             fetchData();
         });
 
+        // Simpan nilai pencarian di localStorage sebelum halaman di-reload
+        $('#searchForm').on('submit', function(e) {
+            localStorage.setItem('search', $('#search').val());
+            localStorage.setItem('instansi', $('#instansi').val());
+            localStorage.setItem('fakultas', $('#fakultas').val());
+            localStorage.setItem('year', $('#year').val());
+            localStorage.setItem('category', $('#category').val());
+            localStorage.setItem('location', $('#location').val());
+        });
+
+
+        // Tambahkan fungsi untuk tombol "X" untuk menghapus semua pencarian
+        $('#clearSearch').on('click', function() {
+            $('#search').val('');
+            $('#instansi').val('').trigger('change');
+            $('#fakultas').val('').trigger('change');
+            $('#year').val('').trigger('change');
+            $('#category').val('').trigger('change');
+            $('#location').val('').trigger('change');
+            localStorage.removeItem('search');
+            localStorage.removeItem('instansi');
+            localStorage.removeItem('fakultas');
+            localStorage.removeItem('year');
+            localStorage.removeItem('category');
+            localStorage.removeItem('location');
+            fetchData();
+        });
+
         fetchData();
 
         $(document).on('click', '.page-link', function(e) {
@@ -302,3 +381,4 @@ $locations_result = $conn->query($locations_query);
     });
 </script>
 </body>
+</html>
