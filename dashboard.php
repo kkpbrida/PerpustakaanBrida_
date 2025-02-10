@@ -439,7 +439,7 @@ while ($row = mysqli_fetch_assoc($instansiChartResult)) {
 
                     for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
                         pdf.getPage(pageNum).then(function (page) {
-                            let scale = 2; // Ubah skala untuk resolusi lebih tinggi
+                            let scale = 3; // Ubah skala untuk resolusi lebih tinggi
                             let viewport = page.getViewport({ scale: scale });
 
                             let canvas = document.createElement("canvas");
