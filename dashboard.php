@@ -91,6 +91,9 @@ while ($row = mysqli_fetch_assoc($instansiChartResult)) {
                 <li class="nav-item">
                     <a class="nav-link" href="depan-admin.php"><i class="fas fa-plus"></i> Add Data</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="panduan.php"><i class="fas fa-book"></i> Panduan</a>
+                </li>
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
