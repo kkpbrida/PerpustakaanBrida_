@@ -148,6 +148,10 @@ $locations_result = $conn->query($locations_query);
             background-color: #dc3545; /* Background merah */
             color: white; /* Warna teks putih */
         }
+        .btn-clear:hover {
+        background-color: #c82333; /* Warna merah lebih gelap saat hover */
+        color: white; /* Warna teks tetap putih */
+        }
 
     </style>
 </head>
@@ -283,6 +287,24 @@ $locations_result = $conn->query($locations_query);
 <script src="js/scripts.js"></script>
 <script>
     $(document).ready(function() {
+        // Cek apakah reload terjadi karena tombol search
+        if (!sessionStorage.getItem("searchReload")) {
+            localStorage.removeItem("search");
+            localStorage.removeItem("instansi");
+            localStorage.removeItem("fakultas");
+            localStorage.removeItem("year");
+            localStorage.removeItem("category");
+            localStorage.removeItem("location");
+        }
+
+        // Reset indikator setelah halaman dimuat
+        sessionStorage.removeItem("searchReload");
+
+        // Tambahkan event listener pada form
+        document.getElementById("searchForm").addEventListener("submit", function () {
+            sessionStorage.setItem("searchReload", "1");
+        });
+
         // Inisialisasi Select2 pada elemen dropdown
         $('#year, #category, #instansi, #fakultas, #location').select2();
         // Ambil nilai pencarian dari localStorage dan isi kembali form pencarian

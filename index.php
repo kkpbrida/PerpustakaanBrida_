@@ -183,6 +183,10 @@ $locations_result = $conn->query($locations_query);
             background-color: #dc3545; /* Background merah */
             color: white; /* Warna teks putih */
         }
+        .btn-clear:hover {
+        background-color: #c82333; /* Warna merah lebih gelap saat hover */
+        color: white; /* Warna teks tetap putih */
+        }
     </style>
 </head>
 <body class="sb-nav-fixed">
@@ -328,9 +332,48 @@ $locations_result = $conn->query($locations_query);
 <script src="js/scripts.js"></script>
 <script>
 $(document).ready(function() {
+    // Cek apakah reload terjadi karena tombol search
+    if (!sessionStorage.getItem("searchReload")) {
+        localStorage.removeItem("search");
+        localStorage.removeItem("instansi");
+        localStorage.removeItem("fakultas");
+        localStorage.removeItem("year");
+        localStorage.removeItem("category");
+        localStorage.removeItem("location");
+        localStorage.removeItem("tgl_masuk");
+    }
+
+    // Reset indikator setelah halaman dimuat
+    sessionStorage.removeItem("searchReload");
+
+    // Tambahkan event listener pada form
+    document.getElementById("searchForm").addEventListener("submit", function () {
+        sessionStorage.setItem("searchReload", "1");
+    });
     // Inisialisasi Select2 pada elemen dropdown
     $('#year, #category, #instansi, #fakultas, #location').select2();
-
+    // Ambil nilai pencarian dari localStorage dan isi kembali form pencarian
+    if (localStorage.getItem('search')) {
+        $('#search').val(localStorage.getItem('search'));
+    }
+    if (localStorage.getItem('instansi')) {
+        $('#instansi').val(localStorage.getItem('instansi')).trigger('change');
+    }
+    if (localStorage.getItem('fakultas')) {
+        $('#fakultas').val(localStorage.getItem('fakultas')).trigger('change');
+    }
+    if (localStorage.getItem('year')) {
+        $('#year').val(localStorage.getItem('year')).trigger('change');
+    }
+    if (localStorage.getItem('category')) {
+        $('#category').val(localStorage.getItem('category')).trigger('change');
+    }
+    if (localStorage.getItem('location')) {
+        $('#location').val(localStorage.getItem('location')).trigger('change');
+    }
+    if (localStorage.getItem('tgl_masuk')) {
+        $('#tgl_masuk').val(localStorage.getItem('tgl_masuk'));
+    }
     function fetchData(page = 1) {
         var search = $('#search').val();
         var instansi = $('#instansi').val();
