@@ -61,6 +61,16 @@ require 'cek.php';
                 border: 1px solid #ced4da;
                 border-radius: 0.375rem;
             }
+            .close-icon {
+                font-size: 1.5rem;
+                color: #000;
+                text-decoration: none;
+            }
+
+            .close-icon:hover {
+                color: #ff0000;
+            }
+        </style>
         </style>
     </head>
     <body class="sb-nav-fixed">
@@ -94,7 +104,13 @@ require 'cek.php';
             </nav>
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Tambah Penelitian</h1>
+                        <div class="d-flex justify-content-between align-items-center mt-4">
+                            <h1>Tambah Penelitian</h1>
+                            <!-- Close icon -->
+                            <a href="index.php" class="close-icon" title="Close">
+                                <i class="fas fa-times"></i>
+                            </a>
+                        </div>
                         <div class="card mb-4">
                             <div class="card-body">
                                 <form action="form.php" method="post">
