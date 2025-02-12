@@ -152,6 +152,61 @@ $locations_result = $conn->query($locations_query);
         background-color: #c82333; /* Warna merah lebih gelap saat hover */
         color: white; /* Warna teks tetap putih */
         }
+        #googleFormModal .modal-dialog {
+            max-width: 50vw; /* Sesuaikan lebar modal */
+            max-height: 80vh; /* Batasi tinggi modal */
+            margin: 10vh auto; /* Beri jarak atas dan bawah */
+            display: flex;
+            align-items: center; /* Pusatkan modal di layar */
+            justify-content: center;
+        }
+
+        #googleFormModal .modal-content {
+            height: 80vh; /* Batasi tinggi modal */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Pusatkan konten modal */
+            align-items: center;
+            padding: 10px;
+        }
+
+        #googleFormModal .modal-body {
+            flex: 1; /* Agar body modal fleksibel */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            overflow: hidden; /* Hilangkan scroll jika tidak perlu */
+        }
+
+        #formIframe {
+            width: 100%;
+            height: 100%;
+            display: block;
+            border: none;
+        }
+
+        #qrCodeImage {
+            max-width: 90%;  /* Batasi lebar agar tidak melebihi modal */
+            max-height: 100%; /* Pastikan tinggi gambar tidak terpotong */
+            width: auto;
+            height: auto;
+            display: block;
+            margin: auto;
+            object-fit: contain;
+        }
+        .modal-body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0; /* Hapus padding jika perlu */
+        }
+        .modal-title-container {
+        display: flex;
+        flex-direction: column; /* Teks otomatis ada di bawah */
+        align-items: center; /* Pusatkan teks */
+        text-align: center;
+        }
 
     </style>
 </head>
@@ -276,6 +331,29 @@ $locations_result = $conn->query($locations_query);
         </div>
     </div>
 </div>
+<!-- Tambahkan modal untuk Google Form -->
+<div class="modal fade" id="googleFormModal" tabindex="-1" aria-labelledby="googleFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title-container">
+                    <h5 class="modal-title" id="googleFormModalLabel">Formulir Pengunjung E-Bray</h5>
+                    <span id="googleFormText">Silahkan isi formulir pengunjung di bawah ini terlebih dahulu!</span>
+                </div>
+                <div class="d-flex align-items-center ms-auto">
+                </div>
+            </div>
+            <div class="modal-body">
+                <img src="assets/img/form_pengunjung.png" alt="QR Code" id="qrCodeImage">
+            </div>
+            <div class="modal-footer">
+                <!-- ubah tombol selesai agar dia menutup modal -->
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Selesai</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <footer class="py-4 bg-light mt-auto">
     <div class="container-fluid px-4">
         <div class="d-flex align-items-center justify-content-between small">
@@ -287,8 +365,9 @@ $locations_result = $conn->query($locations_query);
 <script src="js/scripts.js"></script>
 <script>
     $(document).ready(function() {
-        // Cek apakah reload terjadi karena tombol search
+        // Hapus localStorage kecuali jika reload terjadi karena tombol search
         if (!sessionStorage.getItem("searchReload")) {
+            localStorage.removeItem("formFilled");
             localStorage.removeItem("search");
             localStorage.removeItem("instansi");
             localStorage.removeItem("fakultas");
@@ -297,16 +376,19 @@ $locations_result = $conn->query($locations_query);
             localStorage.removeItem("location");
         }
 
-        // Reset indikator setelah halaman dimuat
+        // Reset indikator reload setelah halaman dimuat
         sessionStorage.removeItem("searchReload");
 
-        // Tambahkan event listener pada form
-        document.getElementById("searchForm").addEventListener("submit", function () {
-            sessionStorage.setItem("searchReload", "1");
-        });
+        // Cek apakah baru pertama kali mengakses halaman
+        if (!localStorage.getItem('formFilled')) {
+            
+            $('#googleFormModal').modal('show');
+            $('body').append('<div id="formMessage" style="text-align: center; margin-top: 20px;">Silakan isi form terlebih dahulu.</div>');
+        }
 
         // Inisialisasi Select2 pada elemen dropdown
         $('#year, #category, #instansi, #fakultas, #location').select2();
+
         // Ambil nilai pencarian dari localStorage dan isi kembali form pencarian
         if (localStorage.getItem('search')) {
             $('#search').val(localStorage.getItem('search'));
@@ -326,6 +408,7 @@ $locations_result = $conn->query($locations_query);
         if (localStorage.getItem('location')) {
             $('#location').val(localStorage.getItem('location')).trigger('change');
         }
+
         function fetchData(page = 1) {
             $.ajax({
                 url: 'search.php',
@@ -336,7 +419,7 @@ $locations_result = $conn->query($locations_query);
                     fakultas: $('#fakultas').val(),
                     year: $('#year').val(),
                     category: $('#category').val(),
-                    location : $('#location').val(),
+                    location: $('#location').val(),
                     page: page,
                     page_type: 'depan'
                 },
@@ -367,6 +450,7 @@ $locations_result = $conn->query($locations_query);
 
         // Simpan nilai pencarian di localStorage sebelum halaman di-reload
         $('#searchForm').on('submit', function(e) {
+            sessionStorage.setItem("searchReload", "1"); // Tandai reload akibat tombol search
             localStorage.setItem('search', $('#search').val());
             localStorage.setItem('instansi', $('#instansi').val());
             localStorage.setItem('fakultas', $('#fakultas').val());
@@ -374,7 +458,6 @@ $locations_result = $conn->query($locations_query);
             localStorage.setItem('category', $('#category').val());
             localStorage.setItem('location', $('#location').val());
         });
-
 
         // Tambahkan fungsi untuk tombol "X" untuk menghapus semua pencarian
         $('#clearSearch').on('click', function() {
