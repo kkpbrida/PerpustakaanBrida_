@@ -103,30 +103,35 @@ while ($row = mysqli_fetch_assoc($instansiChartResult)) {
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand ps-3" href="dashboard.php">E-BRAY</a>
-            <ul class="navbar-nav ms-auto me-3 me-lg-4">
-                <li class="nav-item">
-                    <a class="nav-link" href="home.php"><i class="fas fa-home"></i> Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php"><i class="fas fa-clipboard-list"></i> Penelitian</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="depan-admin.php"><i class="fas fa-plus"></i> Add Data</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#pdfModal"><i class="fas fa-book"></i> Panduan</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                </li>
-            </ul>
-        </nav>
+                <a class="navbar-brand ps-3" href="dashboard.php">E-BRAY</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto me-3 me-lg-4">
+                        <li class="nav-item">
+                            <a class="nav-link" href="home.php"><i class="fas fa-home"></i> Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php"><i class="fas fa-clipboard-list"></i> Penelitian</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="depan-admin.php"><i class="fas fa-plus"></i> Add Data</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#pdfModal"><i class="fas fa-book"></i> Panduan</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         <div style="margin-top: 56px;"></div>
         <div id="layoutSidenav_content">
         <!-- Modal -->
