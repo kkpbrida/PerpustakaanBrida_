@@ -74,10 +74,35 @@ while ($row = mysqli_fetch_assoc($instansiChartResult)) {
             table.table {
                 min-width: 1000px; /* Menjamin tabel tetap proporsional */
             }
+            .navbar-dark .navbar-nav .nav-link {
+                color: rgba(255, 255, 255, 0.9);
+            }
+
+            .navbar-dark .navbar-nav .nav-link:hover {
+                color: rgba(255, 255, 255, 1);
+            }
+
+            .navbar-collapse {
+                background-color: #212529; /* Same as navbar background */
+            }
+
+            .navbar-collapse .navbar-nav {
+                margin-left: 0;
+            }
+
+            /* Garis horizontal hanya muncul saat window diperkecil */
+            @media (max-width: 992px) { /* Untuk tablet & mobile */
+                .navbar-brand {
+                    display: block;
+                    padding-bottom: 12px;
+                    margin-bottom: 12px;
+                    border-bottom: 1.5px solid rgba(255, 255, 255, 0.1); /* Garis horizontal */
+                }
+            }
         </style>
     </head>
     <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <nav class="sb-topnav navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand ps-3" href="dashboard.php">E-BRAY</a>
             <ul class="navbar-nav ms-auto me-3 me-lg-4">
                 <li class="nav-item">
