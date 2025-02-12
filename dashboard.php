@@ -67,90 +67,105 @@ while ($row = mysqli_fetch_assoc($instansiChartResult)) {
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <style>
-            .table-responsive {
-                overflow-x: auto;
-            }
-
-            table.table {
-                min-width: 1000px; /* Menjamin tabel tetap proporsional */
-            }
-            .navbar-dark .navbar-nav .nav-link {
-                color: rgba(255, 255, 255, 0.9);
-            }
-
-            .navbar-dark .navbar-nav .nav-link:hover {
-                color: rgba(255, 255, 255, 1);
-            }
-
-            .navbar-collapse {
-                background-color: #212529; /* Same as navbar background */
-            }
-
-            .navbar-collapse .navbar-nav {
-                margin-left: 0;
-            }
-
-            /* Garis horizontal hanya muncul saat window diperkecil */
-            @media (max-width: 992px) { /* Untuk tablet & mobile */
-                .navbar-brand {
-                    display: block;
-                    padding-bottom: 12px;
-                    margin-bottom: 12px;
-                    border-bottom: 1.5px solid rgba(255, 255, 255, 0.1); /* Garis horizontal */
+            @media (max-width: 992px) {
+                .navbar-toggler {
+                    position: fixed;
+                    right: 15px;
+                    top: 10px;
+                    z-index: 1031;
+                }
+                
+                .navbar-collapse {
+                    position: fixed;
+                    top: 56px;
+                    left: 0;
+                    right: 0;
+                    background-color: #212529;
+                    padding: 1rem;
+                    z-index: 1030;
+                }
+                
+                .navbar-collapse.collapsing,
+                .navbar-collapse.show {
+                    transition: all 0.3s ease;
                 }
             }
-            #pdfModal .modal-dialog {
-                max-width: 80vw; /* Sesuaikan lebar modal */
-                max-height: 80vh; /* Batasi tinggi modal */
-                margin: 10vh auto; /* Beri jarak atas dan bawah */
-            }
-
-            #pdfModal .modal-content {
-                height: 80vh; /* Batasi tinggi modal agar tidak melebihi layar */
-                overflow: hidden; /* Hilangkan overflow agar modal tidak tembus ke bawah */
-            }
-
-            #pdfModal .modal-body {
-                height: calc(80vh - 56px - 10px); /* 80% tinggi layar dikurangi tinggi header */
-                overflow-y: auto; /* Tambahkan scroll jika konten lebih besar */
-            }
-
-
         </style>
-    </head>
-    <body class="sb-nav-fixed">
+        </head>
+        <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand ps-3" href="dashboard.php">E-BRAY</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto me-3 me-lg-4">
-                        <li class="nav-item">
-                            <a class="nav-link" href="home.php"><i class="fas fa-home"></i> Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.php"><i class="fas fa-clipboard-list"></i> Penelitian</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="depan-admin.php"><i class="fas fa-plus"></i> Add Data</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#pdfModal"><i class="fas fa-book"></i> Panduan</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        <div style="margin-top: 56px;"></div>
-        <div id="layoutSidenav_content">
+            <a class="navbar-brand ps-3" href="dashboard.php">E-BRAY</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto me-3 me-lg-4">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.php"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php"><i class="fas fa-clipboard-list"></i> Penelitian</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="depan-admin.php"><i class="fas fa-plus"></i> Add Data</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#pdfModal"><i class="fas fa-book"></i> Panduan</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <script>
+            $(document).ready(function() {
+                var isNavbarOpen = false;
+                
+                $('.navbar-toggler').click(function(e) {
+                    e.preventDefault();
+                    isNavbarOpen = !isNavbarOpen;
+                    
+                    if (isNavbarOpen) {
+                        $('.navbar-collapse').collapse('show');
+                    } else {
+                        $('.navbar-collapse').collapse('hide');
+                    }
+                    
+                    // Tambahkan class active ke tombol toggler
+                    $(this).toggleClass('active');
+                });
+
+                // Tutup navbar saat mengklik link
+                $('.nav-link').click(function() {
+                    if (isNavbarOpen) {
+                        isNavbarOpen = false;
+                        $('.navbar-collapse').collapse('hide');
+                        $('.navbar-toggler').removeClass('active');
+                    }
+                });
+
+                // Tutup navbar saat mengklik di luar
+                $(document).click(function(event) {
+                    var clickover = $(event.target);
+                    var _opened = $(".navbar-collapse").hasClass("show");
+                    
+                    if (_opened === true && !clickover.hasClass("navbar-toggler") && 
+                        !clickover.hasClass("navbar-toggler-icon") && 
+                        !clickover.closest('.navbar-collapse').length) {
+                        
+                        isNavbarOpen = false;
+                        $('.navbar-collapse').collapse('hide');
+                        $('.navbar-toggler').removeClass('active');
+                    }
+                });
+            });
+         </script>
         <!-- Modal -->
         <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl">
