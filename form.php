@@ -279,7 +279,18 @@ require 'cek.php';
             $('#instansi, #fakultas, #kategori, #rak').select2({
                 width: 'resolve' // Pastikan lebar sesuai kontainer
             });
+
+            // Reset dropdowns to default values on form reset
+            $('form').on('reset', function() {
+                setTimeout(function() {
+                    $('#instansi').val(null).trigger('change');
+                    $('#fakultas').val(null).trigger('change');
+                    $('#kategori').val(null).trigger('change');
+                    $('#rak').val(null).trigger('change');
+                }, 0);
+            });
         });
+
         function addPenulis() {
             var container = document.getElementById('penulis_container');
             var totalInputs = container.querySelectorAll('input[name="nama_penulis[]"]').length;
