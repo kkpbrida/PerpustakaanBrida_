@@ -99,6 +99,23 @@ while ($row = mysqli_fetch_assoc($instansiChartResult)) {
                     border-bottom: 1.5px solid rgba(255, 255, 255, 0.1); /* Garis horizontal */
                 }
             }
+            #pdfModal .modal-dialog {
+                max-width: 80vw; /* Sesuaikan lebar modal */
+                max-height: 80vh; /* Batasi tinggi modal */
+                margin: 10vh auto; /* Beri jarak atas dan bawah */
+            }
+
+            #pdfModal .modal-content {
+                height: 80vh; /* Batasi tinggi modal agar tidak melebihi layar */
+                overflow: hidden; /* Hilangkan overflow agar modal tidak tembus ke bawah */
+            }
+
+            #pdfModal .modal-body {
+                height: calc(80vh - 56px - 10px); /* 80% tinggi layar dikurangi tinggi header */
+                overflow-y: auto; /* Tambahkan scroll jika konten lebih besar */
+            }
+
+
         </style>
     </head>
     <body class="sb-nav-fixed">
@@ -469,7 +486,7 @@ while ($row = mysqli_fetch_assoc($instansiChartResult)) {
 
                     for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
                         pdf.getPage(pageNum).then(function (page) {
-                            let scale = 3; // Ubah skala untuk resolusi lebih tinggi
+                            let scale = 5; // Ubah skala untuk resolusi lebih tinggi
                             let viewport = page.getViewport({ scale: scale });
 
                             let canvas = document.createElement("canvas");
