@@ -67,28 +67,51 @@ while ($row = mysqli_fetch_assoc($instansiChartResult)) {
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <style>
-            @media (max-width: 992px) {
-                .navbar-toggler {
-                    position: fixed;
-                    right: 15px;
-                    top: 10px;
-                    z-index: 1031;
+            .table-responsive {
+                overflow-x: auto;
+            }
+
+            table.table {
+                min-width: 1000px; 
+            }
+            .navbar-dark .navbar-nav .nav-link {
+                color: rgba(255, 255, 255, 0.9);
+            }
+            .navbar-dark .navbar-nav .nav-link:hover {
+                color: rgba(255, 255, 255, 1);
+            }
+
+            .navbar-collapse {
+                background-color: #212529; /* Same as navbar background */
+            }
+
+            .navbar-collapse .navbar-nav {
+                margin-left: 0;
+            }
+
+            /* Garis horizontal hanya muncul saat window diperkecil */
+            @media (max-width: 992px) { /* Untuk tablet & mobile */
+                .navbar-brand {
+                    display: block;
+                    padding-bottom: 12px;
+                    margin-bottom: 12px;
+                    border-bottom: 1.5px solid rgba(255, 255, 255, 0.1); /* Garis horizontal */
                 }
-                
-                .navbar-collapse {
-                    position: fixed;
-                    top: 56px;
-                    left: 0;
-                    right: 0;
-                    background-color: #212529;
-                    padding: 1rem;
-                    z-index: 1030;
-                }
-                
-                .navbar-collapse.collapsing,
-                .navbar-collapse.show {
-                    transition: all 0.3s ease;
-                }
+            }
+            #pdfModal .modal-dialog {
+                max-width: 80vw; /* Sesuaikan lebar modal */
+                max-height: 80vh; /* Batasi tinggi modal */
+                margin: 10vh auto; /* Beri jarak atas dan bawah */
+            }
+
+            #pdfModal .modal-content {
+                height: 80vh; /* Batasi tinggi modal agar tidak melebihi layar */
+                overflow: hidden; /* Hilangkan overflow agar modal tidak tembus ke bawah */
+            }
+
+            #pdfModal .modal-body {
+                height: calc(80vh - 56px - 10px); /* 80% tinggi layar dikurangi tinggi header */
+                overflow-y: auto; /* Tambahkan scroll jika konten lebih besar */
             }
         </style>
         </head>
