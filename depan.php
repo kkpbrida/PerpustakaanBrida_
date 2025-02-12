@@ -344,7 +344,7 @@ $locations_result = $conn->query($locations_query);
                 </div>
             </div>
             <div class="modal-body">
-                <img src="assets/img/form_pengunjung.png" alt="QR Code" id="qrCodeImage">
+                <img src="assets/img/form-pengunjung.png" alt="QR Code" id="qrCodeImage">
             </div>
             <div class="modal-footer">
                 <!-- ubah tombol selesai agar dia menutup modal -->
@@ -379,11 +379,9 @@ $locations_result = $conn->query($locations_query);
         // Reset indikator reload setelah halaman dimuat
         sessionStorage.removeItem("searchReload");
 
-        // Cek apakah baru pertama kali mengakses halaman
-        if (!localStorage.getItem('formFilled')) {
-            
-            $('#googleFormModal').modal('show');
-            $('body').append('<div id="formMessage" style="text-align: center; margin-top: 20px;">Silakan isi form terlebih dahulu.</div>');
+         // Cek apakah ini refresh manual atau bukan
+        if (!sessionStorage.getItem("preventPopup")) {
+            $('#googleFormModal').modal('show'); // Tampilkan modal
         }
 
         // Inisialisasi Select2 pada elemen dropdown
@@ -450,6 +448,7 @@ $locations_result = $conn->query($locations_query);
 
         // Simpan nilai pencarian di localStorage sebelum halaman di-reload
         $('#searchForm').on('submit', function(e) {
+            sessionStorage.setItem("preventPopup", "1");
             sessionStorage.setItem("searchReload", "1"); // Tandai reload akibat tombol search
             localStorage.setItem('search', $('#search').val());
             localStorage.setItem('instansi', $('#instansi').val());
@@ -475,7 +474,7 @@ $locations_result = $conn->query($locations_query);
             localStorage.removeItem('location');
             fetchData();
         });
-
+   
         fetchData();
 
         $(document).on('click', '.page-link', function(e) {
@@ -483,6 +482,8 @@ $locations_result = $conn->query($locations_query);
             var page = $(this).data('page');
             fetchData(page);
         });
+        sessionStorage.removeItem("preventPopup");
+        sessionStorage.removeItem("searchReload");
     });
 </script>
 </body>
