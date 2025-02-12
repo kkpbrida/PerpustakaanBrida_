@@ -338,7 +338,7 @@ $locations_result = $conn->query($locations_query);
             <div class="modal-header">
                 <div class="modal-title-container">
                     <h5 class="modal-title" id="googleFormModalLabel">Formulir Pengunjung E-Bray</h5>
-                    <span id="googleFormText">Silahkan isi formulir pengunjung di bawah ini terlebih dahulu!</span>
+                    <span id="googleFormText">Silahkan scan dan isi formulir pengunjung di bawah ini terlebih dahulu!</span>
                 </div>
                 <div class="d-flex align-items-center ms-auto">
                 </div>
